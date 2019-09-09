@@ -1,44 +1,46 @@
 // ----- React Blog Server --------------------/
 
 // ----- Dependencies --------------------/
-var express = require("express");
-var cors = require('cors');
-const bodyParser = require('body-parser');
-var logger = require("morgan");
-var mongoose = require("mongoose");
+const express = require("express");
+const cors = require('cors');
+const logger = require("morgan");
+const mongoose = require("mongoose");
 const favicon = require('express-favicon');
 const path = require('path');
 const Data = require('./data.js');
 
 const router = express.Router();
 
+// Configure env. variables in dotenv file
+require('dotenv').config();
+
 // ----- MongoDB Database --------------------/
 
-const dbRoute = 'mongodb://localhost/test';
+const uri = process.env.ATLAS_URI;
 
 // Connect backend code with database
-mongoose.connect(dbRoute, { useNewUrlParser: true });
-let db = mongoose.connection;
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
+let connection = mongoose.connection;
 
 // Check if connected
-db.once('open', () => console.log('Connected to the database!'));
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+connection.once('open', () => console.log('MongoDB connection established successfully!'));
+connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // ----- Setup --------------------/
 
-// Server Port
+// Create express server
 const port = process.env.PORT || 8080;
 const app = express();
-app.use(cors());
 
 // Serve up static assets
 app.use(favicon(__dirname + '/build/favicon.ico'));
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
 
-// User parsers & logging
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// Middleware
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(logger('dev'));
 
 // ----- Mount Router --------------------/

@@ -18,9 +18,9 @@ const port = process.env.PORT || 8080;
 const app = express();
 
 // Serve up static assets
-// app.use(favicon(__dirname + '../build/favicon.ico'));
+app.use(favicon(__dirname + '../build/favicon.ico'));
 app.use(express.static(__dirname));
-// app.use(express.static(path.join(__dirname, '../build')));
+app.use(express.static(path.join(__dirname, '../build')));
 
 // Middleware
 app.use(cors());
@@ -35,10 +35,10 @@ app.get('/ping', function (req, res) {
     return res.send('<p>pong</p>');
 });
 
-// //Define any API routes before this runs
-// app.get('/*', function (req, res) {
-//     res.sendFile(path.join(__dirname, '../build', 'index.html'));
-// });
+//Define any API routes before this runs
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, '../build', 'index.html'));
+});
 
 // Append /api routing for our http requests
 const postsRouter = require('./routes/api/posts');

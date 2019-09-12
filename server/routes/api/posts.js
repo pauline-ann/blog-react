@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
     .catch(err => res.status(404).json({ Error: err, Description: 'Post not found.' }));
 });
 
-// GET api/posts/add
+// GET api/posts/new
 // Route to add/save post
 router.post('/new', (req, res) => {
 

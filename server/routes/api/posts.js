@@ -57,28 +57,20 @@ router.post('/new', (req, res) => {
 // Route to update post
 router.put('/:id', (req, res) => {
 
-  const title = req.body.title;
-  const description = req.body.description;
-  const content = req.body.content;
-  const category = req.body.category;
-  const location = req.body.location;
-  const aesthetic = req.body.aesthetic;
-  const vibes = req.body.vibes;
-
   const updatedPost = {
-    title: title,
-    description: description,
-    content: content,
-    category: category,
-    location: location,
+    title: req.body.title,
+    description: req.body.description,
+    content: req.body.content,
+    category: req.body.category,
+    location: req.body.location,
     rating: {
-      aesthetic: aesthetic,
-      vibes: vibes
+      aesthetic: req.body.aesthetic,
+      vibes: req.body.vibes
     }
   }
 
   Post.findByIdAndUpdate(req.params.id, updatedPost)
-    .then(post => res.json({ Message: 'Post updated successfully!' }))
+    .then(() => res.json({ Message: 'Post updated successfully!' }))
     .catch(err =>
       res.status(400).json({ Error: err, Description: 'Unable to update post.' })
     );

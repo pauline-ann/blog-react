@@ -4,7 +4,7 @@ import { Container } from "semantic-ui-react";
 //Components
 import Navbar from "./Navbar/Navbar";
 
-const About = (props) => {
+const NewPost = (props) => {
 
     return (
         <div>
@@ -12,10 +12,10 @@ const About = (props) => {
             <Container
                 textAlign="center"
             >
-                <p>About</p>
+                <p>[Insert form here]</p>
             </Container>
         </div >
     );
 }
 
-export default About;
+export default NewPost;

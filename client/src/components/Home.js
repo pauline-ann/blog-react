@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { Container } from "semantic-ui-react";
+import { Container, Item } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 //Components
 import Navbar from "./Navbar/Navbar";
+import Post from "./Post";
 
-//GET ALL BLOG POSTS AND DISPLAY ON HOME PAGE
+//Homepage
 const Home = (props) => {
 
     const [posts, setPosts] = useState([]);
-    // posts: []
 
     useEffect(() => {
         async function fetchData() {
@@ -30,20 +31,21 @@ const Home = (props) => {
     return (
         <div>
             <Navbar />
-            <Container
-                textAlign="center"
-            >
-                {/* RENDER POSTS HERE */}
-                <ul>
-                    {posts.map(post => (
-                        <li key={post.objectID}>
-                            <p>{post.title}</p>
-                            <p>{post.description}</p>
-                            <p>{post.content}</p>
-                            <p>{post.catagory}</p>
-                        </li>
-                    ))}
-                </ul>
+            <Container>
+                <Item.Group link>
+                    {posts.map(post => {
+                        return <Post
+                            title={post.title}
+                            description={post.description}
+                            content={post.content}
+                            category={post.category}
+                            location={post.location}
+                            aesthetic={post.rating.aesthetic}
+                            vibes={post.rating.vibes}
+                        />
+                    }
+                    )}
+                </Item.Group>
             </Container>
         </div >
     );

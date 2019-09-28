@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Form, Rating, Message } from "semantic-ui-react";
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 const NewPost = (props) => {
 
@@ -19,7 +20,8 @@ const NewPost = (props) => {
         locationError: false,
         aestheticError: false,
         vibesError: false,
-        formError: false
+        formError: false,
+        formSubmitted: false
     });
 
     const handleSubmit = (event) => {
@@ -88,7 +90,12 @@ const NewPost = (props) => {
         }
 
         axios.post('/api/posts/new', newPost)
-            .then(res => console.log(res.data));
+            .then(res => {
+                console.log(res.data)
+                if (res.status === 200) {
+                    setInputs(inputs => ({ ...inputs, formSubmitted: true }))
+                }
+            });
 
         // Refresh state
         setInputs(inputs => ({ ...inputs, formError: false }))
@@ -99,17 +106,21 @@ const NewPost = (props) => {
         setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
     }
 
-    const handleAestheticRating = (event, {rating}) => {
-        setInputs(inputs => ({ ...inputs, aesthetic: rating}))
+    const handleAestheticRating = (event, { rating }) => {
+        setInputs(inputs => ({ ...inputs, aesthetic: rating }))
     }
 
-    const handleVibesRating = (event, {rating}) => {
-        setInputs(inputs => ({ ...inputs, vibes: rating}))
+    const handleVibesRating = (event, { rating }) => {
+        setInputs(inputs => ({ ...inputs, vibes: rating }))
     }
 
     const options = [
         { key: 'f', text: 'Food', value: 'food' }
     ]
+
+    if (inputs.formSubmitted === true) {
+        return <Redirect to={{ pathname: "/" }} />;
+    }
 
     return (
         <div>

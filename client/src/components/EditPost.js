@@ -1,17 +1,17 @@
 import React from "react";
 import { Container } from "semantic-ui-react";
 
-const About = (props) => {
+const EditPost = (props) => {
 
     return (
         <div>
             <Container
                 textAlign="center"
             >
-                <p>About</p>
+                <p>[Insert edit form here]</p>
             </Container>
         </div >
     );
 }
 
-export default About;
+export default EditPost;

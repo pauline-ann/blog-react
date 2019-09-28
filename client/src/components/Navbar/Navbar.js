@@ -23,7 +23,7 @@ const Navbar = () => {
               <Breadcrumb>
                 <Breadcrumb.Section as={NavLink} exact activeClassName="active" to="/" className="Navbar-navlink">Home</Breadcrumb.Section>
                 <Breadcrumb.Divider />
-                <Breadcrumb.Section as={NavLink} exact activeClassName="active" to="/new" className="Navbar-navlink">New Post</Breadcrumb.Section>
+                <Breadcrumb.Section as={NavLink} exact activeClassName="active" to="/create" className="Navbar-navlink">New</Breadcrumb.Section>
                 <Breadcrumb.Divider />
                 <Breadcrumb.Section as={NavLink} exact activeClassName="active" to="/about" className="Navbar-navlink">About</Breadcrumb.Section>
               </Breadcrumb>

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Container, Item } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 //Components
-import Navbar from "./Navbar/Navbar";
 import Post from "./Post";
 
 //Homepage
@@ -30,7 +29,6 @@ const Home = (props) => {
 
     return (
         <div>
-            <Navbar />
             <Container>
                 <Item.Group link>
                     {posts.map(post => {

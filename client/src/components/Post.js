@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Icon, Image, Item, Rating } from "semantic-ui-react";
+import { Item, Rating } from "semantic-ui-react";
 
 import sample from "../assets/images/sample.png";
 

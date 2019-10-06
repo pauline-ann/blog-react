@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //Components
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home";
+import Post from "./components/Post";
 import EditPost from "./components/EditPost";
 import NewPost from "./components/NewPost";
 import About from "./components/About";
@@ -16,6 +17,7 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route exact path="/" component={() => <Home />} />
+          <Route path="/post/:id" component={(props) => <Post {...props}/>} />
           <Route exact path="/edit/:id" component={() => <EditPost />} />
           <Route exact path="/create" component={() => <NewPost />} />
           <Route exact path="/about" component={() => <About />} />

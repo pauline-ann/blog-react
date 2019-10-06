@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Container, Item } from "semantic-ui-react";
-// import { Link } from "react-router-dom";
 
 //Components
-import Post from "./Post";
+import PostCard from "./PostCard";
 
 //Homepage
 const Home = (props) => {
@@ -30,9 +29,9 @@ const Home = (props) => {
     return (
         <div>
             <Container>
-                <Item.Group link>
-                    {posts.map(post => {
-                        return <Post
+                <Item.Group>
+                    {posts.map((post, i) => {
+                        return <PostCard
                             title={post.title}
                             description={post.description}
                             content={post.content}
@@ -40,12 +39,14 @@ const Home = (props) => {
                             location={post.location}
                             aesthetic={post.rating.aesthetic}
                             vibes={post.rating.vibes}
+                            id={post._id}
+                            key={i}
                         />
                     }
                     )}
                 </Item.Group>
             </Container>
-        </div >
+        </div>
     );
 }
 

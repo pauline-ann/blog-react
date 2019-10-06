@@ -1,7 +1,9 @@
 import React from "react";
-import { Container, Form, Rating, Message } from "semantic-ui-react";
-import usePostForm from './CustomHooks';
+import { Container, Form, Rating, Message, Header } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
+
+// Custom hooks
+import usePostForm from './CustomHooks';
 
 const NewPost = (props) => {
 
@@ -21,7 +23,7 @@ const NewPost = (props) => {
     return (
         <div>
             <Container>
-                <h2>New post</h2>
+                <Header as='h2'>New post</Header>
                 <Form
                     onSubmit={(event) => handleSubmit(event)}
                     error={inputs.formError}

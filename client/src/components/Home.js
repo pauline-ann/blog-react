@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { Container, Item } from "semantic-ui-react";
+import { Container, Item, Divider } from "semantic-ui-react";
 
 //Components
 import PostCard from "./PostCard";
@@ -28,6 +28,7 @@ const Home = (props) => {
 
     return (
         <div>
+            <Divider horizontal>Latest Posts</Divider><br />
             <Container>
                 <Item.Group>
                     {posts.map((post, i) => {

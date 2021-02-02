@@ -1,3 +1,19 @@
 body {
     height: 100%;
 }
+
+h1, h2, h3, a.header {
+    font-family: 'Noto Serif', serif !important;
+}
+
+a.header {
+    font-weight: bold;
+}
+
+a {
+    color: rgb(54, 40, 13);
+}
+
+a:hover, a:active {
+    color: rgb(231, 159, 49);
+}

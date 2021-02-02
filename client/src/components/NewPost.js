@@ -108,12 +108,15 @@ const NewPost = (props) => {
                         :
                         null
                     }
-                    <Form.Button
-                        color="teal"
-                        type='submit'
-                    >
-                        Submit
+                    <Container textAlign='center'>
+                        <Form.Button
+                            basic
+                            color="yellow"
+                            type='submit'
+                        >
+                            Submit
                     </Form.Button>
+                    </Container>
                 </Form>
             </Container>
         </div >

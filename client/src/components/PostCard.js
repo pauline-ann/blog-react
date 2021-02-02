@@ -13,7 +13,9 @@ const PostCard = (props) => {
 
     const postCardCategory = {
         'color': 'rgb(231, 159, 49)',
-        'text-transform': 'capitalize'
+        'text-transform': 'uppercase',
+        'font-size': '.9rem',
+        'margin-bottom': '10px'
     }
 
     return (

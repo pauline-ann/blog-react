@@ -17,6 +17,14 @@ const Post = (props) => {
         }
     });
 
+    const postHeaderStyle = {
+        'margin-top': '0'
+    }
+
+    const postSubStyle = {
+        'color': 'rgb(231, 159, 49)'
+    }
+
     useEffect(() => {
         async function fetchData() {
             await axios.get('/api/posts/' + props.match.params.id)
@@ -61,7 +69,8 @@ const Post = (props) => {
     return (
         <div>
             <Container text>
-                <Header as="h1">{post.title}</Header>
+            <Header sub style={postSubStyle}>{post.category}</Header>
+                <Header as="h1" style={postHeaderStyle}>{post.title}</Header>
                 <Header.Subheader>
                     <List horizontal>
                         <List.Item>

@@ -14,3 +14,9 @@
 .Navbar-navlink:hover {
     font-weight: 1000;
 }
+
+.Navbar-header {
+    font-family: 'Noto Serif', serif;
+    color: black;
+    font-style: bold;
+}

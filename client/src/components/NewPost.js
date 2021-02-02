@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Form, Rating, Message, Header } from "semantic-ui-react";
+import { Container, Form, Rating, Message } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
 
 // Custom hooks
@@ -23,7 +23,6 @@ const NewPost = (props) => {
     return (
         <div>
             <Container>
-                <Header as='h2'>New post</Header>
                 <Form
                     onSubmit={(event) => handleSubmit(event)}
                     error={inputs.formError}

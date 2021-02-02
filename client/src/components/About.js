@@ -40,7 +40,11 @@ const About = (props) => {
                         />
                         <List.Item
                             icon='linkify'
-                            content={<a href='paulineann.me'>portfolio</a>}
+                            content={<a href='https://www.paulineann.me' target='_blank'>portfolio</a>}
+                        />
+                        <List.Item
+                            icon='instagram'
+                            content={<a href='https://www.instagram.com/paintwithpau/' target='_blank'>instagram</a>}
                         />
                     </List>
                 </Container>

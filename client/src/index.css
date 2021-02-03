@@ -10,10 +10,10 @@ a.header {
     font-weight: bold;
 }
 
-a {
-    color: rgb(54, 40, 13);
+a, .ui.list .list>.item a.header, .ui.list>.item a.header {
+    color: rgb(54, 40, 13) !important;
 }
 
-a:hover, a:active {
-    color: rgb(231, 159, 49);
+a:hover, a:active, .ui.list .list>.item a.header, .ui.list>.item a.header:hover {
+    color: rgb(231, 159, 49) !important;
 }

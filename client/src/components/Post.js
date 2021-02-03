@@ -74,7 +74,7 @@ const Post = (props) => {
                 <Header.Subheader>
                     <List horizontal>
                         <List.Item>
-                            <Icon name="map pin" size="large" color="red"/>
+                            <Icon name="map pin" size="large" color="orange"/>
                             {post.location}
                         </List.Item>
                         <List.Item>Aesthetic: {aRating}</List.Item>

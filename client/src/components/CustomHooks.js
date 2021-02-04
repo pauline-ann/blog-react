@@ -109,8 +109,11 @@ const useCreateForm = (callback) => {
             .then(res => {
                 console.log(res.data)
                 if (res.status === 200) {
-                    console.log('axios post')
+                    console.log('axios post success')
                     setInputs(inputs => ({ ...inputs, formSubmitted: true }))
+                }
+                else {
+                    console.log('Error: create post')
                 }
             });
 
@@ -164,124 +167,110 @@ const useUpdateForm = (callback) => {
         postID: callback.id
     });
 
-    // // Event handlers
+    // Event handlers
 
-    // const handleInputChange = (event) => {
-    //     event.persist();
-    //     setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
-    // }
+    const handleInputChange = (event) => {
+        event.persist();
+        setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
+    }
 
-    // const handleAestheticRating = (event, { rating }) => {
-    //     setInputs(inputs => ({ ...inputs, aesthetic: rating }))
-    // }
+    const handleAestheticRating = (event, { rating }) => {
+        setInputs(inputs => ({ ...inputs, aesthetic: rating }))
+    }
 
-    // const handleVibesRating = (event, { rating }) => {
-    //     setInputs(inputs => ({ ...inputs, vibes: rating }))
-    // }
+    const handleVibesRating = (event, { rating }) => {
+        setInputs(inputs => ({ ...inputs, vibes: rating }))
+    }
 
-    // const handleSubmit = (event) => {
+    const handleSubmit = (event) => {
 
-    //     // Prevent page refresh
-    //     event.preventDefault();
+        // Prevent page refresh
+        event.preventDefault();
 
-    //     // Check form submission for errors
-    //     let error = false;
-    //     if (inputs.title === '') {
-    //         setInputs(inputs => ({ ...inputs, titleError: true }))
-    //         error = true;
-    //     } else {
-    //         setInputs(inputs => ({ ...inputs, titleError: false }))
-    //     }
-    //     if (inputs.description === '') {
-    //         setInputs(inputs => ({ ...inputs, descError: true }))
-    //         error = true;
-    //     } else {
-    //         setInputs(inputs => ({ ...inputs, descError: false }))
-    //     }
-    //     if (inputs.location === '') {
-    //         setInputs(inputs => ({ ...inputs, locationError: true }))
-    //         error = true;
-    //     } else {
-    //         setInputs(inputs => ({ ...inputs, locationError: false }))
-    //     }
-    //     if (inputs.category === '') {
-    //         setInputs(inputs => ({ ...inputs, categoryError: true }))
-    //         error = true;
-    //     } else {
-    //         setInputs(inputs => ({ ...inputs, categoryError: false }))
-    //     }
-    //     if (inputs.aesthetic === 0) {
-    //         setInputs(inputs => ({ ...inputs, aestheticError: true }))
-    //         error = true;
-    //     } else {
-    //         setInputs(inputs => ({ ...inputs, aestheticError: false }))
-    //     }
-    //     if (inputs.vibes === 0) {
-    //         setInputs(inputs => ({ ...inputs, vibesError: true }))
-    //         error = true;
-    //     } else {
-    //         setInputs(inputs => ({ ...inputs, vibesError: false }))
-    //     }
-    //     if (inputs.content === '') {
-    //         setInputs(inputs => ({ ...inputs, contentError: true }))
-    //         error = true;
-    //     } else {
-    //         setInputs(inputs => ({ ...inputs, contentError: false }))
-    //     }
+        // Check form submission for errors
+        let error = false;
+        if (inputs.title === '') {
+            setInputs(inputs => ({ ...inputs, titleError: true }))
+            error = true;
+        } else {
+            setInputs(inputs => ({ ...inputs, titleError: false }))
+        }
+        if (inputs.description === '') {
+            setInputs(inputs => ({ ...inputs, descError: true }))
+            error = true;
+        } else {
+            setInputs(inputs => ({ ...inputs, descError: false }))
+        }
+        if (inputs.location === '') {
+            setInputs(inputs => ({ ...inputs, locationError: true }))
+            error = true;
+        } else {
+            setInputs(inputs => ({ ...inputs, locationError: false }))
+        }
+        if (inputs.category === '') {
+            setInputs(inputs => ({ ...inputs, categoryError: true }))
+            error = true;
+        } else {
+            setInputs(inputs => ({ ...inputs, categoryError: false }))
+        }
+        if (inputs.aesthetic === 0) {
+            setInputs(inputs => ({ ...inputs, aestheticError: true }))
+            error = true;
+        } else {
+            setInputs(inputs => ({ ...inputs, aestheticError: false }))
+        }
+        if (inputs.vibes === 0) {
+            setInputs(inputs => ({ ...inputs, vibesError: true }))
+            error = true;
+        } else {
+            setInputs(inputs => ({ ...inputs, vibesError: false }))
+        }
+        if (inputs.content === '') {
+            setInputs(inputs => ({ ...inputs, contentError: true }))
+            error = true;
+        } else {
+            setInputs(inputs => ({ ...inputs, contentError: false }))
+        }
 
-    //     // Prevent form submission if inputs are invalid
-    //     if (error) {
-    //         setInputs(inputs => ({ ...inputs, formError: true }))
-    //         return
-    //     }
+        // Prevent form submission if inputs are invalid
+        if (error) {
+            setInputs(inputs => ({ ...inputs, formError: true }))
+            return
+        }
 
-    //     // If no errors, make POST request to server
-    //     const newPost = {
-    //         title: inputs.title,
-    //         description: inputs.description,
-    //         content: inputs.content,
-    //         category: inputs.category,
-    //         location: inputs.location,
-    //         aesthetic: inputs.aesthetic,
-    //         vibes: inputs.vibes
-    //     }
+        // If no errors, make POST request to server
+        const updatedPost = {
+            title: inputs.title,
+            description: inputs.description,
+            content: inputs.content,
+            category: inputs.category,
+            location: inputs.location,
+            aesthetic: inputs.aesthetic,
+            vibes: inputs.vibes
+        }
 
-    //     axios.post('/api/posts/new', newPost)
-    //         .then(res => {
-    //             console.log(res.data)
-    //             if (res.status === 200) {
-    //                 console.log('axios post')
-    //                 setInputs(inputs => ({ ...inputs, formSubmitted: true }))
-    //             }
-    //         });
+        axios.put('/api/posts/' + inputs.postID, updatedPost)
+            .then(res => {
+                console.log(res.data)
+                if (res.status === 200) {
+                    console.log('axios edit success')
+                    setInputs(inputs => ({ ...inputs, formSubmitted: true }))
+                } else {
+                    console.log('Error: update post')
+                }
+            });
 
-    //     axios.get('/api/posts')
-    //         .then((res) => {
-    //             console.log('axios get')
-    //             // handle success
-    //             console.log(res);
-    //             const data = res.data;
-    //             let postID = data[data.length - 1]._id;
-    //             console.log('New post ID is ' + postID)
-    //             setInputs(inputs => ({ ...inputs, postID: postID }))
-    //         })
-    //         .catch((err) => {
-    //             // handle error
-    //             console.log(err);
-    //         });
-
-    //     // Refresh state
-    //     setInputs(inputs => ({ ...inputs, formError: false }))
-    // }
+        // Refresh state
+        setInputs(inputs => ({ ...inputs, formError: false }))
+    }
 
     return {
-        inputs
+        inputs,
+        handleInputChange,
+        handleSubmit,
+        handleAestheticRating,
+        handleVibesRating
     };
-
-    // handleSubmit,
-    //     handleInputChange,
-    //     handleAestheticRating,
-    //     handleVibesRating,
 }
 
 const useDeleteForm = (callback) => {

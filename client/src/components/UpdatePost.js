@@ -1,31 +1,23 @@
 import React from "react";
 import { Container, Form, Rating, Message } from "semantic-ui-react";
+import { Redirect } from 'react-router-dom';
 
 // handle change in form with custom hook
 // redirect when submit
 
 // Custom hooks
-import useUpdateForm from './CustomHooks';
+import { useUpdateForm } from './CustomHooks';
 
 const UpdatePost = (props) => {
 
-    // const { inputs, handleVibesRating, handleAestheticRating, handleInputChange, handleSubmit } = useUpdateForm();
+    const { inputs } = useUpdateForm(props);
+
+    // handleVibesRating, handleAestheticRating, handleInputChange, handleSubmit 
 
     // Category options
     const options = [
         { key: 'f', text: 'Food', value: 'food' }
     ]
-
-    const defaultInputs = {
-        title: props.title,
-        description: props.description,
-        content: props.content,
-        category: props.category,
-        location: props.location,
-        aesthetic: props.aesthetic,
-        vibes: props.vibes,
-        id: props.id
-    }
 
     return (
         <div>
@@ -38,18 +30,18 @@ const UpdatePost = (props) => {
                         <label>Title</label>
                         <Form.Input
                             name='title'
-                            value={defaultInputs.title}
-                            // onChange={handleInputChange}
-                            // error={inputs.titleError}
+                            value={inputs.title}
+                        // onChange={handleInputChange}
+                        // error={inputs.titleError}
                         />
                     </Form.Field>
                     <Form.Field>
                         <label>Description</label>
                         <Form.Input
                             name='description'
-                            value={defaultInputs.description}
-                            // onChange={handleInputChange}
-                            // error={inputs.descError}
+                            value={inputs.description}
+                        // onChange={handleInputChange}
+                        // error={inputs.descError}
                         />
                     </Form.Field>
                     <Form.Group widths="equal">
@@ -57,9 +49,9 @@ const UpdatePost = (props) => {
                             <label>Location</label>
                             <Form.Input
                                 name='location'
-                                value={defaultInputs.location}
-                                // onChange={handleInputChange}
-                                // error={inputs.locationError}
+                                value={inputs.location}
+                            // onChange={handleInputChange}
+                            // error={inputs.locationError}
                             />
                         </Form.Field>
                         <Form.Field>
@@ -77,34 +69,34 @@ const UpdatePost = (props) => {
                             <label>Aesthetic</label>
                             <Rating
                                 maxRating={5}
-                                defaultRating={defaultInputs.aesthetic}
+                                defaultRating={inputs.aesthetic}
                                 name='aesthetic'
-                                value={defaultInputs.aesthetic}
+                                value={inputs.aesthetic}
                                 // onRate={handleAestheticRating}
                                 icon='star'
-                                // error={inputs.aestheticError}
+                            // error={inputs.aestheticError}
                             />
                         </Form.Field>
                         <Form.Field>
                             <label>Vibes</label>
                             <Rating
                                 maxRating={5}
-                                defaultRating={defaultInputs.vibes}
+                                defaultRating={inputs.vibes}
                                 name='vibes'
-                                value={defaultInputs.vibes}
+                                value={inputs.vibes}
                                 // onRate={handleVibesRating}
                                 icon='star'
-                                // error={inputs.vibesError}
+                            // error={inputs.vibesError}
                             />
                         </Form.Field>
                     </Form.Group>
                     <Form.TextArea
                         name='content'
-                        value={defaultInputs.content}
-                        // onChange={handleInputChange}
-                        // error={inputs.contentError}
+                        value={inputs.content}
+                    // onChange={handleInputChange}
+                    // error={inputs.contentError}
                     />
-                    {/* {inputs.formError
+                    {inputs.formError
                         ?
                         <Message
                             error
@@ -113,7 +105,7 @@ const UpdatePost = (props) => {
                         />
                         :
                         null
-                    } */}
+                    }
                     <Container textAlign='center'>
                         <Form.Button
                             basic

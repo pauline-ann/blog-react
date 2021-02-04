@@ -3,7 +3,7 @@ import { Container, Form, Rating, Message } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
 
 // Custom hooks
-import useCreateForm from './CustomHooks';
+import { useCreateForm } from './CustomHooks';
 
 const CreatePost = (props) => {
 

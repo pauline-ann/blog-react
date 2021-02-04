@@ -1,6 +1,6 @@
 //Dependencies
 import React from "react";
-import { Menu, Image, Breadcrumb, Container, Button } from 'semantic-ui-react'
+import { Menu, Image, Breadcrumb, Container } from 'semantic-ui-react'
 import { Link, NavLink } from "react-router-dom";
 
 //Assets

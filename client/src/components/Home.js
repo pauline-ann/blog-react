@@ -4,6 +4,7 @@ import { Container, Item, Divider } from "semantic-ui-react";
 
 //Components
 import PostCard from "./PostCard";
+import FeaturedPosts from "./FeaturedPosts";
 
 //Homepage
 const Home = (props) => {
@@ -28,8 +29,9 @@ const Home = (props) => {
 
     return (
         <div>
-            <Divider horizontal>Latest Posts</Divider><br />
             <Container>
+                <FeaturedPosts />
+                <Divider horizontal>Latest Posts</Divider><br />
                 <Item.Group>
                     {posts.map((post, i) => {
                         return <PostCard

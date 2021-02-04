@@ -19,7 +19,8 @@ const usePostForm = (callback) => {
         aestheticError: false,
         vibesError: false,
         formError: false,
-        formSubmitted: false
+        formSubmitted: false,
+        postID: ''
     });
 
     // Event handlers
@@ -108,8 +109,24 @@ const usePostForm = (callback) => {
             .then(res => {
                 console.log(res.data)
                 if (res.status === 200) {
+                    console.log('axios post')
                     setInputs(inputs => ({ ...inputs, formSubmitted: true }))
                 }
+            });
+
+        axios.get('/api/posts')
+            .then((res) => {
+                console.log('axios get')
+                // handle success
+                console.log(res);
+                const data = res.data;
+                let postID = data[data.length - 1]._id;
+                console.log('New post ID is ' + postID)
+                setInputs(inputs => ({ ...inputs, postID: postID }))
+            })
+            .catch((err) => {
+                // handle error
+                console.log(err);
             });
 
         // Refresh state
@@ -122,7 +139,7 @@ const usePostForm = (callback) => {
         handleAestheticRating,
         handleVibesRating,
         inputs
-      };
+    };
 }
 
 export default usePostForm;

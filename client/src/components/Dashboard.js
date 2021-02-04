@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Container, Button, Modal, Divider, List, Image } from "semantic-ui-react";
 
-import NewPost from "./NewPost";
+import CreatePost from "./CreatePost";
+import UpdateDeletePost from './UpdateDeletePost';
 import sample from "../assets/images/ramen-icon.png";
 
 //Dashboard
@@ -11,7 +12,6 @@ const Dashboard = (props) => {
     const modalTriggerStyle = {
         'text-align': "center",
         'width': '100%',
-        'text-align': 'center',
         'padding-top': '3rem',
         'padding-bottom': '3rem',
         'background': 'rgb(254,237,207)'
@@ -48,18 +48,25 @@ const Dashboard = (props) => {
                 }>
                     <Modal.Header textAlign='center'>New Post</Modal.Header>
                     <Modal.Content>
-                        <NewPost />
+                        <CreatePost />
                     </Modal.Content>
                 </Modal>
                 <br />
-                <Divider section/>
+                <Divider section />
                 <h2 style={headerStyle}>Edit Posts</h2><br />
-                <List>
+                <List divided verticalAlign>
                     {posts.map((post, i) => {
                         return <List.Item>
                             <Image avatar src={sample} />
                             <List.Content>
-                                <List.Header as='a'>{post.title}</List.Header>
+                                <Modal closeIcon trigger={
+                                    <List.Header as='a'>{post.title}</List.Header>
+                                }>
+                                    <Modal.Header textAlign='center'>Edit Post</Modal.Header>
+                                    <Modal.Content>
+                                        <UpdateDeletePost />
+                                    </Modal.Content>
+                                </Modal>
                                 <List.Description>
                                     {post.description}
                                 </List.Description>

@@ -17,9 +17,9 @@ const Footer = () => {
     <div style={footerStyle}>
       <Container textAlign="center">
         <Divider /><br/>
-        <a href='https://www.paulineann.me/' target='_blank'><Image src={logo} size="mini" centered /></a><br />
+        <a href='https://www.paulineann.me/' target='_blank' rel='noopener noreferrer'><Image src={logo} size="mini" centered /></a><br />
         <List horizontal>
-          <List.Item>Designed and Developed by <a href='https://www.linkedin.com/in/pauline-ann/' target='_blankl'>Pauline Ann Bantayan</a> — <a href='google.com'>Powered by React.js</a> — © 2019-2020</List.Item>
+          <List.Item>Designed and Developed by <a href='https://www.linkedin.com/in/pauline-ann/' target='_blank' rel='noopener noreferrer'>Pauline Ann Bantayan</a> — <a href='google.com'>Powered by React.js</a> — © 2019-2020</List.Item>
         </List>
       </Container>
     </div>

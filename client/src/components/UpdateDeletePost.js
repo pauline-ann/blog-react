@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "semantic-ui-react";
 
-const EditPost = (props) => {
+const UpdateDeletePost = (props) => {
 
     return (
         <div>
@@ -14,4 +14,4 @@ const EditPost = (props) => {
     );
 }
 
-export default EditPost;
+export default UpdateDeletePost;

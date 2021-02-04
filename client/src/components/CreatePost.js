@@ -1,11 +1,12 @@
 import React from "react";
 import { Container, Form, Rating, Message } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 // Custom hooks
 import usePostForm from './CustomHooks';
 
-const NewPost = (props) => {
+const CreatePost = (props) => {
 
     const { inputs, handleVibesRating, handleAestheticRating, handleInputChange, handleSubmit } = usePostForm();
 
@@ -14,10 +15,13 @@ const NewPost = (props) => {
         { key: 'f', text: 'Food', value: 'food' }
     ]
 
-    // Redirect to home page when form is submitted
+    // Gets postID when form is submitted
     if (inputs.formSubmitted === true) {
         console.log("Form submission success!")
-        return <Redirect to={{ pathname: "/" }} />;
+    }
+
+    if (inputs.postID !== '') {
+        return <Redirect to={'/post/' + inputs.postID} />
     }
 
     return (
@@ -123,4 +127,4 @@ const NewPost = (props) => {
     );
 }
 
-export default NewPost;
+export default CreatePost;

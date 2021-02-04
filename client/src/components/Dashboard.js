@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Container, Button, Modal, Divider, List, Image } from "semantic-ui-react";
 
 import CreatePost from "./CreatePost";
-import UpdateDeletePost from './UpdateDeletePost';
+import UpdatePost from './UpdatePost';
 import sample from "../assets/images/ramen-icon.png";
 
 //Dashboard
@@ -19,6 +19,11 @@ const Dashboard = (props) => {
 
     const headerStyle = {
         'text-align': 'center'
+    }
+
+    const listItemStyle = {
+        'padding': '.75em 0',
+        'display': 'block'
     }
 
     const [posts, setPosts] = useState([]);
@@ -56,21 +61,31 @@ const Dashboard = (props) => {
                 <h2 style={headerStyle}>Edit Posts</h2><br />
                 <List divided verticalAlign>
                     {posts.map((post, i) => {
-                        return <List.Item>
+                        return <List.Item style={listItemStyle}>
                             <Image avatar src={sample} />
                             <List.Content>
-                                <Modal closeIcon trigger={
-                                    <List.Header as='a'>{post.title}</List.Header>
-                                }>
-                                    <Modal.Header textAlign='center'>Edit Post</Modal.Header>
-                                    <Modal.Content>
-                                        <UpdateDeletePost />
-                                    </Modal.Content>
-                                </Modal>
+                                <List.Header>{post.title}</List.Header>
                                 <List.Description>
                                     {post.description}
                                 </List.Description>
                             </List.Content>
+                            <Modal closeIcon trigger={
+                                <Button circular icon='edit outline' />
+                            }><Modal.Header textAlign='center'>Edit Post</Modal.Header>
+                                <Modal.Content>
+                                    <UpdatePost
+                                        title={post.title}
+                                        description={post.description}
+                                        content={post.content}
+                                        category={post.category}
+                                        location={post.location}
+                                        aesthetic={post.rating.aesthetic}
+                                        vibes={post.rating.vibes}
+                                        id={post._id}
+                                    />
+                                </Modal.Content>
+                            </Modal>
+                            <Button circular icon='delete' />
                         </List.Item>
                     })}
                 </List>

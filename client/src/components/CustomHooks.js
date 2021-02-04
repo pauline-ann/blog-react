@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const usePostForm = (callback) => {
+const useCreateForm = (callback) => {
 
     const [inputs, setInputs] = useState({
         title: '',
@@ -142,4 +142,12 @@ const usePostForm = (callback) => {
     };
 }
 
-export default usePostForm;
+const useUpdateForm = (callback) => {
+    console.log('hi im the edit form hook function')
+}
+
+const useDeleteForm = (callback) => {
+    console.log('hi im the delete form hook function')
+}
+
+export default { useCreateForm, useUpdateForm, useDeleteForm };

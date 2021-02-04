@@ -1,51 +1,55 @@
 import React from "react";
 import { Container, Form, Rating, Message } from "semantic-ui-react";
-import { Redirect } from 'react-router-dom';
+
+// handle change in form with custom hook
+// redirect when submit
 
 // Custom hooks
-import useCreateForm from './CustomHooks';
+import useUpdateForm from './CustomHooks';
 
-const CreatePost = (props) => {
+const UpdatePost = (props) => {
 
-    const { inputs, handleVibesRating, handleAestheticRating, handleInputChange, handleSubmit } = useCreateForm();
+    // const { inputs, handleVibesRating, handleAestheticRating, handleInputChange, handleSubmit } = useUpdateForm();
 
     // Category options
     const options = [
         { key: 'f', text: 'Food', value: 'food' }
     ]
 
-    // Gets postID when form is submitted
-    if (inputs.formSubmitted === true) {
-        console.log("Form submission success!")
-    }
-
-    if (inputs.postID !== '') {
-        return <Redirect to={'/post/' + inputs.postID} />
+    const defaultInputs = {
+        title: props.title,
+        description: props.description,
+        content: props.content,
+        category: props.category,
+        location: props.location,
+        aesthetic: props.aesthetic,
+        vibes: props.vibes,
+        id: props.id
     }
 
     return (
         <div>
             <Container>
                 <Form
-                    onSubmit={(event) => handleSubmit(event)}
-                    error={inputs.formError}
+                // onSubmit={(event) => handleSubmit(event)}
+                // error={inputs.formError}
                 >
                     <Form.Field>
                         <label>Title</label>
                         <Form.Input
                             name='title'
-                            value={inputs.title}
-                            onChange={handleInputChange}
-                            error={inputs.titleError}
+                            value={defaultInputs.title}
+                            // onChange={handleInputChange}
+                            // error={inputs.titleError}
                         />
                     </Form.Field>
                     <Form.Field>
                         <label>Description</label>
                         <Form.Input
                             name='description'
-                            value={inputs.description}
-                            onChange={handleInputChange}
-                            error={inputs.descError}
+                            value={defaultInputs.description}
+                            // onChange={handleInputChange}
+                            // error={inputs.descError}
                         />
                     </Form.Field>
                     <Form.Group widths="equal">
@@ -53,9 +57,9 @@ const CreatePost = (props) => {
                             <label>Location</label>
                             <Form.Input
                                 name='location'
-                                value={inputs.location}
-                                onChange={handleInputChange}
-                                error={inputs.locationError}
+                                value={defaultInputs.location}
+                                // onChange={handleInputChange}
+                                // error={inputs.locationError}
                             />
                         </Form.Field>
                         <Form.Field>
@@ -73,35 +77,34 @@ const CreatePost = (props) => {
                             <label>Aesthetic</label>
                             <Rating
                                 maxRating={5}
-                                defaultRating={inputs.aesthetic}
+                                defaultRating={defaultInputs.aesthetic}
                                 name='aesthetic'
-                                value={inputs.aesthetic}
-                                onRate={handleAestheticRating}
+                                value={defaultInputs.aesthetic}
+                                // onRate={handleAestheticRating}
                                 icon='star'
-                                error={inputs.aestheticError}
+                                // error={inputs.aestheticError}
                             />
                         </Form.Field>
                         <Form.Field>
                             <label>Vibes</label>
                             <Rating
                                 maxRating={5}
-                                defaultRating={inputs.vibes}
+                                defaultRating={defaultInputs.vibes}
                                 name='vibes'
-                                value={inputs.vibes}
-                                onRate={handleVibesRating}
+                                value={defaultInputs.vibes}
+                                // onRate={handleVibesRating}
                                 icon='star'
-                                error={inputs.vibesError}
+                                // error={inputs.vibesError}
                             />
                         </Form.Field>
                     </Form.Group>
                     <Form.TextArea
                         name='content'
-                        value={inputs.content}
-                        onChange={handleInputChange}
-                        placeholder='How was your meal?'
-                        error={inputs.contentError}
+                        value={defaultInputs.content}
+                        // onChange={handleInputChange}
+                        // error={inputs.contentError}
                     />
-                    {inputs.formError
+                    {/* {inputs.formError
                         ?
                         <Message
                             error
@@ -110,7 +113,7 @@ const CreatePost = (props) => {
                         />
                         :
                         null
-                    }
+                    } */}
                     <Container textAlign='center'>
                         <Form.Button
                             basic
@@ -126,4 +129,4 @@ const CreatePost = (props) => {
     );
 }
 
-export default CreatePost;
+export default UpdatePost;

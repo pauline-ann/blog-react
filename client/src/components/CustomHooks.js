@@ -19,8 +19,8 @@ const useCreateForm = (callback) => {
         aestheticError: false,
         vibesError: false,
         formError: false,
-        formSubmitted: false,
-        postID: ''
+        postID: '',
+        formSubmitted: false
     });
 
     // Event handlers
@@ -273,8 +273,4 @@ const useUpdateForm = (callback) => {
     };
 }
 
-const useDeleteForm = (callback) => {
-    console.log('hi im the delete form hook function')
-}
-
-export { useCreateForm, useUpdateForm, useDeleteForm };
+export { useCreateForm, useUpdateForm };

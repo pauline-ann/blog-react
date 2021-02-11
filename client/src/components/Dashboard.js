@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Container, Button, Modal, Divider, List, Image } from "semantic-ui-react";
+import { Redirect } from 'react-router-dom';
 
 import CreatePost from "./CreatePost";
 import UpdatePost from './UpdatePost';
+
 import sample from "../assets/images/ramen-icon.png";
 
 //Dashboard
 const Dashboard = (props) => {
+
+    let postDeleted = false;
 
     const modalTriggerStyle = {
         'text-align': "center",
@@ -44,6 +48,24 @@ const Dashboard = (props) => {
         fetchData();
     }, [])
 
+    function deletePost(post, e) {
+
+        e.preventDefault();
+
+        axios.delete('/api/posts/' + post._id)
+            .then(res => {
+                console.log(res.data)
+                if (res.status === 200) {
+                    console.log('Post successfully deleted')
+                    // this.forceUpdate();
+                } else {
+                    console.log('Error: delete post')
+                }
+            })
+        //refresh component
+        //ask user if sure        
+    }
+
     return (
         <div>
             <Container>
@@ -61,6 +83,8 @@ const Dashboard = (props) => {
                 <h2 style={headerStyle}>Edit Posts</h2><br />
                 <List divided verticalAlign>
                     {posts.map((post, i) => {
+                        console.log('post')
+                        console.log(post)
                         return <List.Item style={listItemStyle}>
                             <Image avatar src={sample} />
                             <List.Content>
@@ -85,7 +109,7 @@ const Dashboard = (props) => {
                                     />
                                 </Modal.Content>
                             </Modal>
-                            <Button circular icon='delete' />
+                            <Button circular icon='delete' onClick={(e) => { deletePost(post, e) }} />
                         </List.Item>
                     })}
                 </List>

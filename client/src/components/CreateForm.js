@@ -2,62 +2,60 @@ import React from "react";
 import { Container, Form, Rating, Message } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
 
-// redirect when submit
-
 // Custom hooks
-import { useUpdateForm } from './CustomHooks';
+import { useCreateForm } from './CustomHooks';
 
-const UpdatePost = (props) => {
+const CreateForm = React.memo(props => {
 
-    const { inputs, handleInputChange, handleVibesRating, handleAestheticRating, handleSubmit } = useUpdateForm(props);
+    const { inputs, handleVibesRating, handleAestheticRating, handleInputChange, handleSubmit } = useCreateForm();
 
     // Category options
     const options = [
         { key: 'f', text: 'Food', value: 'food' }
     ]
 
-    // Redirect to post page once form is submitted
+    // Gets postID when form is submitted
     if (inputs.formSubmitted === true) {
+        console.log("Form submission success!")
+    }
+
+    if (inputs.postID !== '') {
         return <Redirect to={'/post/' + inputs.postID} />
     }
 
     return (
-        <div>
+        <React.Fragment>
             <Container>
                 <Form
                     onSubmit={(event) => handleSubmit(event)}
                     error={inputs.formError}
                 >
-                    <Form.Field
-                        error={inputs.titleError}
-                    >
+                    <Form.Field>
                         <label>Title</label>
                         <Form.Input
                             name='title'
                             value={inputs.title}
                             onChange={handleInputChange}
+                            error={inputs.titleError}
                         />
                     </Form.Field>
-                    <Form.Field
-                        error={inputs.descError}
-
-                    >
+                    <Form.Field>
                         <label>Description</label>
                         <Form.Input
                             name='description'
                             value={inputs.description}
                             onChange={handleInputChange}
+                            error={inputs.descError}
                         />
                     </Form.Field>
                     <Form.Group widths="equal">
-                        <Form.Field
-                            error={inputs.locationError}
-                        >
+                        <Form.Field>
                             <label>Location</label>
                             <Form.Input
                                 name='location'
                                 value={inputs.location}
                                 onChange={handleInputChange}
+                                error={inputs.locationError}
                             />
                         </Form.Field>
                         <Form.Field>
@@ -71,9 +69,7 @@ const UpdatePost = (props) => {
                         </Form.Field>
                     </Form.Group>
                     <Form.Group widths="equal">
-                        <Form.Field
-                            error={inputs.aestheticError}
-                        >
+                        <Form.Field>
                             <label>Aesthetic</label>
                             <Rating
                                 maxRating={5}
@@ -82,11 +78,10 @@ const UpdatePost = (props) => {
                                 value={inputs.aesthetic}
                                 onRate={handleAestheticRating}
                                 icon='star'
+                                error={inputs.aestheticError}
                             />
                         </Form.Field>
-                        <Form.Field
-                            error={inputs.vibesError}
-                        >
+                        <Form.Field>
                             <label>Vibes</label>
                             <Rating
                                 maxRating={5}
@@ -95,18 +90,17 @@ const UpdatePost = (props) => {
                                 value={inputs.vibes}
                                 onRate={handleVibesRating}
                                 icon='star'
+                                error={inputs.vibesError}
                             />
                         </Form.Field>
                     </Form.Group>
-                    <Form.Field
+                    <Form.TextArea
+                        name='content'
+                        value={inputs.content}
+                        onChange={handleInputChange}
+                        placeholder='How was your meal?'
                         error={inputs.contentError}
-                    >
-                        <Form.TextArea
-                            name='content'
-                            value={inputs.content}
-                            onChange={handleInputChange}
-                        />
-                    </Form.Field>
+                    />
                     {inputs.formError
                         ?
                         <Message
@@ -128,8 +122,8 @@ const UpdatePost = (props) => {
                     </Container>
                 </Form>
             </Container>
-        </div >
+        </React.Fragment>
     );
-}
+})
 
-export default UpdatePost;
+export default CreateForm;

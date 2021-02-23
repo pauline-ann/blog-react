@@ -107,6 +107,7 @@ const useCreateForm = (callback) => {
 
         axios.post('/api/posts/new', newPost)
             .then(res => {
+                console.log('submit create form: axios post request')
                 console.log(res.data)
                 if (res.status === 200) {
                     console.log('axios post success')
@@ -119,8 +120,7 @@ const useCreateForm = (callback) => {
 
         axios.get('/api/posts')
             .then((res) => {
-                console.log('axios get')
-                // handle success
+                console.log('submit create form: axios get request')
                 console.log(res);
                 const data = res.data;
                 let postID = data[data.length - 1]._id;

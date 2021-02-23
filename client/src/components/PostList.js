@@ -36,7 +36,7 @@ const PostList = (props) => {
     }, [])
 
     // Get api info
-    const getAPI = () => {
+    const getPosts = () => {
         axios.get('/api/posts')
             .then((res) => {
                 // handle success
@@ -61,12 +61,11 @@ const PostList = (props) => {
                             <List.Content>
                                 <List.Header>{post.title}</List.Header>
                                 <List.Description>
-                                    {/* {post.description} */}
-                                    {post._id}
+                                    {post.description}
                                 </List.Description>
                             </List.Content>
                             {/* DELETE POST BUTTON/MODAL */}
-                            <DeleteModal id={post._id} />
+                            <DeleteModal id={post._id} getPosts={getPosts} />
                             {/* EDIT POST BUTTON/MODAL */}
                             <UpdateModal
                                 title={post.title}

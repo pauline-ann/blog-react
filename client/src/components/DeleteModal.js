@@ -8,11 +8,14 @@ const DeleteModal = (props) => {
     // Initiate state to open and close modal
     const [open, setOpen] = React.useState(false)
 
+    // Define variables from props
     let id = props.id;
+    let getPosts = props.getPosts;
 
     // Handle Delete
     const deleteHandler = (e, id) => {
 
+        // prevent refresh when button clicked
         e.preventDefault();
 
         axios.delete('/api/posts/' + id)
@@ -20,10 +23,10 @@ const DeleteModal = (props) => {
                 console.log(res.data)
                 if (res.status === 200) {
                     console.log('Post successfully deleted')
-                    // getAPI()
-                    // somehow tell parent component that it's been deleted,
-                    // then have parent component refresh list
-                    setOpen(false)
+                    // close modal
+                    setOpen(false);
+                    // refresh list
+                    getPosts();
                 } else {
                     console.log('Error: delete post')
                     setOpen(false)

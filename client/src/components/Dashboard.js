@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Button, Modal, Divider, List, Image } from "semantic-ui-react";
+import { Container, Button, Modal, Divider, List, Image } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 
-import CreateForm from "./CreateForm";
+import CreateForm from './CreateForm';
 import PostList from './PostList';
 
 //Dashboard
@@ -12,15 +12,15 @@ const Dashboard = (props) => {
     // Component Styling
 
     const modalTriggerStyle = {
-        'text-align': "center",
-        'width': '100%',
-        'padding-top': '3rem',
-        'padding-bottom': '3rem',
-        'background': 'rgb(254,237,207)'
+        textAlign: 'center',
+        width: '100%',
+        paddingTop: '3rem',
+        paddingBottom: '3rem',
+        background: 'rgb(254,237,207)'
     }
 
     const headerStyle = {
-        'text-align': 'center'
+        textAlign: 'center'
     }
 
     return (
@@ -30,7 +30,7 @@ const Dashboard = (props) => {
                 <Modal closeIcon trigger={
                     <Button style={modalTriggerStyle}>Create New Post</Button>
                 }>
-                    <Modal.Header textAlign='center'>New Post</Modal.Header>
+                    <Modal.Header style={headerStyle}>New Post</Modal.Header>
                     <Modal.Content>
                         <CreateForm />
                     </Modal.Content>

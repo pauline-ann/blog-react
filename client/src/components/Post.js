@@ -18,11 +18,11 @@ const Post = (props) => {
     });
 
     const postHeaderStyle = {
-        'margin-top': '0'
+        marginTop: '0'
     }
 
     const postSubStyle = {
-        'color': 'rgb(231, 159, 49)'
+        color: 'rgb(231, 159, 49)'
     }
 
     useEffect(() => {

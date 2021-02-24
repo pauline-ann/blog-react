@@ -9,6 +9,14 @@ import { useUpdateForm } from './CustomHooks';
 
 const UpdateModal = React.memo(props => {
 
+    // Component Styling
+
+    const headerStyle = {
+        textAlign: 'center'
+    }
+
+    // Initiate Custom Hooks
+
     const { inputs, handleInputChange, handleVibesRating, handleAestheticRating, handleSubmit } = useUpdateForm(props);
 
     // Category options
@@ -25,7 +33,7 @@ const UpdateModal = React.memo(props => {
         <React.Fragment>
             <Modal closeIcon trigger={
                 <Button floated='right' circular icon='edit outline' />
-            }><Modal.Header textAlign='center'>Edit Post</Modal.Header>
+            }><Modal.Header style={headerStyle}>Edit Post</Modal.Header>
                 <Modal.Content>
                     <Form
                         onSubmit={(event) => handleSubmit(event)}

@@ -50,7 +50,7 @@ const PostList = (props) => {
 
     return (
         <React.Fragment>
-            <List divided verticalAlign>
+            <List divided verticalAlign='middle'>
                 {posts.map((post, i) => {
                     console.log(post)
                     return (

@@ -65,8 +65,12 @@ const CreateForm = React.memo(props => {
                             />
                         </Form.Field>
                     </Form.Group>
-                    <Form.Group widths="equal">
-                        <Form.Field>
+                    <Form.Group
+                        widths="equal"
+                    >
+                        <Form.Field
+                            error={inputs.aestheticError}
+                        >
                             <label>Aesthetic</label>
                             <Rating
                                 maxRating={5}
@@ -75,10 +79,11 @@ const CreateForm = React.memo(props => {
                                 value={inputs.aesthetic}
                                 onRate={handleAestheticRating}
                                 icon='star'
-                                error={inputs.aestheticError}
                             />
                         </Form.Field>
-                        <Form.Field>
+                        <Form.Field
+                            error={inputs.vibesError}
+                        >
                             <label>Vibes</label>
                             <Rating
                                 maxRating={5}
@@ -87,7 +92,6 @@ const CreateForm = React.memo(props => {
                                 value={inputs.vibes}
                                 onRate={handleVibesRating}
                                 icon='star'
-                                error={inputs.vibesError}
                             />
                         </Form.Field>
                     </Form.Group>

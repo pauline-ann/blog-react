@@ -26,8 +26,8 @@ const PostCard = (props) => {
                 <Link to={"/post/" + props.id}><Item.Header as='a' style={postCardHeader}>{props.title}</Item.Header></Link>
                 <Item.Description>{props.description}</Item.Description>
                 <Item.Extra>
-                    Aesthetic: <Rating icon='star' defaultRating={props.aesthetic} maxRating={5} />
-                    Vibes:   <Rating icon='star' defaultRating={props.vibes} maxRating={5} />
+                    Aesthetic: <Rating icon='star' defaultRating={props.aesthetic} maxRating={5} disabled />
+                    Vibes:   <Rating icon='star' defaultRating={props.vibes} maxRating={5} disabled />
                 </Item.Extra>
                 <br />
                 <Link to={"/post/" + props.id}>Read more...</Link>

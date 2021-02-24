@@ -56,13 +56,13 @@ const Post = (props) => {
 
     if (post.rating.aesthetic > 0) {
         aRating = (
-            <Rating icon='star' defaultRating={post.rating.aesthetic} maxRating={5} />
+            <Rating icon='star' defaultRating={post.rating.aesthetic} maxRating={5} disabled />
         )
     }
 
     if (post.rating.vibes > 0) {
         vRating = (
-            <Rating icon='star' defaultRating={post.rating.vibes} maxRating={5} />
+            <Rating icon='star' defaultRating={post.rating.vibes} maxRating={5} disabled />
         )
     }
 

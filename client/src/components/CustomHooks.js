@@ -19,8 +19,7 @@ const useCreateForm = (callback) => {
         aestheticError: false,
         vibesError: false,
         formError: false,
-        postID: '',
-        formSubmitted: false
+        postID: ''
     });
 
     // Event handlers
@@ -108,32 +107,21 @@ const useCreateForm = (callback) => {
         axios.post('/api/posts/new', newPost)
             .then(res => {
                 console.log('submit create form: axios post request')
-                console.log(res.data)
+                console.log(res)
                 if (res.status === 200) {
                     console.log('axios post success')
-                    setInputs(inputs => ({ ...inputs, formSubmitted: true }))
+                    setInputs(inputs => ({ ...inputs, postID: res.data.newPostID }))
                 }
                 else {
                     console.log('Error: create post')
                 }
             });
 
-        axios.get('/api/posts')
-            .then((res) => {
-                console.log('submit create form: axios get request')
-                console.log(res);
-                const data = res.data;
-                let postID = data[data.length - 1]._id;
-                console.log('New post ID is ' + postID)
-                setInputs(inputs => ({ ...inputs, postID: postID }))
-            })
-            .catch((err) => {
-                // handle error
-                console.log(err);
-            });
-
         // Refresh state
-        setInputs(inputs => ({ ...inputs, formError: false }))
+        setInputs(inputs => ({
+            ...inputs,
+            formError: false
+        }))
     }
 
     return {

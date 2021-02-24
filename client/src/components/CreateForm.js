@@ -15,11 +15,8 @@ const CreateForm = React.memo(props => {
     ]
 
     // Gets postID when form is submitted
-    if (inputs.formSubmitted === true) {
-        console.log("Form submission success!")
-    }
-
     if (inputs.postID !== '') {
+        console.log('new postID is ' + inputs.postID)
         return <Redirect to={'/post/' + inputs.postID} />
     }
 

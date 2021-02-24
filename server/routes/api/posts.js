@@ -49,7 +49,10 @@ router.post('/new', (req, res) => {
   })
 
   newPost.save()
-    .then(() => res.json({ Message: 'Post added successfully!' }))
+    .then(() => res.json({
+      Message: 'Post added successfully!',
+      newPostID: newPost._id
+    }))
     .catch(err => res.status(400).json({ err }));
 });
 

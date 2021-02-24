@@ -49,7 +49,7 @@ const Post = (props) => {
                 });
         }
         fetchData();
-    }, [])
+    }, [props.match.params.id])
 
     let aRating;
     let vRating;

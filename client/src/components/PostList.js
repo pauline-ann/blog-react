@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { List, Image } from "semantic-ui-react";
-import { Redirect } from 'react-router-dom';
 
 import UpdateModal from './UpdateModal';
 import DeleteModal from './DeleteModal';

@@ -4,9 +4,31 @@ import { Grid, Segment } from "semantic-ui-react";
 
 // Featured Posts
 
-// Import all posts, search through and match the ones with category "featured" to the sections w info
+// Import featured posts (rank: 1, 2, 3)
+// Add formatting
 
 const FeaturedPosts = (props) => {
+
+    // Initiate state to store and list posts
+    const [posts, setPosts] = useState([]);
+
+    // Hook to grab posts from api
+    useEffect(() => {
+        async function fetchData() {
+            await axios.get('/api/posts')
+                .then((res) => {
+                    // handle success
+                    setPosts(res.data);
+                })
+                .catch((err) => {
+                    // handle error
+                    console.log(err);
+                });
+        }
+        fetchData();
+    }, [])
+
+    console.log(posts)
 
     return (
         <div>

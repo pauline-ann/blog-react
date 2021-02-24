@@ -261,4 +261,116 @@ const useUpdateForm = (callback) => {
     };
 }
 
-export { useCreateForm, useUpdateForm };
+const useFeaturedForm = (callback) => {
+
+    const [featured, setFeatured] = useState({
+        featured1: ''
+    });
+
+    // Event handlers
+
+    // const handleAestheticRating = (event, { rating }) => {
+    //     setInputs(inputs => ({ ...inputs, aesthetic: rating }))
+    // }
+
+    // const handleVibesRating = (event, { rating }) => {
+    //     setInputs(inputs => ({ ...inputs, vibes: rating }))
+    // }
+
+    // const handleSubmit = (event) => {
+
+    //     // Prevent page refresh
+    //     event.preventDefault();
+
+    //     // Check form submission for errors
+    //     let error = false;
+    //     if (inputs.title === '') {
+    //         setInputs(inputs => ({ ...inputs, titleError: true }))
+    //         error = true;
+    //     } else {
+    //         setInputs(inputs => ({ ...inputs, titleError: false }))
+    //     }
+    //     if (inputs.description === '') {
+    //         setInputs(inputs => ({ ...inputs, descError: true }))
+    //         error = true;
+    //     } else {
+    //         setInputs(inputs => ({ ...inputs, descError: false }))
+    //     }
+    //     if (inputs.location === '') {
+    //         setInputs(inputs => ({ ...inputs, locationError: true }))
+    //         error = true;
+    //     } else {
+    //         setInputs(inputs => ({ ...inputs, locationError: false }))
+    //     }
+    //     if (inputs.category === '') {
+    //         setInputs(inputs => ({ ...inputs, categoryError: true }))
+    //         error = true;
+    //     } else {
+    //         setInputs(inputs => ({ ...inputs, categoryError: false }))
+    //     }
+    //     if (inputs.aesthetic === 0) {
+    //         setInputs(inputs => ({ ...inputs, aestheticError: true }))
+    //         error = true;
+    //     } else {
+    //         setInputs(inputs => ({ ...inputs, aestheticError: false }))
+    //     }
+    //     if (inputs.vibes === 0) {
+    //         setInputs(inputs => ({ ...inputs, vibesError: true }))
+    //         error = true;
+    //     } else {
+    //         setInputs(inputs => ({ ...inputs, vibesError: false }))
+    //     }
+    //     if (inputs.content === '') {
+    //         setInputs(inputs => ({ ...inputs, contentError: true }))
+    //         error = true;
+    //     } else {
+    //         setInputs(inputs => ({ ...inputs, contentError: false }))
+    //     }
+
+    //     // Prevent form submission if inputs are invalid
+    //     if (error) {
+    //         setInputs(inputs => ({ ...inputs, formError: true }))
+    //         return
+    //     }
+
+    //     // If no errors, make POST request to server
+    //     const newPost = {
+    //         title: inputs.title,
+    //         description: inputs.description,
+    //         content: inputs.content,
+    //         category: inputs.category,
+    //         location: inputs.location,
+    //         aesthetic: inputs.aesthetic,
+    //         vibes: inputs.vibes
+    //     }
+
+    //     axios.post('/api/posts/new', newPost)
+    //         .then(res => {
+    //             console.log('submit create form: axios post request')
+    //             console.log(res)
+    //             if (res.status === 200) {
+    //                 console.log('axios post success')
+    //                 setInputs(inputs => ({ ...inputs, postID: res.data.newPostID }))
+    //             }
+    //             else {
+    //                 console.log('Error: create post')
+    //             }
+    //         });
+
+    //     // Refresh state
+    //     setInputs(inputs => ({
+    //         ...inputs,
+    //         formError: false
+    //     }))
+    // }
+
+    // return {
+    //     handleSubmit,
+    //     handleInputChange,
+    //     handleAestheticRating,
+    //     handleVibesRating,
+    //     inputs
+    // };
+}
+
+export { useCreateForm, useUpdateForm, useFeaturedForm };

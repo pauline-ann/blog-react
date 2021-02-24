@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import axios from 'axios';
 import { Button, Modal } from "semantic-ui-react";
-import { Redirect } from 'react-router-dom';
 
 const DeleteModal = (props) => {
 

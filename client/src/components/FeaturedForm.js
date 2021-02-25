@@ -8,7 +8,6 @@ import { useFeaturedForm } from './CustomHooks';
 
 const FeaturedForm = React.memo(props => {
 
-
     // Initiate Custom Hooks
     const { inputs, handleMainFeature, handleSubFeature, handleSubSubFeature, handleSubmit } = useFeaturedForm();
 
@@ -56,15 +55,14 @@ const FeaturedForm = React.memo(props => {
 
     // Redirect to homepage when form is successfully submitted
     // if (form is submitted) {
-    // return <Redirect to={'/post/' + inputs.postID} />
+    // return <Redirect to={'/'} />
     //}
 
     // TODO
-    // Format custom hook for featured form
-    // Format input validation
-    // Check that all 3 are selected
+    // Fix how dropdown becomes blank after clicking
     // Create models, api endpoints, for featured posts (store id?)
     // Based on which label, store in db as main feature, sub feature 1, and sub feature 2
+    // Check that no 2 options are the same (low priority)
 
     return (
         <React.Fragment>
@@ -80,7 +78,6 @@ const FeaturedForm = React.memo(props => {
                         options={postOptions}
                         placeholder='Select'
                         onChange={handleMainFeature}
-                        value={inputs.mainFeatureID}
                     />
                     <Form.Select
                         fluid
@@ -88,7 +85,6 @@ const FeaturedForm = React.memo(props => {
                         options={postOptions}
                         placeholder='Select'
                         onChange={handleSubFeature}
-                        value={inputs.subFeatureID}
                     />
                     <Form.Select
                         fluid
@@ -96,7 +92,6 @@ const FeaturedForm = React.memo(props => {
                         options={postOptions}
                         placeholder='Select'
                         onChange={handleSubSubFeature}
-                        value={inputs.subSubFeatureID}
                     />
                     {inputs.formError
                         ?

@@ -289,10 +289,11 @@ const useFeaturedForm = (callback) => {
     const handleSubSubFeature = (event, { value }) => {
         event.persist();
         setInputs(inputs => ({ ...inputs, featureID_sub2: value }))
-
     }
 
     const handleSubmit = (event) => {
+
+        console.log(inputs)
 
         // Prevent page refresh
         event.preventDefault();
@@ -325,28 +326,35 @@ const useFeaturedForm = (callback) => {
         }
 
         // If no errors, make POST request to server
-        // const newPost = {
-        //     title: inputs.title,
-        //     description: inputs.description,
-        //     content: inputs.content,
-        //     category: inputs.category,
-        //     location: inputs.location,
-        //     aesthetic: inputs.aesthetic,
-        //     vibes: inputs.vibes
-        // }
 
-        // axios.post('/api/posts/new', newPost)
-        //     .then(res => {
-        //         console.log('submit create form: axios post request')
-        //         console.log(res)
-        //         if (res.status === 200) {
-        //             console.log('axios post success')
-        //             setInputs(inputs => ({ ...inputs, postID: res.data.newPostID }))
-        //         }
-        //         else {
-        //             console.log('Error: create post')
-        //         }
-        //     });
+        // Check API
+        // If no featured model, create new
+
+        const newPost = {
+            title: inputs.title,
+            description: inputs.description,
+            content: inputs.content,
+            category: inputs.category,
+            location: inputs.location,
+            aesthetic: inputs.aesthetic,
+            vibes: inputs.vibes
+        }
+
+        axios.post('/api/posts/new', newPost)
+            .then(res => {
+                console.log('submit create form: axios post request')
+                console.log(res)
+                if (res.status === 200) {
+                    console.log('axios post success')
+                    setInputs(inputs => ({ ...inputs, postID: res.data.newPostID }))
+                }
+                else {
+                    console.log('Error: create post')
+                }
+            });
+
+        // If there is, then update model
+
 
         // Refresh state
         setInputs(inputs => ({

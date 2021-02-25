@@ -44,6 +44,9 @@ app.get('/ping', function (req, res) {
 const postsRouter = require('./routes/api/posts');
 app.use('/api/posts', postsRouter);
 
+const featuredRouter = require('./routes/api/featured');
+app.use('/api/featured', featuredRouter);
+
 // ----- Listen --------------------/
 app.listen(port, () => {
     console.log("------------------------------------------------------------");

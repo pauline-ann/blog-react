@@ -53,6 +53,7 @@ const Dashboard = (props) => {
                 </Modal>
                 <br />
                 <Divider section clearing horizontal />
+                <Divider section clearing horizontal />
                 <h2 style={headerStyle}>Edit Posts</h2><br />
                 <PostList />
             </Container>

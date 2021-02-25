@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { List, Image } from "semantic-ui-react";
+import { List, Image, Segment } from "semantic-ui-react";
 
 import UpdateModal from './UpdateModal';
 import DeleteModal from './DeleteModal';

@@ -16,7 +16,7 @@ const Footer = () => {
   return (
     <div style={footerStyle}>
       <Container textAlign='center'>
-        <Divider /><br/>
+        <Divider section hidden/>
         <a href='https://www.paulineann.me/' target='_blank' rel='noopener noreferrer'><Image src={logo} size='mini' centered /></a><br />
         <List horizontal>
           <List.Item>Designed and Developed by <a href='https://www.linkedin.com/in/pauline-ann/' target='_blank' rel='noopener noreferrer'>Pauline Ann Bantayan</a> — <a href='https://reactjs.org/'>Powered by React.js</a> — © 2019-2020</List.Item>

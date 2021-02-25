@@ -54,9 +54,9 @@ const FeaturedForm = React.memo(props => {
         });
 
     // Redirect to homepage when form is successfully submitted
-    // if (form is submitted) {
-    // return <Redirect to={'/'} />
-    //}
+    if (inputs.featuredPostsID !== '') {
+    return <Redirect to={'/'} />
+    }
 
     // TODO
     // Fix how dropdown becomes blank after clicking
@@ -74,21 +74,21 @@ const FeaturedForm = React.memo(props => {
                 >
                     <Form.Select
                         fluid
-                        label='Main feature'
+                        label='Main featured post'
                         options={postOptions}
                         placeholder='Select'
                         onChange={handleMainFeature}
                     />
                     <Form.Select
                         fluid
-                        label='Sub feature 1'
+                        label='Secondary featured post'
                         options={postOptions}
                         placeholder='Select'
                         onChange={handleSubFeature}
                     />
                     <Form.Select
                         fluid
-                        label='Sub feature 2'
+                        label='Tertiary featured post'
                         options={postOptions}
                         placeholder='Select'
                         onChange={handleSubSubFeature}

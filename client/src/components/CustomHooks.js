@@ -264,31 +264,32 @@ const useUpdateForm = (callback) => {
 const useFeaturedForm = (callback) => {
 
     const [inputs, setInputs] = useState({
-        featureID_main: '',
-        featureID_sub: '',
-        featureID_sub2: '',
+        mainFeatureID: '',
+        subFeatureID: '',
+        subSubFeatureID: '',
         mainFeatureError: false,
         subFeatureError: false,
         subSubFeatureError: false,
-        formError: false
+        formError: false,
+        featuredPostsID: ''
     });
 
     // Event handlers
 
     const handleMainFeature = (event, { value }) => {
         event.persist();
-        setInputs(inputs => ({ ...inputs, featureID_main: value }
+        setInputs(inputs => ({ ...inputs, mainFeatureID: value }
         ))
     }
 
     const handleSubFeature = (event, { value }) => {
         event.persist();
-        setInputs(inputs => ({ ...inputs, featureID_sub: value }))
+        setInputs(inputs => ({ ...inputs, subFeatureID: value }))
     }
 
     const handleSubSubFeature = (event, { value }) => {
         event.persist();
-        setInputs(inputs => ({ ...inputs, featureID_sub2: value }))
+        setInputs(inputs => ({ ...inputs, subSubFeatureID: value }))
     }
 
     const handleSubmit = (event) => {
@@ -300,19 +301,19 @@ const useFeaturedForm = (callback) => {
 
         // Check form submission for errors
         let error = false;
-        if (inputs.featureID_main === '') {
+        if (inputs.mainFeatureID === '') {
             setInputs(inputs => ({ ...inputs, mainFeatureError: true }))
             error = true;
         } else {
             setInputs(inputs => ({ ...inputs, mainFeatureError: false }))
         }
-        if (inputs.featureID_sub === '') {
+        if (inputs.subFeatureID === '') {
             setInputs(inputs => ({ ...inputs, subFeatureError: true }))
             error = true;
         } else {
             setInputs(inputs => ({ ...inputs, subFeatureError: false }))
         }
-        if (inputs.featureID_sub2 === '') {
+        if (inputs.subSubFeatureID === '') {
             setInputs(inputs => ({ ...inputs, subSubFeatureError: true }))
             error = true;
         } else {
@@ -325,36 +326,34 @@ const useFeaturedForm = (callback) => {
             return
         }
 
-        // If no errors, make POST request to server
+        // Make requests to server to update or create new featured posts
 
-        // Check API
-        // If no featured model, create new
-
-        const newPost = {
-            title: inputs.title,
-            description: inputs.description,
-            content: inputs.content,
-            category: inputs.category,
-            location: inputs.location,
-            aesthetic: inputs.aesthetic,
-            vibes: inputs.vibes
+        // Check API that there's no existing featured posts
+        // ***********
+        
+        // Make POST request and create new featured posts
+        const newFeaturedPosts = {
+            mainFeatureID: inputs.mainFeatureID,
+            subFeatureID: inputs.subFeatureID,
+            subSubFeatureID: inputs.subSubFeatureID
         }
 
-        axios.post('/api/posts/new', newPost)
+        axios.post('/api/featured/new', newFeaturedPosts)
             .then(res => {
-                console.log('submit create form: axios post request')
+                console.log('submit featured posts form: axios post request')
                 console.log(res)
                 if (res.status === 200) {
                     console.log('axios post success')
-                    setInputs(inputs => ({ ...inputs, postID: res.data.newPostID }))
+                    console.log(res)
+                    setInputs(inputs => ({ ...inputs, featuredPostsID: res.data.newFeaturedPostsID }))
                 }
                 else {
                     console.log('Error: create post')
                 }
             });
 
-        // If there is, then update model
-
+        // If there are already existing featured posts, then update model
+        // *************
 
         // Refresh state
         setInputs(inputs => ({

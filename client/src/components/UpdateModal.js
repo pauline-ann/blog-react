@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Form, Rating, Message, Modal, Button } from "semantic-ui-react";
+import { Container, Form, Rating, Message, Modal, Button, Divider } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
 
 // redirect when submit
@@ -35,6 +35,7 @@ const UpdateModal = React.memo(props => {
                 <Button floated='right' circular icon='edit outline' />
             }><Modal.Header style={headerStyle}>Edit Post</Modal.Header>
                 <Modal.Content>
+                    <Divider hidden />
                     <Form
                         onSubmit={(event) => handleSubmit(event)}
                         error={inputs.formError}
@@ -128,6 +129,7 @@ const UpdateModal = React.memo(props => {
                             :
                             null
                         }
+                        <Divider section hidden />
                         <Container textAlign='center'>
                             <Form.Button
                                 basic

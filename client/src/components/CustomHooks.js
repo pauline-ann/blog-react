@@ -263,114 +263,105 @@ const useUpdateForm = (callback) => {
 
 const useFeaturedForm = (callback) => {
 
-    const [featured, setFeatured] = useState({
-        featured1: ''
+    const [inputs, setInputs] = useState({
+        featureID_main: '',
+        featureID_sub: '',
+        featureID_sub2: '',
+        mainFeatureError: false,
+        subFeatureError: false,
+        subSubFeatureError: false,
+        formError: false
     });
 
     // Event handlers
 
-    // const handleAestheticRating = (event, { rating }) => {
-    //     setInputs(inputs => ({ ...inputs, aesthetic: rating }))
-    // }
+    const handleMainFeature = (event, { value }) => {
+        event.persist();
+        setInputs(inputs => ({ ...inputs, featureID_main: value }
+        ))
+    }
 
-    // const handleVibesRating = (event, { rating }) => {
-    //     setInputs(inputs => ({ ...inputs, vibes: rating }))
-    // }
+    const handleSubFeature = (event, { value }) => {
+        event.persist();
+        setInputs(inputs => ({ ...inputs, featureID_sub: value }))
+    }
 
-    // const handleSubmit = (event) => {
+    const handleSubSubFeature = (event, { value }) => {
+        event.persist();
+        setInputs(inputs => ({ ...inputs, featureID_sub2: value }))
 
-    //     // Prevent page refresh
-    //     event.preventDefault();
+    }
 
-    //     // Check form submission for errors
-    //     let error = false;
-    //     if (inputs.title === '') {
-    //         setInputs(inputs => ({ ...inputs, titleError: true }))
-    //         error = true;
-    //     } else {
-    //         setInputs(inputs => ({ ...inputs, titleError: false }))
-    //     }
-    //     if (inputs.description === '') {
-    //         setInputs(inputs => ({ ...inputs, descError: true }))
-    //         error = true;
-    //     } else {
-    //         setInputs(inputs => ({ ...inputs, descError: false }))
-    //     }
-    //     if (inputs.location === '') {
-    //         setInputs(inputs => ({ ...inputs, locationError: true }))
-    //         error = true;
-    //     } else {
-    //         setInputs(inputs => ({ ...inputs, locationError: false }))
-    //     }
-    //     if (inputs.category === '') {
-    //         setInputs(inputs => ({ ...inputs, categoryError: true }))
-    //         error = true;
-    //     } else {
-    //         setInputs(inputs => ({ ...inputs, categoryError: false }))
-    //     }
-    //     if (inputs.aesthetic === 0) {
-    //         setInputs(inputs => ({ ...inputs, aestheticError: true }))
-    //         error = true;
-    //     } else {
-    //         setInputs(inputs => ({ ...inputs, aestheticError: false }))
-    //     }
-    //     if (inputs.vibes === 0) {
-    //         setInputs(inputs => ({ ...inputs, vibesError: true }))
-    //         error = true;
-    //     } else {
-    //         setInputs(inputs => ({ ...inputs, vibesError: false }))
-    //     }
-    //     if (inputs.content === '') {
-    //         setInputs(inputs => ({ ...inputs, contentError: true }))
-    //         error = true;
-    //     } else {
-    //         setInputs(inputs => ({ ...inputs, contentError: false }))
-    //     }
+    const handleSubmit = (event) => {
 
-    //     // Prevent form submission if inputs are invalid
-    //     if (error) {
-    //         setInputs(inputs => ({ ...inputs, formError: true }))
-    //         return
-    //     }
+        // Prevent page refresh
+        event.preventDefault();
 
-    //     // If no errors, make POST request to server
-    //     const newPost = {
-    //         title: inputs.title,
-    //         description: inputs.description,
-    //         content: inputs.content,
-    //         category: inputs.category,
-    //         location: inputs.location,
-    //         aesthetic: inputs.aesthetic,
-    //         vibes: inputs.vibes
-    //     }
+        // Check form submission for errors
+        let error = false;
+        if (inputs.featureID_main === '') {
+            setInputs(inputs => ({ ...inputs, mainFeatureError: true }))
+            error = true;
+        } else {
+            setInputs(inputs => ({ ...inputs, mainFeatureError: false }))
+        }
+        if (inputs.featureID_sub === '') {
+            setInputs(inputs => ({ ...inputs, subFeatureError: true }))
+            error = true;
+        } else {
+            setInputs(inputs => ({ ...inputs, subFeatureError: false }))
+        }
+        if (inputs.featureID_sub2 === '') {
+            setInputs(inputs => ({ ...inputs, subSubFeatureError: true }))
+            error = true;
+        } else {
+            setInputs(inputs => ({ ...inputs, subSubFeatureError: false }))
+        }
 
-    //     axios.post('/api/posts/new', newPost)
-    //         .then(res => {
-    //             console.log('submit create form: axios post request')
-    //             console.log(res)
-    //             if (res.status === 200) {
-    //                 console.log('axios post success')
-    //                 setInputs(inputs => ({ ...inputs, postID: res.data.newPostID }))
-    //             }
-    //             else {
-    //                 console.log('Error: create post')
-    //             }
-    //         });
+        // Prevent form submission if inputs are invalid
+        if (error) {
+            setInputs(inputs => ({ ...inputs, formError: true }))
+            return
+        }
 
-    //     // Refresh state
-    //     setInputs(inputs => ({
-    //         ...inputs,
-    //         formError: false
-    //     }))
-    // }
+        // If no errors, make POST request to server
+        // const newPost = {
+        //     title: inputs.title,
+        //     description: inputs.description,
+        //     content: inputs.content,
+        //     category: inputs.category,
+        //     location: inputs.location,
+        //     aesthetic: inputs.aesthetic,
+        //     vibes: inputs.vibes
+        // }
 
-    // return {
-    //     handleSubmit,
-    //     handleInputChange,
-    //     handleAestheticRating,
-    //     handleVibesRating,
-    //     inputs
-    // };
+        // axios.post('/api/posts/new', newPost)
+        //     .then(res => {
+        //         console.log('submit create form: axios post request')
+        //         console.log(res)
+        //         if (res.status === 200) {
+        //             console.log('axios post success')
+        //             setInputs(inputs => ({ ...inputs, postID: res.data.newPostID }))
+        //         }
+        //         else {
+        //             console.log('Error: create post')
+        //         }
+        //     });
+
+        // Refresh state
+        setInputs(inputs => ({
+            ...inputs,
+            formError: false
+        }))
+    }
+
+    return {
+        handleMainFeature,
+        handleSubFeature,
+        handleSubSubFeature,
+        handleSubmit,
+        inputs
+    };
 }
 
 export { useCreateForm, useUpdateForm, useFeaturedForm };

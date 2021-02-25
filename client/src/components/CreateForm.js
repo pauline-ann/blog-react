@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Form, Rating, Message } from "semantic-ui-react";
+import { Container, Form, Rating, Message, Divider } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
 
 // Custom hooks
@@ -23,6 +23,7 @@ const CreateForm = React.memo(props => {
     return (
         <React.Fragment>
             <Container>
+                <Divider hidden />
                 <Form
                     onSubmit={(event) => handleSubmit(event)}
                     error={inputs.formError}
@@ -112,6 +113,7 @@ const CreateForm = React.memo(props => {
                         :
                         null
                     }
+                    <Divider section hidden />
                     <Container textAlign='center'>
                         <Form.Button
                             basic

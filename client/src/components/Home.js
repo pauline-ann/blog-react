@@ -30,7 +30,7 @@ const Home = (props) => {
     return (
         <div>
             <Container>
-                <FeaturedPosts />
+                <FeaturedPosts posts={posts}/>
                 <Divider horizontal>Latest Posts</Divider><br />
                 <Item.Group>
                     {posts.map((post, i) => {

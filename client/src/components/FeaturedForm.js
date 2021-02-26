@@ -55,7 +55,7 @@ const FeaturedForm = React.memo(props => {
 
     // Redirect to homepage when form is successfully submitted
     if (inputs.featuredPostsID !== '') {
-    return <Redirect to={'/'} />
+        return <Redirect to={'/'} />
     }
 
     // TODO

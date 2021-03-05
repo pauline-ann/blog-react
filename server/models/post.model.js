@@ -38,6 +38,10 @@ const postSchema = new Schema({
             min: 1,
             max: 5
         }
+    },
+    photo: {
+        type: String,
+        required: true
     }
 }, {
         timestamps: true

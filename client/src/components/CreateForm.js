@@ -1,13 +1,14 @@
-import React from "react";
-import { Container, Form, Rating, Message, Divider } from "semantic-ui-react";
+import React, { useState } from "react";
+import { Container, Form, Rating, Message, Divider, Button, Input, Segment } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
+import { InputFile } from 'semantic-ui-react-input-file'
 
 // Custom hooks
 import { useCreateForm } from './CustomHooks';
 
 const CreateForm = React.memo(props => {
 
-    const { inputs, handleVibesRating, handleAestheticRating, handleInputChange, handleSubmit } = useCreateForm();
+    const { inputs, file, filename, handleVibesRating, handleAestheticRating, handleInputChange, handleFileUpload, handleSubmit } = useCreateForm();
 
     // Category options
     const options = [
@@ -97,12 +98,38 @@ const CreateForm = React.memo(props => {
                         </Form.Field>
                     </Form.Group>
                     <Form.TextArea
+                        label='Experience'
                         name='content'
                         value={inputs.content}
                         onChange={handleInputChange}
                         placeholder='How was your meal?'
                         error={inputs.contentError}
                     />
+                    <Form.Group widths='equal'>
+                        <Form.Field
+                            error={inputs.photoError}
+                        >
+                            <label>{filename}</label>
+                            {/* <input type='file' className='custom-file-input' id='customFile' /> */}
+                            {/* <InputFile
+                                button={{ ...buttonProps }}
+                                input={{
+                                    id: 'input-control-id',
+                                    onChange: handleUpload
+                                }}
+                            /> */}
+                            <InputFile
+                                input={{
+                                    id: 'input-control-id',
+                                    onChange: handleFileUpload,
+                                    name:'file'
+                                }}
+                            />
+                        </Form.Field>
+                        <Form.Field>
+                             {/* show photo */}
+                        </Form.Field>
+                    </Form.Group>
                     {inputs.formError
                         ?
                         <Message
@@ -125,7 +152,7 @@ const CreateForm = React.memo(props => {
                     </Container>
                 </Form>
             </Container>
-        </React.Fragment>
+        </React.Fragment >
     );
 })
 

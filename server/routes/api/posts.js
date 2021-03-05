@@ -28,6 +28,8 @@ router.get('/:id', (req, res) => {
 // Route to add/save post
 router.post('/new', (req, res) => {
 
+  console.log(req.body)
+
   const title = req.body.title;
   const description = req.body.description;
   const content = req.body.content;
@@ -35,6 +37,7 @@ router.post('/new', (req, res) => {
   const location = req.body.location;
   const aesthetic = req.body.aesthetic;
   const vibes = req.body.vibes;
+  const photo = req.body.photo;
 
   const newPost = new Post({
     title,
@@ -45,7 +48,8 @@ router.post('/new', (req, res) => {
     rating: {
       aesthetic,
       vibes
-    }
+    },
+    photo
   })
 
   newPost.save()

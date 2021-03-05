@@ -18,9 +18,14 @@ const useCreateForm = (callback) => {
         locationError: false,
         aestheticError: false,
         vibesError: false,
+        photoError: false,
         formError: false,
         postID: ''
     });
+
+    const [file, setFile] = useState({})
+
+    const [filename, setFilename] = useState('Choose Photo');
 
     // Event handlers
 
@@ -35,6 +40,11 @@ const useCreateForm = (callback) => {
 
     const handleVibesRating = (event, { rating }) => {
         setInputs(inputs => ({ ...inputs, vibes: rating }))
+    }
+
+    const handleFileUpload = e => {
+        setFile(e.target.files[0]);
+        setFilename(e.target.files[0].name);
     }
 
     const handleSubmit = (event) => {
@@ -86,6 +96,12 @@ const useCreateForm = (callback) => {
         } else {
             setInputs(inputs => ({ ...inputs, contentError: false }))
         }
+        if (file === {}) {
+            setInputs(inputs => ({ ...inputs, photoError: true }))
+            error = true;
+        } else {
+            setInputs(inputs => ({ ...inputs, photoError: false }))
+        }
 
         // Prevent form submission if inputs are invalid
         if (error) {
@@ -101,8 +117,12 @@ const useCreateForm = (callback) => {
             category: inputs.category,
             location: inputs.location,
             aesthetic: inputs.aesthetic,
-            vibes: inputs.vibes
+            vibes: inputs.vibes,
+            photo: filename
         }
+
+        console.log(file)
+        console.log(filename)
 
         axios.post('/api/posts/new', newPost)
             .then(res => {
@@ -125,11 +145,14 @@ const useCreateForm = (callback) => {
     }
 
     return {
-        handleSubmit,
         handleInputChange,
         handleAestheticRating,
         handleVibesRating,
-        inputs
+        handleFileUpload,
+        handleSubmit,
+        inputs,
+        file,
+        filename
     };
 }
 

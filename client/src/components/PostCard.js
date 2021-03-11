@@ -30,7 +30,6 @@ const PostCard = (props) => {
                     Aesthetic: <Rating icon='star' defaultRating={props.aesthetic} maxRating={5} disabled />
                     Vibes:   <Rating icon='star' defaultRating={props.vibes} maxRating={5} disabled />
                 </Item.Extra>
-                <br />
                 <Item.Description>{props.description}</Item.Description>
                 <br />
                 <Link to={"/post/" + props.id}>Read more...</Link>

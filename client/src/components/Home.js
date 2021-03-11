@@ -34,7 +34,7 @@ const Home = (props) => {
                 <Item.Group>
                     {posts.reverse().map((post, i) => {
 
-                        let date = moment(post.updatedAt).format('dddd, MMMM Do YYYY');
+                        let date = moment(post.createdAt).format('dddd, MMMM Do YYYY');
 
                         return <PostCard
                             title={post.title}

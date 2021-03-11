@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Header, Image, Icon, Rating, Divider, List } from "semantic-ui-react";
 import axios from 'axios';
 import sample from "../assets/images/ramen.jpg";
+import moment from 'moment';
 
 const Post = (props) => {
 
@@ -25,6 +26,15 @@ const Post = (props) => {
         color: 'rgb(231, 159, 49)'
     }
 
+    const postDescriptionStyle = {
+        fontSize: '.9em'
+    }
+
+    const postDateStyle = {
+        fontSize: '.8em',
+        fontStyle: 'italic'
+    }
+
     useEffect(() => {
         async function fetchData() {
             await axios.get('/api/posts/' + props.match.params.id)
@@ -40,7 +50,8 @@ const Post = (props) => {
                         rating: {
                             aesthetic: res.data.rating.aesthetic,
                             vibes: res.data.rating.vibes
-                        }
+                        },
+                        date: moment(res.data.createdAt).format('dddd, MMMM Do YYYY')
                     });
                 })
                 .catch((err) => {
@@ -69,18 +80,20 @@ const Post = (props) => {
     return (
         <div>
             <Container text>
-            <Header sub style={postSubStyle}>{post.category}</Header>
+                <Header sub style={postSubStyle}>{post.category}</Header>
                 <Header as="h1" style={postHeaderStyle}>{post.title}</Header>
                 <Header.Subheader>
                     <List horizontal>
                         <List.Item>
-                            <Icon name="map pin" size="large" color="orange"/>
+                            <Icon name="map pin" size="large" color="orange" />
                             {post.location}
                         </List.Item>
                         <List.Item>Aesthetic: {aRating}</List.Item>
                         <List.Item>Vibes: {vRating}</List.Item>
                     </List>
                 </Header.Subheader>
+                <p style={postDescriptionStyle}>{post.description}</p>
+                <p style={postDateStyle}>{post.date}</p>
                 <Divider />
                 <Image src={sample} fluid />
                 <Divider />

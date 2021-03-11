@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Container, Form, Rating, Message, Divider, Button, Input, Segment } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
-import { InputFile } from 'semantic-ui-react-input-file'
+// import { InputFile } from 'semantic-ui-react-input-file'
 
 // Custom hooks
 import { useCreateForm } from './CustomHooks';
 
 const CreateForm = React.memo(props => {
 
-    const { inputs, file, filename, handleVibesRating, handleAestheticRating, handleInputChange, handleFileUpload, handleSubmit } = useCreateForm();
+    const { errors, inputs, handleVibesRating, handleAestheticRating, handleInputChange, handleFileUpload, handleSubmit } = useCreateForm();
 
     // Category options
     const options = [
@@ -27,7 +27,7 @@ const CreateForm = React.memo(props => {
                 <Divider hidden />
                 <Form
                     onSubmit={(event) => handleSubmit(event)}
-                    error={inputs.formError}
+                    error={errors.formError}
                 >
                     <Form.Field>
                         <label>Title</label>
@@ -35,7 +35,7 @@ const CreateForm = React.memo(props => {
                             name='title'
                             value={inputs.title}
                             onChange={handleInputChange}
-                            error={inputs.titleError}
+                            error={errors.titleError}
                         />
                     </Form.Field>
                     <Form.Field>
@@ -44,7 +44,7 @@ const CreateForm = React.memo(props => {
                             name='description'
                             value={inputs.description}
                             onChange={handleInputChange}
-                            error={inputs.descError}
+                            error={errors.descError}
                         />
                     </Form.Field>
                     <Form.Group widths="equal">
@@ -54,7 +54,7 @@ const CreateForm = React.memo(props => {
                                 name='location'
                                 value={inputs.location}
                                 onChange={handleInputChange}
-                                error={inputs.locationError}
+                                error={errors.locationError}
                             />
                         </Form.Field>
                         <Form.Field>
@@ -71,7 +71,7 @@ const CreateForm = React.memo(props => {
                         widths="equal"
                     >
                         <Form.Field
-                            error={inputs.aestheticError}
+                            error={errors.aestheticError}
                         >
                             <label>Aesthetic</label>
                             <Rating
@@ -84,7 +84,7 @@ const CreateForm = React.memo(props => {
                             />
                         </Form.Field>
                         <Form.Field
-                            error={inputs.vibesError}
+                            error={errors.vibesError}
                         >
                             <label>Vibes</label>
                             <Rating
@@ -103,13 +103,13 @@ const CreateForm = React.memo(props => {
                         value={inputs.content}
                         onChange={handleInputChange}
                         placeholder='How was your meal?'
-                        error={inputs.contentError}
+                        error={errors.contentError}
                     />
                     <Form.Group widths='equal'>
                         <Form.Field
-                            error={inputs.photoError}
+                            error={errors.photoError}
                         >
-                            <label>{filename}</label>
+                            <label>{inputs.photoName}</label>
                             {/* <input type='file' className='custom-file-input' id='customFile' /> */}
                             {/* <InputFile
                                 button={{ ...buttonProps }}
@@ -118,19 +118,20 @@ const CreateForm = React.memo(props => {
                                     onChange: handleUpload
                                 }}
                             /> */}
-                            <InputFile
+                            {/* <InputFile
                                 input={{
                                     id: 'input-control-id',
                                     onChange: handleFileUpload,
-                                    name:'file'
+                                    name:'photo',
+                                    accept: '.png, .jpg, .jpeg'
                                 }}
-                            />
+                            /> */}
                         </Form.Field>
                         <Form.Field>
-                             {/* show photo */}
+                             
                         </Form.Field>
                     </Form.Group>
-                    {inputs.formError
+                    {errors.formError
                         ?
                         <Message
                             error

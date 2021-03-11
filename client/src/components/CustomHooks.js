@@ -11,6 +11,12 @@ const useCreateForm = (callback) => {
         location: '',
         aesthetic: 0,
         vibes: 0,
+        photo: {},
+        photoName: 'Choose File',
+        postID: ''
+    });
+
+    const [errors, setErrors] = useState({
         titleError: false,
         descError: false,
         contentError: false,
@@ -19,13 +25,8 @@ const useCreateForm = (callback) => {
         aestheticError: false,
         vibesError: false,
         photoError: false,
-        formError: false,
-        postID: ''
+        formError: false
     });
-
-    const [file, setFile] = useState({})
-
-    const [filename, setFilename] = useState('Choose Photo');
 
     // Event handlers
 
@@ -43,8 +44,13 @@ const useCreateForm = (callback) => {
     }
 
     const handleFileUpload = e => {
-        setFile(e.target.files[0]);
-        setFilename(e.target.files[0].name);
+
+        let photo = e.target.files[0]
+
+        setInputs({ ...inputs, photo: photo })
+        setInputs({ ...inputs, photoName: photo.name });
+        console.log(inputs.photo)
+        console.log(e.target.files[0])
     }
 
     const handleSubmit = (event) => {
@@ -55,57 +61,57 @@ const useCreateForm = (callback) => {
         // Check form submission for errors
         let error = false;
         if (inputs.title === '') {
-            setInputs(inputs => ({ ...inputs, titleError: true }))
+            setErrors(errors => ({ ...errors, titleError: true }))
             error = true;
         } else {
-            setInputs(inputs => ({ ...inputs, titleError: false }))
+            setErrors(errors => ({ ...errors, titleError: false }))
         }
         if (inputs.description === '') {
-            setInputs(inputs => ({ ...inputs, descError: true }))
+            setErrors(errors => ({ ...errors, descError: true }))
             error = true;
         } else {
-            setInputs(inputs => ({ ...inputs, descError: false }))
+            setErrors(errors => ({ ...errors, descError: false }))
         }
         if (inputs.location === '') {
-            setInputs(inputs => ({ ...inputs, locationError: true }))
+            setErrors(errors => ({ ...errors, locationError: true }))
             error = true;
         } else {
-            setInputs(inputs => ({ ...inputs, locationError: false }))
+            setErrors(errors => ({ ...errors, locationError: false }))
         }
         if (inputs.category === '') {
-            setInputs(inputs => ({ ...inputs, categoryError: true }))
+            setErrors(errors => ({ ...errors, categoryError: true }))
             error = true;
         } else {
-            setInputs(inputs => ({ ...inputs, categoryError: false }))
+            setErrors(errors => ({ ...errors, categoryError: false }))
         }
         if (inputs.aesthetic === 0) {
-            setInputs(inputs => ({ ...inputs, aestheticError: true }))
+            setErrors(errors => ({ ...errors, aestheticError: true }))
             error = true;
         } else {
-            setInputs(inputs => ({ ...inputs, aestheticError: false }))
+            setErrors(errors => ({ ...errors, aestheticError: false }))
         }
         if (inputs.vibes === 0) {
-            setInputs(inputs => ({ ...inputs, vibesError: true }))
+            setErrors(errors => ({ ...errors, vibesError: true }))
             error = true;
         } else {
-            setInputs(inputs => ({ ...inputs, vibesError: false }))
+            setErrors(errors => ({ ...errors, vibesError: false }))
         }
         if (inputs.content === '') {
-            setInputs(inputs => ({ ...inputs, contentError: true }))
+            setErrors(errors => ({ ...errors, contentError: true }))
             error = true;
         } else {
-            setInputs(inputs => ({ ...inputs, contentError: false }))
+            setErrors(errors => ({ ...errors, contentError: false }))
         }
-        if (file === {}) {
-            setInputs(inputs => ({ ...inputs, photoError: true }))
+        if (inputs.photo === '') {
+            setErrors(errors => ({ ...errors, photoError: true }))
             error = true;
         } else {
-            setInputs(inputs => ({ ...inputs, photoError: false }))
+            setErrors(errors => ({ ...errors, photoError: false }))
         }
 
         // Prevent form submission if inputs are invalid
         if (error) {
-            setInputs(inputs => ({ ...inputs, formError: true }))
+            setErrors(errors => ({ ...errors, formError: true }))
             return
         }
 
@@ -118,11 +124,8 @@ const useCreateForm = (callback) => {
             location: inputs.location,
             aesthetic: inputs.aesthetic,
             vibes: inputs.vibes,
-            photo: filename
+            photo: inputs.photo
         }
-
-        console.log(file)
-        console.log(filename)
 
         axios.post('/api/posts/new', newPost)
             .then(res => {
@@ -130,7 +133,7 @@ const useCreateForm = (callback) => {
                 console.log(res)
                 if (res.status === 200) {
                     console.log('axios post success')
-                    setInputs(inputs => ({ ...inputs, postID: res.data.newPostID }))
+                    setInputs(newPost => ({ ...inputs, postID: res.data.newPostID }))
                 }
                 else {
                     console.log('Error: create post')
@@ -138,8 +141,8 @@ const useCreateForm = (callback) => {
             });
 
         // Refresh state
-        setInputs(inputs => ({
-            ...inputs,
+        setErrors(errors => ({
+            ...errors,
             formError: false
         }))
     }
@@ -150,9 +153,8 @@ const useCreateForm = (callback) => {
         handleVibesRating,
         handleFileUpload,
         handleSubmit,
-        inputs,
-        file,
-        filename
+        errors,
+        inputs
     };
 }
 

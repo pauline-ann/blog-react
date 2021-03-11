@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+// const multer = require('multer');
+// const upload = multer({'./upload/'})
 
 // Load post mongoose model
 const Post = require('../../models/post.model');

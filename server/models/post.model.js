@@ -40,7 +40,7 @@ const postSchema = new Schema({
         }
     },
     photo: {
-        type: String,
+        type: Object,
         required: true
     }
 }, {

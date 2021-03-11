@@ -25,11 +25,13 @@ const PostCard = (props) => {
             <Item.Content>
                 <Item.Meta style={postCardCategory}>{props.category}</Item.Meta>
                 <Link to={"/post/" + props.id}><Item.Header style={postCardHeader}>{props.title}</Item.Header></Link>
-                <Item.Description>{props.description}</Item.Description>
+                <Item.Extra>{props.time}</Item.Extra>
                 <Item.Extra>
                     Aesthetic: <Rating icon='star' defaultRating={props.aesthetic} maxRating={5} disabled />
                     Vibes:   <Rating icon='star' defaultRating={props.vibes} maxRating={5} disabled />
                 </Item.Extra>
+                <br />
+                <Item.Description>{props.description}</Item.Description>
                 <br />
                 <Link to={"/post/" + props.id}>Read more...</Link>
             </Item.Content>

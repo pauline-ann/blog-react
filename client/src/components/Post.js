@@ -27,7 +27,7 @@ const Post = (props) => {
     }
 
     const postDescriptionStyle = {
-        fontSize: '.9em'
+        fontSize: '.93em'
     }
 
     const postDateStyle = {

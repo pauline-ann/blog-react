@@ -27,7 +27,7 @@ const CreateForm = React.memo(props => {
                 <Divider hidden />
                 <Form
                     onSubmit={(event) => handleSubmit(event)}
-                    error={errors.formError}
+                    error={errors.formError || errors.charLimitError}
                 >
                     <Form.Field>
                         <label>Title</label>

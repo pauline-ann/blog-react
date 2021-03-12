@@ -60,69 +60,78 @@ const useCreateForm = (callback) => {
         event.preventDefault();
 
         // Check form submission for errors
-        let error = false;
-        let charLimitError = false;
+        let inputError = false;
+        let descCharLimitError = false;
+
         if (inputs.title === '') {
             setErrors(errors => ({ ...errors, titleError: true }))
-            error = true;
+            inputError = true;
         } else {
             setErrors(errors => ({ ...errors, titleError: false }))
         }
-        if (inputs.description === '') {
+        if (inputs.description === '' || inputs.description.length > 200) {
             setErrors(errors => ({ ...errors, descError: true }))
-            error = true;
-        } else {
-            setErrors(errors => ({ ...errors, descError: false }))
-        }
-        if (inputs.description.length > 200) {
-            setErrors(errors => ({ ...errors, descError: true }))
-            charLimitError = true;
+            if (inputs.description === '') {
+                inputError= true;
+            } else {
+                inputError= false;
+            }
+            if (inputs.description.length > 200) {
+                descCharLimitError = true
+            } else {
+                descCharLimitError = false
+            }
         } else {
             setErrors(errors => ({ ...errors, descError: false }))
         }
         if (inputs.location === '') {
             setErrors(errors => ({ ...errors, locationError: true }))
-            error = true;
+            inputError = true;
         } else {
             setErrors(errors => ({ ...errors, locationError: false }))
         }
         if (inputs.category === '') {
             setErrors(errors => ({ ...errors, categoryError: true }))
-            error = true;
+            inputError = true;
         } else {
             setErrors(errors => ({ ...errors, categoryError: false }))
         }
         if (inputs.aesthetic === 0) {
             setErrors(errors => ({ ...errors, aestheticError: true }))
-            error = true;
+            inputError = true;
         } else {
             setErrors(errors => ({ ...errors, aestheticError: false }))
         }
         if (inputs.vibes === 0) {
             setErrors(errors => ({ ...errors, vibesError: true }))
-            error = true;
+            inputError = true;
         } else {
             setErrors(errors => ({ ...errors, vibesError: false }))
         }
         if (inputs.content === '') {
             setErrors(errors => ({ ...errors, contentError: true }))
-            error = true;
+            inputError = true;
         } else {
             setErrors(errors => ({ ...errors, contentError: false }))
         }
         if (inputs.photo === '') {
             setErrors(errors => ({ ...errors, photoError: true }))
-            error = true;
+            inputError = true;
         } else {
             setErrors(errors => ({ ...errors, photoError: false }))
         }
 
         // Prevent form submission if inputs are invalid
-        if (error) {
+        if (inputError && descCharLimitError) {
             setErrors(errors => ({ ...errors, formError: true }))
+            setErrors(errors => ({ ...errors, charLimitError: true }))
             return
-        }
-        if (charLimitError) {
+        } else if (inputError && !descCharLimitError) {
+            setErrors(errors => ({ ...errors, formError: true }))
+            setErrors(errors => ({ ...errors, charLimitError: false }))
+            return
+        } else if (!inputError && descCharLimitError) {
+            setErrors(errors => ({ ...errors, formError: false }))
             setErrors(errors => ({ ...errors, charLimitError: true }))
             return
         }

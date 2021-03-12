@@ -109,6 +109,13 @@ const CreateForm = React.memo(props => {
                         <Form.Field
                             error={errors.photoError}
                         >
+
+                            {/* File type input 
+                                on change set state e.target.files[0]
+                                store in computer or db
+                                send data, file path
+                                multer????
+                            */}
                             <label>{inputs.photoName}</label>
                             {/* <input type='file' className='custom-file-input' id='customFile' /> */}
                             {/* <InputFile
@@ -137,6 +144,16 @@ const CreateForm = React.memo(props => {
                             error
                             header="Incomplete Submission"
                             content="Please fill out the required fields."
+                        />
+                        :
+                        null
+                    }
+                    {errors.charLimitError
+                        ?
+                        <Message
+                            error
+                            header="Maximum Characters Limit"
+                            content="Description must be 200 characters or less."
                         />
                         :
                         null

@@ -46,7 +46,7 @@ const Home = (props) => {
                             vibes={post.rating.vibes}
                             id={post._id}
                             key={i}
-                            time={date}
+                            date={date}
                         />
                     }
                     )}

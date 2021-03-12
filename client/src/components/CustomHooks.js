@@ -25,7 +25,8 @@ const useCreateForm = (callback) => {
         aestheticError: false,
         vibesError: false,
         photoError: false,
-        formError: false
+        formError: false,
+        charLimitError: false
     });
 
     // Event handlers
@@ -60,6 +61,7 @@ const useCreateForm = (callback) => {
 
         // Check form submission for errors
         let error = false;
+        let charLimitError = false;
         if (inputs.title === '') {
             setErrors(errors => ({ ...errors, titleError: true }))
             error = true;
@@ -69,6 +71,12 @@ const useCreateForm = (callback) => {
         if (inputs.description === '') {
             setErrors(errors => ({ ...errors, descError: true }))
             error = true;
+        } else {
+            setErrors(errors => ({ ...errors, descError: false }))
+        }
+        if (inputs.description.length > 200) {
+            setErrors(errors => ({ ...errors, descError: true }))
+            charLimitError = true;
         } else {
             setErrors(errors => ({ ...errors, descError: false }))
         }
@@ -112,6 +120,10 @@ const useCreateForm = (callback) => {
         // Prevent form submission if inputs are invalid
         if (error) {
             setErrors(errors => ({ ...errors, formError: true }))
+            return
+        }
+        if (charLimitError) {
+            setErrors(errors => ({ ...errors, charLimitError: true }))
             return
         }
 

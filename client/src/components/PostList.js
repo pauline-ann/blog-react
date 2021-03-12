@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { List, Image, Segment } from "semantic-ui-react";
+import moment from 'moment';
 
 import UpdateModal from './UpdateModal';
 import DeleteModal from './DeleteModal';
-
-import sample from "../assets/images/ramen-icon.png";
 
 const PostList = (props) => {
 
@@ -13,6 +12,16 @@ const PostList = (props) => {
     const listItemStyle = {
         'padding': '.75em 0',
         'display': 'block'
+    }
+
+    const dateStyle = {
+        fontStyle: 'italic',
+        paddingBottom: '8px'
+    }
+
+    const postTitleStyle = {
+        paddingBottom: '8px',
+        fontSize: '1.2em'
     }
 
     // Initiate state to store and list posts
@@ -50,15 +59,15 @@ const PostList = (props) => {
     return (
         <React.Fragment>
             <List divided verticalAlign='middle'>
-                {posts.map((post, i) => {
+                {posts.reverse().map((post, i) => {
                     console.log(post)
                     return (
                         <List.Item
                             style={listItemStyle}
                             key={post._id}>
-                            <Image avatar src={sample} />
                             <List.Content>
-                                <List.Header>{post.title}</List.Header>
+                                <List.Description style={dateStyle}>{moment(post.createdAt).format('dddd, MMMM Do YYYY')}</List.Description>
+                                <List.Header style={postTitleStyle}>{post.title}</List.Header>
                                 <List.Description>
                                     {post.description}
                                 </List.Description>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Form, Rating, Message, Modal, Button, Divider } from "semantic-ui-react";
+import { Container, Form, Rating, Message, Modal, List, Divider } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
 
 // redirect when submit
@@ -32,7 +32,7 @@ const UpdateModal = React.memo(props => {
     return (
         <React.Fragment>
             <Modal closeIcon trigger={
-                <Button floated='right' circular icon='edit outline' />
+                <List.Icon color='grey' name='edit outline' size='big' verticalAlign='middle' />
             }><Modal.Header style={headerStyle}>Edit Post</Modal.Header>
                 <Modal.Content>
                     <Divider hidden />

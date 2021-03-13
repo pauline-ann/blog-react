@@ -65,15 +65,6 @@ const PostList = (props) => {
                         <List.Item
                             style={listItemStyle}
                             key={post._id}>
-                            <List.Content>
-                                <List.Description style={dateStyle}>{moment(post.createdAt).format('dddd, MMMM Do YYYY')}</List.Description>
-                                <List.Header style={postTitleStyle}>{post.title}</List.Header>
-                                <List.Description>
-                                    {post.description}
-                                </List.Description>
-                            </List.Content>
-                            {/* DELETE POST BUTTON/MODAL */}
-                            <DeleteModal id={post._id} getPosts={getPosts} />
                             {/* EDIT POST BUTTON/MODAL */}
                             <UpdateModal
                                 title={post.title}
@@ -85,6 +76,15 @@ const PostList = (props) => {
                                 vibes={post.rating.vibes}
                                 id={post._id}
                             />
+                            {/* DELETE POST BUTTON/MODAL */}
+                            <DeleteModal id={post._id} getPosts={getPosts} />
+                            <List.Content>
+                                <List.Description style={dateStyle}>{moment(post.createdAt).format('dddd, MMMM Do YYYY')}</List.Description>
+                                <List.Header style={postTitleStyle}>{post.title}</List.Header>
+                                <List.Description>
+                                    {post.description}
+                                </List.Description>
+                            </List.Content>
                         </List.Item>)
                 })}
             </List>

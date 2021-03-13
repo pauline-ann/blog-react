@@ -1,6 +1,6 @@
 import React from "react";
 import axios from 'axios';
-import { Button, Modal } from "semantic-ui-react";
+import { Button, Modal, List } from "semantic-ui-react";
 
 const DeleteModal = (props) => {
 
@@ -40,7 +40,9 @@ const DeleteModal = (props) => {
                 onOpen={() => setOpen(true)}
                 open={open}
                 size='tiny'
-                trigger={<Button floated='right' circular icon='delete' />
+                trigger={
+                    // <Button floated='right' circular icon='delete' />
+                    <List.Icon color='grey' name='delete' size='big' verticalAlign='middle' />
                 }>
                 <Modal.Header>Delete Post</Modal.Header>
                 <Modal.Content>

@@ -63,12 +63,6 @@ const useCreateForm = (callback) => {
         let inputError = false;
         let descCharLimitError = false;
 
-        if (inputs.title === '') {
-            setErrors(errors => ({ ...errors, titleError: true }))
-            inputError = true;
-        } else {
-            setErrors(errors => ({ ...errors, titleError: false }))
-        }
         if (inputs.description === '' || inputs.description.length > 200) {
             setErrors(errors => ({ ...errors, descError: true }))
             if (inputs.description === '') {
@@ -83,6 +77,12 @@ const useCreateForm = (callback) => {
             }
         } else {
             setErrors(errors => ({ ...errors, descError: false }))
+        }
+        if (inputs.title === '') {
+            setErrors(errors => ({ ...errors, titleError: true }))
+            inputError = true;
+        } else {
+            setErrors(errors => ({ ...errors, titleError: false }))
         }
         if (inputs.location === '') {
             setErrors(errors => ({ ...errors, locationError: true }))
@@ -232,12 +232,6 @@ const useUpdateForm = (callback) => {
         let inputError = false;
         let descCharLimitError = false;
 
-        if (inputs.title === '') {
-            setErrors(errors => ({ ...errors, titleError: true }))
-            inputError = true;
-        } else {
-            setErrors(errors => ({ ...errors, titleError: false }))
-        }
         if (inputs.description === '' || inputs.description.length > 200) {
             setErrors(errors => ({ ...errors, descError: true }))
             if (inputs.description === '') {
@@ -252,6 +246,12 @@ const useUpdateForm = (callback) => {
             }
         } else {
             setErrors(errors => ({ ...errors, descError: false }))
+        }
+        if (inputs.title === '') {
+            setErrors(errors => ({ ...errors, titleError: true }))
+            inputError = true;
+        } else {
+            setErrors(errors => ({ ...errors, titleError: false }))
         }
         if (inputs.location === '') {
             setErrors(errors => ({ ...errors, locationError: true }))

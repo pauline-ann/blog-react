@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Container, Button, Modal, Divider } from 'semantic-ui-react';
-import axios from 'axios';
 
 import CreateForm from './CreateForm';
 import PostList from './PostList';

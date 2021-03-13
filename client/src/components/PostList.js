@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { List, Image, Segment } from "semantic-ui-react";
+import { List } from "semantic-ui-react";
 import moment from 'moment';
 
 import UpdateModal from './UpdateModal';
@@ -33,7 +33,7 @@ const PostList = (props) => {
             await axios.get('/api/posts')
                 .then((res) => {
                     // handle success
-                    setPosts(res.data);
+                    setPosts(res.data.reverse());
                 })
                 .catch((err) => {
                     // handle error
@@ -59,7 +59,7 @@ const PostList = (props) => {
     return (
         <React.Fragment>
             <List divided verticalAlign='middle'>
-                {posts.reverse().map((post, i) => {
+                {posts.map((post, i) => {
                     console.log(post)
                     return (
                         <List.Item

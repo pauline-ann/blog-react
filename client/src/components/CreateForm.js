@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Container, Form, Rating, Message, Divider, Button, Input, Segment } from "semantic-ui-react";
+import React from "react";
+import { Container, Form, Rating, Message, Divider } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
 // import { InputFile } from 'semantic-ui-react-input-file'
 
@@ -8,7 +8,7 @@ import { useCreateForm } from './CustomHooks';
 
 const CreateForm = React.memo(props => {
 
-    const { errors, inputs, handleVibesRating, handleAestheticRating, handleInputChange, handleFileUpload, handleSubmit } = useCreateForm();
+    const { inputs, errors, handleVibesRating, handleAestheticRating, handleInputChange, handleFileUpload, handleSubmit } = useCreateForm();
 
     // Category options
     const options = [
@@ -29,32 +29,35 @@ const CreateForm = React.memo(props => {
                     onSubmit={(event) => handleSubmit(event)}
                     error={errors.formError || errors.charLimitError}
                 >
-                    <Form.Field>
+                    <Form.Field
+                        error={errors.titleError}
+                    >
                         <label>Title</label>
                         <Form.Input
                             name='title'
                             value={inputs.title}
                             onChange={handleInputChange}
-                            error={errors.titleError}
                         />
                     </Form.Field>
-                    <Form.Field>
+                    <Form.Field
+                        error={errors.descError}
+                    >
                         <label>Description</label>
                         <Form.Input
                             name='description'
                             value={inputs.description}
                             onChange={handleInputChange}
-                            error={errors.descError}
                         />
                     </Form.Field>
                     <Form.Group widths="equal">
-                        <Form.Field>
+                        <Form.Field
+                            error={errors.locationError}
+                        >
                             <label>Location</label>
                             <Form.Input
                                 name='location'
                                 value={inputs.location}
                                 onChange={handleInputChange}
-                                error={errors.locationError}
                             />
                         </Form.Field>
                         <Form.Field>
@@ -135,7 +138,7 @@ const CreateForm = React.memo(props => {
                             /> */}
                         </Form.Field>
                         <Form.Field>
-                             
+
                         </Form.Field>
                     </Form.Group>
                     {errors.formError

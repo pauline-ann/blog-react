@@ -17,7 +17,7 @@ const UpdateModal = React.memo(props => {
 
     // Initiate Custom Hooks
 
-    const { inputs, handleInputChange, handleVibesRating, handleAestheticRating, handleSubmit } = useUpdateForm(props);
+    const { inputs, errors, handleInputChange, handleVibesRating, handleAestheticRating, handleSubmit } = useUpdateForm(props);
 
     // Category options
     const options = [
@@ -25,7 +25,7 @@ const UpdateModal = React.memo(props => {
     ]
 
     // Redirect to post page once form is submitted
-    if (inputs.formSubmitted === true) {
+    if (errors.formSubmitted === true) {
         return <Redirect to={'/post/' + inputs.postID} />
     }
 
@@ -33,15 +33,18 @@ const UpdateModal = React.memo(props => {
         <React.Fragment>
             <Modal closeIcon trigger={
                 <List.Icon color='grey' name='edit outline' size='big' verticalAlign='middle' />
-            }><Modal.Header style={headerStyle}>Edit Post</Modal.Header>
+            }>
+                <Modal.Header style={headerStyle}>
+                    Edit Post
+                </Modal.Header>
                 <Modal.Content>
                     <Divider hidden />
                     <Form
                         onSubmit={(event) => handleSubmit(event)}
-                        error={inputs.formError}
+                        error={errors.formError || errors.charLimitError}
                     >
                         <Form.Field
-                            error={inputs.titleError}
+                            error={errors.titleError}
                         >
                             <label>Title</label>
                             <Form.Input
@@ -51,8 +54,7 @@ const UpdateModal = React.memo(props => {
                             />
                         </Form.Field>
                         <Form.Field
-                            error={inputs.descError}
-
+                            error={errors.descError}
                         >
                             <label>Description</label>
                             <Form.Input
@@ -63,7 +65,7 @@ const UpdateModal = React.memo(props => {
                         </Form.Field>
                         <Form.Group widths="equal">
                             <Form.Field
-                                error={inputs.locationError}
+                                error={errors.locationError}
                             >
                                 <label>Location</label>
                                 <Form.Input
@@ -84,7 +86,7 @@ const UpdateModal = React.memo(props => {
                         </Form.Group>
                         <Form.Group widths="equal">
                             <Form.Field
-                                error={inputs.aestheticError}
+                                error={errors.aestheticError}
                             >
                                 <label>Aesthetic</label>
                                 <Rating
@@ -97,7 +99,7 @@ const UpdateModal = React.memo(props => {
                                 />
                             </Form.Field>
                             <Form.Field
-                                error={inputs.vibesError}
+                                error={errors.vibesError}
                             >
                                 <label>Vibes</label>
                                 <Rating
@@ -111,7 +113,7 @@ const UpdateModal = React.memo(props => {
                             </Form.Field>
                         </Form.Group>
                         <Form.Field
-                            error={inputs.contentError}
+                            error={errors.contentError}
                         >
                             <Form.TextArea
                                 name='content'
@@ -119,7 +121,7 @@ const UpdateModal = React.memo(props => {
                                 onChange={handleInputChange}
                             />
                         </Form.Field>
-                        {inputs.formError
+                        {errors.formError
                             ?
                             <Message
                                 error
@@ -129,6 +131,16 @@ const UpdateModal = React.memo(props => {
                             :
                             null
                         }
+                        {errors.charLimitError
+                        ?
+                        <Message
+                            error
+                            header="Maximum Character Limit"
+                            content="Description must be 200 characters or less."
+                        />
+                        :
+                        null
+                    }
                         <Divider section hidden />
                         <Container textAlign='center'>
                             <Form.Button

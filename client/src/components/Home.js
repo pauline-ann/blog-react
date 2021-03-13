@@ -17,7 +17,7 @@ const Home = (props) => {
                 .then((res) => {
                     // handle success
                     console.log(res);
-                    setPosts(res.data);
+                    setPosts(res.data.reverse());
                 })
                 .catch((err) => {
                     // handle error
@@ -32,7 +32,7 @@ const Home = (props) => {
             <Container>
                 <Divider horizontal>Latest Posts</Divider><br />
                 <Item.Group>
-                    {posts.reverse().map((post, i) => {
+                    {posts.map((post, i) => {
 
                         let date = moment(post.createdAt).format('dddd, MMMM Do YYYY');
 

@@ -72,9 +72,9 @@ const useCreateForm = (callback) => {
         if (inputs.description === '' || inputs.description.length > 200) {
             setErrors(errors => ({ ...errors, descError: true }))
             if (inputs.description === '') {
-                inputError= true;
+                inputError = true;
             } else {
-                inputError= false;
+                inputError = false;
             }
             if (inputs.description.length > 200) {
                 descCharLimitError = true
@@ -189,6 +189,12 @@ const useUpdateForm = (callback) => {
         location: callback.location,
         aesthetic: callback.aesthetic,
         vibes: callback.vibes,
+        photo: callback.photo,
+        photoName: callback.photoname,
+        postID: callback.id
+    });
+
+    const [errors, setErrors] = useState({
         titleError: false,
         descError: false,
         contentError: false,
@@ -196,9 +202,10 @@ const useUpdateForm = (callback) => {
         locationError: false,
         aestheticError: false,
         vibesError: false,
+        photoError: false,
         formError: false,
+        charLimitError: false,
         formSubmitted: false,
-        postID: callback.id
     });
 
     // Event handlers
@@ -222,53 +229,73 @@ const useUpdateForm = (callback) => {
         event.preventDefault();
 
         // Check form submission for errors
-        let error = false;
+        let inputError = false;
+        let descCharLimitError = false;
+
         if (inputs.title === '') {
-            setInputs(inputs => ({ ...inputs, titleError: true }))
-            error = true;
+            setErrors(errors => ({ ...errors, titleError: true }))
+            inputError = true;
         } else {
-            setInputs(inputs => ({ ...inputs, titleError: false }))
+            setErrors(errors => ({ ...errors, titleError: false }))
         }
-        if (inputs.description === '') {
-            setInputs(inputs => ({ ...inputs, descError: true }))
-            error = true;
+        if (inputs.description === '' || inputs.description.length > 200) {
+            setErrors(errors => ({ ...errors, descError: true }))
+            if (inputs.description === '') {
+                inputError = true;
+            } else {
+                inputError = false;
+            }
+            if (inputs.description.length > 200) {
+                descCharLimitError = true
+            } else {
+                descCharLimitError = false
+            }
         } else {
-            setInputs(inputs => ({ ...inputs, descError: false }))
+            setErrors(errors => ({ ...errors, descError: false }))
         }
         if (inputs.location === '') {
-            setInputs(inputs => ({ ...inputs, locationError: true }))
-            error = true;
+            setErrors(errors => ({ ...errors, locationError: true }))
+            inputError = true;
         } else {
-            setInputs(inputs => ({ ...inputs, locationError: false }))
+            setErrors(errors => ({ ...errors, locationError: false }))
         }
         if (inputs.category === '') {
-            setInputs(inputs => ({ ...inputs, categoryError: true }))
-            error = true;
+            setErrors(errors => ({ ...errors, categoryError: true }))
+            inputError = true;
         } else {
-            setInputs(inputs => ({ ...inputs, categoryError: false }))
+            setErrors(errors => ({ ...errors, categoryError: false }))
         }
         if (inputs.aesthetic === 0) {
-            setInputs(inputs => ({ ...inputs, aestheticError: true }))
-            error = true;
+            setErrors(errors => ({ ...errors, aestheticError: true }))
+            inputError = true;
         } else {
-            setInputs(inputs => ({ ...inputs, aestheticError: false }))
+            setErrors(errors => ({ ...errors, aestheticError: false }))
         }
         if (inputs.vibes === 0) {
-            setInputs(inputs => ({ ...inputs, vibesError: true }))
-            error = true;
+            setErrors(errors => ({ ...errors, vibesError: true }))
+            inputError = true;
         } else {
-            setInputs(inputs => ({ ...inputs, vibesError: false }))
+            setErrors(errors => ({ ...errors, vibesError: false }))
         }
         if (inputs.content === '') {
-            setInputs(inputs => ({ ...inputs, contentError: true }))
-            error = true;
+            setErrors(errors => ({ ...errors, contentError: true }))
+            inputError = true;
         } else {
-            setInputs(inputs => ({ ...inputs, contentError: false }))
+            setErrors(errors => ({ ...errors, contentError: false }))
         }
 
         // Prevent form submission if inputs are invalid
-        if (error) {
-            setInputs(inputs => ({ ...inputs, formError: true }))
+        if (inputError && descCharLimitError) {
+            setErrors(errors => ({ ...errors, formError: true }))
+            setErrors(errors => ({ ...errors, charLimitError: true }))
+            return
+        } else if (inputError && !descCharLimitError) {
+            setErrors(errors => ({ ...errors, formError: true }))
+            setErrors(errors => ({ ...errors, charLimitError: false }))
+            return
+        } else if (!inputError && descCharLimitError) {
+            setErrors(errors => ({ ...errors, formError: false }))
+            setErrors(errors => ({ ...errors, charLimitError: true }))
             return
         }
 
@@ -288,18 +315,22 @@ const useUpdateForm = (callback) => {
                 console.log(res.data)
                 if (res.status === 200) {
                     console.log('axios edit success')
-                    setInputs(inputs => ({ ...inputs, formSubmitted: true }))
+                    setErrors(errors => ({ ...errors, formSubmitted: true }))
                 } else {
                     console.log('Error: update post')
                 }
             });
 
         // Refresh state
-        setInputs(inputs => ({ ...inputs, formError: false }))
+        setErrors(errors => ({
+            ...errors,
+            formError: false
+        }))
     }
 
     return {
         inputs,
+        errors,
         handleInputChange,
         handleSubmit,
         handleAestheticRating,

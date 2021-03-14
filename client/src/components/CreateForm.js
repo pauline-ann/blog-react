@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Form, Rating, Message, Divider } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
-// import { InputFile } from 'semantic-ui-react-input-file'
+import { InputFile } from 'semantic-ui-react-input-file';
 
 // Custom hooks
 import { useCreateForm } from './CustomHooks';
@@ -112,7 +112,6 @@ const CreateForm = React.memo(props => {
                         <Form.Field
                             error={errors.photoError}
                         >
-
                             {/* File type input 
                                 on change set state e.target.files[0]
                                 store in computer or db
@@ -121,13 +120,12 @@ const CreateForm = React.memo(props => {
                             */}
                             <label>{inputs.photoName}</label>
                             {/* <input type='file' className='custom-file-input' id='customFile' /> */}
-                            {/* <InputFile
-                                button={{ ...buttonProps }}
+                            <InputFile
                                 input={{
                                     id: 'input-control-id',
-                                    onChange: handleUpload
+                                    onChange: handleFileUpload
                                 }}
-                            /> */}
+                            />
                             {/* <InputFile
                                 input={{
                                     id: 'input-control-id',

@@ -82,6 +82,7 @@ const Post = (props) => {
             <Container text>
                 <Header sub style={postSubStyle}>{post.category}</Header>
                 <Header as="h1" style={postHeaderStyle}>{post.title}</Header>
+                <p style={postDescriptionStyle}>{post.description}</p>
                 <Header.Subheader>
                     <List horizontal>
                         <List.Item>
@@ -92,7 +93,6 @@ const Post = (props) => {
                         <List.Item>Vibes: {vRating}</List.Item>
                     </List>
                 </Header.Subheader>
-                <p style={postDescriptionStyle}>{post.description}</p>
                 <p style={postDateStyle}>{post.date}</p>
                 <Divider />
                 <Image src={sample} fluid />

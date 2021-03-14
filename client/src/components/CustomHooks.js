@@ -45,13 +45,9 @@ const useCreateForm = (callback) => {
     }
 
     const handleFileUpload = e => {
-
         let photo = e.target.files[0]
-
-        setInputs({ ...inputs, photo: photo })
-        setInputs({ ...inputs, photoName: photo.name });
-        console.log(inputs.photo)
-        console.log(e.target.files[0])
+        console.log(photo)
+        setInputs(inputs => ({ ...inputs, photoName: photo.name, photo: photo }))
     }
 
     const handleSubmit = (event) => {

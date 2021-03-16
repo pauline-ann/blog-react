@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-// const multer = require('multer');
-// const upload = multer({'./upload/'})
 
 // Load post mongoose model
 const Post = require('../../models/post.model');
@@ -26,7 +24,7 @@ router.get('/:id', (req, res) => {
     .catch(err => res.status(404).json({ Error: err, Description: 'Post not found.' }));
 });
 
-// GET api/posts/new
+// POST api/posts/new
 // Route to add/save post
 router.post('/new', (req, res) => {
 
@@ -62,7 +60,7 @@ router.post('/new', (req, res) => {
     .catch(err => res.status(400).json({ err }));
 });
 
-// GET api/posts/:id
+// PUT api/posts/:id
 // Route to update post
 router.put('/:id', (req, res) => {
 
@@ -85,7 +83,7 @@ router.put('/:id', (req, res) => {
     );
 });
 
-// GET api/posts/:id
+// DELETE api/posts/:id
 // Route to delete post by id
 router.delete('/:id', (req, res) => {
   Post.findByIdAndRemove(req.params.id, req.body)

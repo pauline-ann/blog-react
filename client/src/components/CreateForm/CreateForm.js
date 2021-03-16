@@ -1,14 +1,15 @@
 import React from "react";
-import { Container, Form, Rating, Message, Divider } from "semantic-ui-react";
+import { Container, Form, Rating, Message, Divider, Icon } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
-import { InputFile } from 'semantic-ui-react-input-file';
+
+import './CreateForm.css'
 
 // Custom hooks
-import { useCreateForm } from './CustomHooks';
+import { useCreateForm } from '../CustomHooks';
 
 const CreateForm = React.memo(props => {
 
-    const { inputs, errors, handleVibesRating, handleAestheticRating, handleInputChange, handleFileUpload, handleSubmit } = useCreateForm();
+    const { inputs, errors, handleVibesRating, handleAestheticRating, handleInputChange, handleFileSelected, handleSubmit } = useCreateForm();
 
     // Category options
     const options = [
@@ -100,45 +101,26 @@ const CreateForm = React.memo(props => {
                             />
                         </Form.Field>
                     </Form.Group>
-                    <Form.TextArea
-                        label='Experience'
-                        name='content'
-                        value={inputs.content}
-                        onChange={handleInputChange}
-                        placeholder='How was your meal?'
+                    <Form.Field
                         error={errors.contentError}
-                    />
-                    <Form.Group widths='equal'>
-                        <Form.Field
-                            error={errors.photoError}
-                        >
-                            {/* File type input 
-                                on change set state e.target.files[0]
-                                store in computer or db
-                                send data, file path
-                                multer????
-                            */}
-                            <label>{inputs.photoName}</label>
-                            {/* <input type='file' className='custom-file-input' id='customFile' /> */}
-                            <InputFile
-                                input={{
-                                    id: 'input-control-id',
-                                    onChange: handleFileUpload
-                                }}
-                            />
-                            {/* <InputFile
-                                input={{
-                                    id: 'input-control-id',
-                                    onChange: handleFileUpload,
-                                    name:'photo',
-                                    accept: '.png, .jpg, .jpeg'
-                                }}
-                            /> */}
-                        </Form.Field>
-                        <Form.Field>
-
-                        </Form.Field>
-                    </Form.Group>
+                    >
+                        <Form.TextArea
+                            label='Experience'
+                            name='content'
+                            value={inputs.content}
+                            onChange={handleInputChange}
+                            placeholder='How was your meal?'
+                        />
+                    </Form.Field>
+                    <Divider hidden/>
+                    <Form.Field
+                        error={errors.photoError}
+                    >
+                        <label htmlFor='file-upload' className='custom-file-upload'>
+                            <Icon name='upload'/>{inputs.photoName}
+                        </label>
+                        <input type='file' name='file' id='file-upload' onChange={handleFileSelected}/>
+                    </Form.Field>
                     {errors.formError
                         ?
                         <Message

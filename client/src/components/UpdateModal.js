@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Form, Rating, Message, Modal, List, Divider } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
+import { InputFile } from 'semantic-ui-react-input-file';
 
 // redirect when submit
 
@@ -17,7 +18,9 @@ const UpdateModal = React.memo(props => {
 
     // Initiate Custom Hooks
 
-    const { inputs, errors, handleInputChange, handleVibesRating, handleAestheticRating, handleSubmit } = useUpdateForm(props);
+    const { inputs, errors, handleInputChange, handleVibesRating, handleAestheticRating, handleFileUpload, handleSubmit } = useUpdateForm(props);
+
+    console.log(inputs.photo)
 
     // Category options
     const options = [
@@ -116,9 +119,21 @@ const UpdateModal = React.memo(props => {
                             error={errors.contentError}
                         >
                             <Form.TextArea
+                                label='Experience'
                                 name='content'
                                 value={inputs.content}
                                 onChange={handleInputChange}
+                            />
+                        </Form.Field>
+                        <Form.Field
+                            error={errors.photoError}
+                        >
+                            <label></label>
+                            <InputFile
+                                input={{
+                                    id: 'input-control-id',
+                                    onChange: handleFileUpload
+                                }}
                             />
                         </Form.Field>
                         {errors.formError
@@ -132,15 +147,15 @@ const UpdateModal = React.memo(props => {
                             null
                         }
                         {errors.charLimitError
-                        ?
-                        <Message
-                            error
-                            header="Maximum Character Limit"
-                            content="Description must be 200 characters or less."
-                        />
-                        :
-                        null
-                    }
+                            ?
+                            <Message
+                                error
+                                header="Maximum Character Limit"
+                                content="Description must be 200 characters or less."
+                            />
+                            :
+                            null
+                        }
                         <Divider section hidden />
                         <Container textAlign='center'>
                             <Form.Button

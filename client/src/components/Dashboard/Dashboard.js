@@ -1,38 +1,26 @@
 import React from 'react';
 import { Container, Button, Modal, Divider } from 'semantic-ui-react';
 
-import CreateForm from './CreateForm';
-import PostList from './PostList';
+import CreateForm from '../CreateForm/CreateForm';
+import PostList from '../PostList';
+
+import './Dashboard.css';
 
 //Dashboard
 const Dashboard = (props) => {
 
-    // Component Styling
-
-    const modalTriggerStyle = {
-        textAlign: 'center',
-        width: '100%',
-        paddingTop: '3rem',
-        paddingBottom: '3rem',
-        background: 'rgb(254,237,207)'
-    }
-
-    const headerStyle = {
-        textAlign: 'center'
-    }
-
     return (
         <React.Fragment>
             <Container>
-                <h1 style={headerStyle}>Dashboard</h1><br />
+                <h1 className='dashboard-header'>Dashboard</h1><br />
                 {/* Create New Post Button */}
                 <Modal
                     closeIcon
                     trigger={
-                        <Button style={modalTriggerStyle}>New Post</Button>
+                        <Button className='dashboard-modal-trigger'>New Post</Button>
                     }>
                     <Modal.Header
-                        style={headerStyle}>New Post</Modal.Header>
+                        className='dashboard-header'>New Post</Modal.Header>
                     <Modal.Content>
                         <CreateForm />
                     </Modal.Content>
@@ -40,7 +28,7 @@ const Dashboard = (props) => {
                 <br />
                 <Divider section clearing horizontal />
                 <Divider section clearing horizontal />
-                <h2 style={headerStyle}>Edit Posts</h2><br />
+                <h2 className='dashboard-header'>Edit Posts</h2><br />
                 <PostList />
             </Container>
         </React.Fragment>

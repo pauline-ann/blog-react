@@ -2,7 +2,7 @@ body {
     height: 100%;
 }
 
-h1, h2, h3, a.header {
+h1, h2, h3, a.header, div.header {
     font-family: 'Noto Serif', serif !important;
 }
 

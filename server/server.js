@@ -5,9 +5,8 @@ const express = require("express");
 const cors = require('cors');
 const logger = require("morgan");
 const favicon = require('express-favicon');
-const path = require('path');
 
-// ----- MongoDB Database --------------------/
+// ----- Init Mongo DB --------------------/
 const connectDB = require("./config/db");
 connectDB();
 
@@ -43,6 +42,9 @@ app.get('/ping', function (req, res) {
 // Append /api routing for our http requests
 const postsRouter = require('./routes/api/posts');
 app.use('/api/posts', postsRouter);
+
+const imagesRouter = require('./routes/api/images');
+app.use('/api/images', imagesRouter);
 
 // ----- Listen --------------------/
 app.listen(port, () => {

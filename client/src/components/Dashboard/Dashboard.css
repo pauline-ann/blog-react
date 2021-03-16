@@ -1,0 +1,16 @@
+.dashboard-modal-trigger {
+    text-align: center;
+    width: 100%;
+    padding: 3rem 3rem !important;
+    border: 2px solid lightgray !important;
+    background-color: white !important;
+}
+
+.dashboard-modal-trigger:active, .dashboard-modal-trigger:hover {
+    background: rgb(254,237,207) !important;
+}
+
+.dashboard-header {
+    text-align: center;
+    font-size: 1.8em;
+}

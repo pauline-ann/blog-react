@@ -39,8 +39,8 @@ const postSchema = new Schema({
             max: 5
         }
     },
-    photo: {
-        type: Object,
+    photoID: {
+        type: String,
         required: true
     }
 }, {

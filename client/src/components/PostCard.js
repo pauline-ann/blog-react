@@ -2,8 +2,6 @@ import React from "react";
 import { Item, Rating } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-import sample from "../assets/images/ramen.jpg";
-
 const PostCard = (props) => {
 
     const postCardHeader = {
@@ -25,7 +23,7 @@ const PostCard = (props) => {
 
     return (
         <Item>
-            <Item.Image size='medium' src={sample} />
+            <Item.Image size='medium' src={`/api/images/render/${props.fileName}`} />
             <Item.Content>
                 <Item.Meta style={postCardCategory}>{props.category}</Item.Meta>
                 <Link to={"/post/" + props.id}><Item.Header style={postCardHeader}>{props.title}</Item.Header></Link>

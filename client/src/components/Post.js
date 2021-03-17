@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Header, Image, Icon, Rating, Divider, List } from "semantic-ui-react";
 import axios from 'axios';
-import sample from "../assets/images/ramen.jpg";
 import moment from 'moment';
 
 const Post = (props) => {
@@ -15,7 +14,12 @@ const Post = (props) => {
         rating: {
             aesthetic: 0,
             vibes: 0
-        }
+        },
+        photo: {
+            fileName: '',
+            fileID: ''
+        },
+        date: null
     });
 
     const postHeaderStyle = {
@@ -50,6 +54,10 @@ const Post = (props) => {
                         rating: {
                             aesthetic: res.data.rating.aesthetic,
                             vibes: res.data.rating.vibes
+                        },
+                        photo: {
+                            fileName: res.data.photo.fileName,
+                            fileID: res.data.photo.fileID
                         },
                         date: moment(res.data.createdAt).format('dddd, MMMM Do YYYY')
                     });
@@ -95,7 +103,7 @@ const Post = (props) => {
                 </Header.Subheader>
                 <p style={postDateStyle}>{post.date}</p>
                 <Divider />
-                <Image src={sample} fluid />
+                <Image src={`/api/images/render/${post.photo.fileName}`} fluid />
                 <Divider />
                 {post.content}
             </Container>

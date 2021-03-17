@@ -74,7 +74,9 @@ const PostList = (props) => {
                                 location={post.location}
                                 aesthetic={post.rating.aesthetic}
                                 vibes={post.rating.vibes}
-                                photo={post.photo}
+                                flavor={post.rating.flavor}
+                                fileName={post.photo.fileName}
+                                fileID={post.photo.fileID}
                                 id={post._id}
                             />
                             {/* DELETE POST BUTTON/MODAL */}

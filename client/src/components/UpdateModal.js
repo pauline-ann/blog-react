@@ -17,7 +17,7 @@ const UpdateModal = React.memo(props => {
 
     // Initiate Custom Hooks
 
-    const { inputs, errors, handleInputChange, handleVibesRating, handleAestheticRating, handleFileUpload, handleSubmit } = useUpdateForm(props);
+    const { inputs, errors, handleInputChange, handleVibesRating, handleAestheticRating, handleFlavorRating, handleFileUpload, handleSubmit } = useUpdateForm(props);
 
     console.log(inputs.photo)
 
@@ -65,7 +65,9 @@ const UpdateModal = React.memo(props => {
                                 onChange={handleInputChange}
                             />
                         </Form.Field>
-                        <Form.Group widths="equal">
+                        <Form.Group
+                            widths="equal"
+                        >
                             <Form.Field
                                 error={errors.locationError}
                             >
@@ -86,7 +88,10 @@ const UpdateModal = React.memo(props => {
                                 />
                             </Form.Field>
                         </Form.Group>
-                        <Form.Group widths="equal">
+                        <Divider hidden />
+                        <Form.Group
+                            inline
+                        >
                             <Form.Field
                                 error={errors.aestheticError}
                             >
@@ -113,7 +118,21 @@ const UpdateModal = React.memo(props => {
                                     icon='star'
                                 />
                             </Form.Field>
+                            <Form.Field
+                                error={errors.flavorError}
+                            >
+                                <label>Flavor</label>
+                                <Rating
+                                    maxRating={5}
+                                    defaultRating={inputs.flavor}
+                                    name='vibes'
+                                    value={inputs.flavor}
+                                    onRate={handleFlavorRating}
+                                    icon='star'
+                                />
+                            </Form.Field>
                         </Form.Group>
+                        <Divider />
                         <Form.Field
                             error={errors.contentError}
                         >

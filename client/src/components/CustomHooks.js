@@ -223,7 +223,9 @@ const useCreateForm = (callback) => {
             location: callback.location,
             aesthetic: callback.aesthetic,
             vibes: callback.vibes,
-            photo: callback.photo,
+            flavor: callback.flavor,
+            fileName: callback.fileName,
+            fileID: callback.fileID,
             postID: callback.id
         });
 
@@ -235,6 +237,7 @@ const useCreateForm = (callback) => {
             locationError: false,
             aestheticError: false,
             vibesError: false,
+            flavorError: false,
             photoError: false,
             formError: false,
             charLimitError: false,
@@ -254,6 +257,10 @@ const useCreateForm = (callback) => {
 
         const handleVibesRating = (event, { rating }) => {
             setInputs(inputs => ({ ...inputs, vibes: rating }))
+        }
+
+        const handleFlavorRating = (event, { rating }) => {
+            setInputs(inputs => ({ ...inputs, flavor: rating }))
         }
 
         const handleFileUpload = e => {
@@ -316,6 +323,12 @@ const useCreateForm = (callback) => {
             } else {
                 setErrors(errors => ({ ...errors, vibesError: false }))
             }
+            if (inputs.flavor === 0) {
+                setErrors(errors => ({ ...errors, flavorError: true }))
+                inputError = true;
+            } else {
+                setErrors(errors => ({ ...errors, flavorError: false }))
+            }
             if (inputs.content === '') {
                 setErrors(errors => ({ ...errors, contentError: true }))
                 inputError = true;
@@ -352,7 +365,10 @@ const useCreateForm = (callback) => {
                 category: inputs.category,
                 location: inputs.location,
                 aesthetic: inputs.aesthetic,
-                vibes: inputs.vibes
+                vibes: inputs.vibes,
+                flavor: inputs.flavor,
+                fileName: inputs.fileName,
+                fileID: inputs.fileID
             }
 
             axios.put('/api/posts/' + inputs.postID, updatedPost)
@@ -380,6 +396,7 @@ const useCreateForm = (callback) => {
             handleSubmit,
             handleAestheticRating,
             handleVibesRating,
+            handleFlavorRating,
             handleFileUpload
         };
     }

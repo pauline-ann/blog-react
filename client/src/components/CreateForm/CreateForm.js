@@ -9,7 +9,7 @@ import { useCreateForm } from '../CustomHooks';
 
 const CreateForm = React.memo(props => {
 
-    const { inputs, errors, handleVibesRating, handleAestheticRating, handleInputChange, handleFileSelected, handleSubmit } = useCreateForm();
+    const { inputs, errors, handleVibesRating, handleAestheticRating, handleFlavorRating, handleInputChange, handleFileSelected, handleSubmit } = useCreateForm();
 
     // Category options
     const options = [
@@ -100,6 +100,19 @@ const CreateForm = React.memo(props => {
                                 icon='star'
                             />
                         </Form.Field>
+                        <Form.Field
+                            error={errors.flavorError}
+                        >
+                            <label>Flavor</label>
+                            <Rating
+                                maxRating={5}
+                                defaultRating={inputs.flavor}
+                                name='vibes'
+                                value={inputs.flavor}
+                                onRate={handleFlavorRating}
+                                icon='star'
+                            />
+                        </Form.Field>
                     </Form.Group>
                     <Form.Field
                         error={errors.contentError}
@@ -112,14 +125,14 @@ const CreateForm = React.memo(props => {
                             placeholder='How was your meal?'
                         />
                     </Form.Field>
-                    <Divider hidden/>
+                    <Divider hidden />
                     <Form.Field
                         error={errors.photoError}
                     >
                         <label htmlFor='file-upload' className='custom-file-upload'>
-                            <Icon name='upload'/>{inputs.photoName}
+                            <Icon name='upload' />{inputs.photoName}
                         </label>
-                        <input type='file' name='file' id='file-upload' onChange={handleFileSelected}/>
+                        <input type='file' name='file' id='file-upload' onChange={handleFileSelected} />
                     </Form.Field>
                     {errors.formError
                         ?

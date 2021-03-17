@@ -11,6 +11,7 @@ const useCreateForm = (callback) => {
         location: '',
         aesthetic: 0,
         vibes: 0,
+        flavor: 0,
         photo: null,
         photoName: 'Upload Image',
         postID: ''
@@ -24,6 +25,7 @@ const useCreateForm = (callback) => {
         locationError: false,
         aestheticError: false,
         vibesError: false,
+        flavorError: false,
         photoError: false,
         formError: false,
         charLimitError: false
@@ -42,6 +44,10 @@ const useCreateForm = (callback) => {
 
     const handleVibesRating = (event, { rating }) => {
         setInputs(inputs => ({ ...inputs, vibes: rating }))
+    }
+
+    const handleFlavorRating = (event, { rating }) => {
+        setInputs(inputs => ({ ...inputs, flavor: rating }))
     }
 
     const handleFileSelected = e => {
@@ -103,6 +109,12 @@ const useCreateForm = (callback) => {
             inputError = true;
         } else {
             setErrors(errors => ({ ...errors, vibesError: false }))
+        }
+        if (inputs.flavor === 0) {
+            setErrors(errors => ({ ...errors, flavorError: true }))
+            inputError = true;
+        } else {
+            setErrors(errors => ({ ...errors, flavorError: false }))
         }
         if (inputs.content === '') {
             setErrors(errors => ({ ...errors, contentError: true }))
@@ -192,6 +204,7 @@ const useCreateForm = (callback) => {
             handleInputChange,
             handleAestheticRating,
             handleVibesRating,
+            handleFlavorRating,
             handleFileSelected,
             handleSubmit,
             errors,

@@ -171,6 +171,7 @@ const useCreateForm = (callback) => {
                 location: inputs.location,
                 aesthetic: inputs.aesthetic,
                 vibes: inputs.vibes,
+                flavor: inputs.flavor,
                 fileName: res.data.file.filename,
                 fileID: res.data.file.id
             }

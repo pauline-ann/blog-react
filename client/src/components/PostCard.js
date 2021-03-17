@@ -31,6 +31,7 @@ const PostCard = (props) => {
                 <Item.Extra>
                     Aesthetic: <Rating icon='star' defaultRating={props.aesthetic} maxRating={5} disabled />
                     Vibes:   <Rating icon='star' defaultRating={props.vibes} maxRating={5} disabled />
+                    Flavor:   <Rating icon='star' defaultRating={props.flavor} maxRating={5} disabled />
                 </Item.Extra>
                 <Item.Description>{props.description}</Item.Description>
                 <br />

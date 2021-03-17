@@ -44,6 +44,7 @@ const Home = (props) => {
                             location={post.location}
                             aesthetic={post.rating.aesthetic}
                             vibes={post.rating.vibes}
+                            flavor={post.rating.flavor}
                             id={post._id}
                             fileName={post.photo.fileName}
                             key={i}

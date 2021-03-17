@@ -13,7 +13,8 @@ const Post = (props) => {
         location: '',
         rating: {
             aesthetic: 0,
-            vibes: 0
+            vibes: 0,
+            flavor: 0
         },
         photo: {
             fileName: '',
@@ -53,7 +54,8 @@ const Post = (props) => {
                         location: res.data.location,
                         rating: {
                             aesthetic: res.data.rating.aesthetic,
-                            vibes: res.data.rating.vibes
+                            vibes: res.data.rating.vibes,
+                            flavor: res.data.rating.flavor
                         },
                         photo: {
                             fileName: res.data.photo.fileName,
@@ -72,16 +74,21 @@ const Post = (props) => {
 
     let aRating;
     let vRating;
+    let fRating;
 
     if (post.rating.aesthetic > 0) {
         aRating = (
             <Rating icon='star' defaultRating={post.rating.aesthetic} maxRating={5} disabled />
         )
     }
-
     if (post.rating.vibes > 0) {
         vRating = (
             <Rating icon='star' defaultRating={post.rating.vibes} maxRating={5} disabled />
+        )
+    }
+    if (post.rating.flavor > 0) {
+        vRating = (
+            <Rating icon='star' defaultRating={post.rating.flavor} maxRating={5} disabled />
         )
     }
 
@@ -99,6 +106,7 @@ const Post = (props) => {
                         </List.Item>
                         <List.Item>Aesthetic: {aRating}</List.Item>
                         <List.Item>Vibes: {vRating}</List.Item>
+                        <List.Item>Flavor: {fRating}</List.Item>
                     </List>
                 </Header.Subheader>
                 <p style={postDateStyle}>{post.date}</p>

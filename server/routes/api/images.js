@@ -76,7 +76,7 @@ router.get('/:filename', (req, res) => {
         .toArray((err, files) => {
 
             //Check if file
-            if ( !files[0] || files.length === 0) {
+            if (!files[0] || files.length === 0) {
                 return res.status(404).json({
                     message: 'No image exists.',
                     error: err
@@ -85,6 +85,35 @@ router.get('/:filename', (req, res) => {
 
             // Files exist 
             return res.json(files[0])
+        });
+});
+
+// GET api/images/render/:filename
+// Render fetched image to browser
+router.get('/render/:filename', (req, res) => {
+    gfs.find({ filename: req.params.filename })
+        .toArray((err, files) => {
+
+            let file = files[0]
+
+            // Check if file
+            if (!file || files.length === 0) {
+                return res.status(404).json({
+                    message: 'No image exists.',
+                    error: err
+                });
+            }
+
+            // If image
+            if (file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/svg+xml') {
+                // Render image to browser
+                gfs.openDownloadStreamByName(req.params.filename).pipe(res)
+            } else {
+                // Not an image
+                res.status(404).json({
+                    err: 'Not an image'
+                })
+            }
         });
 });
 

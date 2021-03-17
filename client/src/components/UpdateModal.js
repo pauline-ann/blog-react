@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Form, Rating, Message, Modal, List, Divider } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
-import { InputFile } from 'semantic-ui-react-input-file';
 
 // redirect when submit
 
@@ -129,12 +128,6 @@ const UpdateModal = React.memo(props => {
                             error={errors.photoError}
                         >
                             <label></label>
-                            <InputFile
-                                input={{
-                                    id: 'input-control-id',
-                                    onChange: handleFileUpload
-                                }}
-                            />
                         </Form.Field>
                         {errors.formError
                             ?

@@ -153,6 +153,7 @@ const useCreateForm = (callback) => {
             ).then(res => {
                 console.log('File uploaded')
                 console.log(res)
+                console.log(res.data.file)
             }).catch(e => {
                 console.log('error')
                 console.log(e)

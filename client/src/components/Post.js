@@ -87,7 +87,7 @@ const Post = (props) => {
         )
     }
     if (post.rating.flavor > 0) {
-        vRating = (
+        fRating = (
             <Rating icon='star' defaultRating={post.rating.flavor} maxRating={5} disabled />
         )
     }

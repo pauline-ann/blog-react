@@ -71,8 +71,9 @@ const CreateForm = React.memo(props => {
                             />
                         </Form.Field>
                     </Form.Group>
+                    <Divider hidden />
                     <Form.Group
-                        widths="equal"
+                        inline
                     >
                         <Form.Field
                             error={errors.aestheticError}
@@ -114,6 +115,7 @@ const CreateForm = React.memo(props => {
                             />
                         </Form.Field>
                     </Form.Group>
+                    <Divider hidden />
                     <Form.Field
                         error={errors.contentError}
                     >

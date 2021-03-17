@@ -39,12 +39,19 @@ const postSchema = new Schema({
             max: 5
         }
     },
-    photoID: {
-        type: String,
-        required: true
-    }
+    photo: {
+        fileName: {
+            type: String,
+            required: true
+        },
+        fileID: {
+            type: String,
+            required: true
+        }
+    },
+
 }, {
-        timestamps: true
-    });
+    timestamps: true
+});
 
 module.exports = mongoose.model('Post', postSchema);

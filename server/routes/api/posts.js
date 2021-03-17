@@ -37,7 +37,8 @@ router.post('/new', (req, res) => {
   const location = req.body.location;
   const aesthetic = req.body.aesthetic;
   const vibes = req.body.vibes;
-  const photo = req.body.photo;
+  const fileName = req.body.fileName;
+  const fileID = req.body.fileID;
 
   const newPost = new Post({
     title,
@@ -49,7 +50,10 @@ router.post('/new', (req, res) => {
       aesthetic,
       vibes
     },
-    photo
+    photo: {
+      fileName,
+      fileID
+    }
   })
 
   newPost.save()

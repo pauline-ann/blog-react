@@ -117,6 +117,15 @@ router.get('/render/:filename', (req, res) => {
         });
 });
 
+// POST api/images/upload
+// Upload file to db using GridFS/Multer middleware (breaks image file down into chunks)
+router.post('/upload', upload.single('file'), (req, res) => {
+    res.status(200).json({
+        file: req.file,
+        message: 'File uploaded successfully.'
+    })
+});
+
 // PUT api/images/:filename
 // Update image by ID(?)
 //
@@ -137,14 +146,5 @@ router.post('/:filename', (req, res) => {
         })
     })
 })
-
-// POST api/images/upload
-// Upload file to db using GridFS/Multer middleware (breaks image file down into chunks)
-router.post('/upload', upload.single('file'), (req, res) => {
-    res.status(200).json({
-        file: req.file,
-        message: 'File uploaded successfully.'
-    })
-});
 
 module.exports = router;

@@ -53,19 +53,39 @@ router.get('/test', (req, res) => res.send('Images route testing!'));
 
 // GET api/images
 // Display all image files in JSON
-router.get('/files', (req, res) => {
+router.get('/', (req, res) => {
     gfs.find().toArray((err, files) => {
 
         //Check if files
         if (!files || files.length === 0) {
             return res.status(404).json({
-                err: 'No image files exist.'
+                message: 'No image files exist.',
+                error: err
             });
         }
 
         // Files exist 
         return res.json(files)
     });
+});
+
+// GET api/images/:filename
+// Display specific image file in JSON
+router.get('/:filename', (req, res) => {
+    gfs.find({ filename: req.params.filename })
+        .toArray((err, files) => {
+
+            //Check if file
+            if ( !files[0] || files.length === 0) {
+                return res.status(404).json({
+                    message: 'No image exists.',
+                    error: err
+                });
+            }
+
+            // Files exist 
+            return res.json(files[0])
+        });
 });
 
 // POST api/images/upload

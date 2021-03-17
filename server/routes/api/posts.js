@@ -37,6 +37,7 @@ router.post('/new', (req, res) => {
   const location = req.body.location;
   const aesthetic = req.body.aesthetic;
   const vibes = req.body.vibes;
+  const flavor = req.body.flavor
   const fileName = req.body.fileName;
   const fileID = req.body.fileID;
 
@@ -48,7 +49,8 @@ router.post('/new', (req, res) => {
     location,
     rating: {
       aesthetic,
-      vibes
+      vibes,
+      flavor
     },
     photo: {
       fileName,
@@ -76,7 +78,12 @@ router.put('/:id', (req, res) => {
     location: req.body.location,
     rating: {
       aesthetic: req.body.aesthetic,
-      vibes: req.body.vibes
+      vibes: req.body.vibes,
+      flavor: req.body.flavor
+    },
+    photo: {
+      fileName: req.body.fileName,
+      fileID: req.body.fileID
     }
   }
 

@@ -37,6 +37,12 @@ const postSchema = new Schema({
             required: true,
             min: 1,
             max: 5
+        },
+        flavor: {
+            type: Number,
+            required: true,
+            min: 1,
+            max: 5
         }
     },
     photo: {

@@ -80,7 +80,7 @@ const PostList = (props) => {
                                 id={post._id}
                             />
                             {/* DELETE POST BUTTON/MODAL */}
-                            <DeleteModal id={post._id} getPosts={getPosts} />
+                            <DeleteModal postID={post._id} fileID={post.photo.fileID} getPosts={getPosts} />
                             <List.Content>
                                 <List.Description style={dateStyle}>{moment(post.createdAt).format('dddd, MMMM Do YYYY')}</List.Description>
                                 <List.Header style={postTitleStyle}>{post.title}</List.Header>

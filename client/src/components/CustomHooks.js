@@ -367,7 +367,7 @@ const useUpdateForm = (callback) => {
         const formData = new FormData();
         formData.append('file', inputs.photoUpload, inputs.photoName);
 
-        // Update Image: Make DELETE request to server then POST new image
+        // Update Image: Make image DELETE request to server
         axios.post(
             `/api/images/${inputs.initFileID}`
         ).then(res => {

@@ -367,61 +367,66 @@ const useUpdateForm = (callback) => {
         const formData = new FormData();
         formData.append('file', inputs.photoUpload, inputs.photoName);
 
-        // Update Image: Make image DELETE request to server
+        // Make image DELETE request
         axios.post(
             `/api/images/${inputs.initFileID}`
         ).then(res => {
             console.log('Image deleted')
             console.log(res)
-
-            // POST new image
-            axios.post(
-                '/api/images/upload',
-                formData,
-                {
-                    headers: { 'content-type': 'multipart/form-data' }
-                }
-            ).then(res => {
-                console.log('New image uploaded')
-                console.log(res)
-
-                // Update post: make PUT request to server
-                // New post object
-                const updatedPost = {
-                    title: inputs.title,
-                    description: inputs.description,
-                    content: inputs.content,
-                    category: inputs.category,
-                    location: inputs.location,
-                    aesthetic: inputs.aesthetic,
-                    vibes: inputs.vibes,
-                    flavor: inputs.flavor,
-                    fileName: res.data.file.filename,
-                    fileID: res.data.file.id
-                }
-
-                axios.put('/api/posts/' + inputs.postID, updatedPost)
-                    .then(res => {
-                        console.log(res.data)
-                        if (res.status === 200) {
-                            console.log('axios edit success')
-                            setErrors(errors => ({ ...errors, formSubmitted: true }))
-                        } else {
-                            console.log('Error: update post')
-                        }
-                        // CALLBACK HELL (will improve this later)
-                    }).catch(e => {
-                        console.log('error')
-                        console.log(e)
-                    });
-            }).catch(e => {
-                console.log('error')
-                console.log(e)
-            })
+            return res
         }).catch(e => {
             console.log('error')
             console.log(e)
         })
+
+        // Make image POST request
+        axios.post(
+            '/api/images/upload',
+            formData,
+            {
+                headers: { 'content-type': 'multipart/form-data' }
+            }
+        ).then(res => {
+            console.log('New image uploaded')
+            console.log(res)
+            updatePost(res.data.file)
+        }).catch(e => {
+            console.log('error')
+            console.log(e)
+        })
+
+        // Update post with new image
+        const updatePost = (newImage) => {
+
+            //New post object
+            const updatedPost = {
+                title: inputs.title,
+                description: inputs.description,
+                content: inputs.content,
+                category: inputs.category,
+                location: inputs.location,
+                aesthetic: inputs.aesthetic,
+                vibes: inputs.vibes,
+                flavor: inputs.flavor,
+                fileName: newImage.filename,
+                fileID: newImage.id
+            }
+
+            //Update post: make PUT request to server
+            axios.put('/api/posts/' + inputs.postID, updatedPost)
+                .then(res => {
+                    console.log(res.data)
+                    if (res.status === 200) {
+                        console.log('axios edit success')
+                        setErrors(errors => ({ ...errors, formSubmitted: true }))
+                    } else {
+                        console.log('Error: update post')
+                    }
+                }).catch(e => {
+                    console.log('error')
+                    console.log(e)
+                });
+        }
 
         // Refresh state
         setErrors(errors => ({

@@ -12,7 +12,7 @@ const useCreateForm = (callback) => {
         aesthetic: 0,
         vibes: 0,
         flavor: 0,
-        photo: null,
+        photoUpload: null,
         photoName: 'Upload Image',
         postID: ''
     });
@@ -53,7 +53,7 @@ const useCreateForm = (callback) => {
     const handleFileSelected = e => {
         let photo = e.target.files[0]
         console.log(photo)
-        setInputs(inputs => ({ ...inputs, photoName: photo.name, photo: photo }))
+        setInputs(inputs => ({ ...inputs, photoName: photo.name, photoUpload: photo }))
     }
 
     const handleSubmit = (event) => {
@@ -122,7 +122,7 @@ const useCreateForm = (callback) => {
         } else {
             setErrors(errors => ({ ...errors, contentError: false }))
         }
-        if (!(inputs.photo instanceof File)) {
+        if (!(inputs.photoUpload instanceof File)) {
             setErrors(errors => ({ ...errors, photoError: true }))
             inputError = true;
         } else {
@@ -148,9 +148,9 @@ const useCreateForm = (callback) => {
 
         // Handle file upload
         console.log('Selected file:')
-        console.log(inputs.photo)
+        console.log(inputs.photoUpload)
         const formData = new FormData();
-        formData.append('file', inputs.photo, inputs.photoName);
+        formData.append('file', inputs.photoUpload, inputs.photoName);
 
         // New Image: Make POST request to server
         axios.post(
@@ -179,226 +179,267 @@ const useCreateForm = (callback) => {
             // New post: Make POST request to server
             return axios.post('/api/posts/new', newPost)
                 .then(res => {
-                            console.log('submit create form: axios post request')
-                            console.log(res)
-                            if (res.status === 200) {
-                                console.log('axios post success')
-                                setInputs(inputs => ({ ...inputs, postID: res.data.newPostID }))
-                            }
-                            else {
-                                console.log('Error: create post')
-                            }
-                        });
-                }).catch(e => {
-                    console.log('error')
-                    console.log(e)
-                })
-
-            // Refresh state
-            setErrors(errors => ({
-                ...errors,
-                formError: false
-            }))
-        }
-
-    return {
-            handleInputChange,
-            handleAestheticRating,
-            handleVibesRating,
-            handleFlavorRating,
-            handleFileSelected,
-            handleSubmit,
-            errors,
-            inputs
-        };
-    }
-
-    const useUpdateForm = (callback) => {
-
-        const [inputs, setInputs] = useState({
-            title: callback.title,
-            description: callback.description,
-            content: callback.content,
-            category: callback.category,
-            location: callback.location,
-            aesthetic: callback.aesthetic,
-            vibes: callback.vibes,
-            flavor: callback.flavor,
-            fileName: callback.fileName,
-            fileID: callback.fileID,
-            postID: callback.id
-        });
-
-        const [errors, setErrors] = useState({
-            titleError: false,
-            descError: false,
-            contentError: false,
-            categoryError: false,
-            locationError: false,
-            aestheticError: false,
-            vibesError: false,
-            flavorError: false,
-            photoError: false,
-            formError: false,
-            charLimitError: false,
-            formSubmitted: false,
-        });
-
-        // Event handlers
-
-        const handleInputChange = (event) => {
-            event.persist();
-            setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
-        }
-
-        const handleAestheticRating = (event, { rating }) => {
-            setInputs(inputs => ({ ...inputs, aesthetic: rating }))
-        }
-
-        const handleVibesRating = (event, { rating }) => {
-            setInputs(inputs => ({ ...inputs, vibes: rating }))
-        }
-
-        const handleFlavorRating = (event, { rating }) => {
-            setInputs(inputs => ({ ...inputs, flavor: rating }))
-        }
-
-        const handleFileUpload = e => {
-            let photo = e.target.files[0]
-            console.log(photo)
-            setInputs(inputs => ({ ...inputs, photoName: photo.name, photo: photo }))
-        }
-
-        const handleSubmit = (event) => {
-
-            // Prevent page refresh
-            event.preventDefault();
-
-            // Check form submission for errors
-            let inputError = false;
-            let descCharLimitError = false;
-
-            if (inputs.description === '' || inputs.description.length > 200) {
-                setErrors(errors => ({ ...errors, descError: true }))
-                if (inputs.description === '') {
-                    inputError = true;
-                } else {
-                    inputError = false;
-                }
-                if (inputs.description.length > 200) {
-                    descCharLimitError = true
-                } else {
-                    descCharLimitError = false
-                }
-            } else {
-                setErrors(errors => ({ ...errors, descError: false }))
-            }
-            if (inputs.title === '') {
-                setErrors(errors => ({ ...errors, titleError: true }))
-                inputError = true;
-            } else {
-                setErrors(errors => ({ ...errors, titleError: false }))
-            }
-            if (inputs.location === '') {
-                setErrors(errors => ({ ...errors, locationError: true }))
-                inputError = true;
-            } else {
-                setErrors(errors => ({ ...errors, locationError: false }))
-            }
-            if (inputs.category === '') {
-                setErrors(errors => ({ ...errors, categoryError: true }))
-                inputError = true;
-            } else {
-                setErrors(errors => ({ ...errors, categoryError: false }))
-            }
-            if (inputs.aesthetic === 0) {
-                setErrors(errors => ({ ...errors, aestheticError: true }))
-                inputError = true;
-            } else {
-                setErrors(errors => ({ ...errors, aestheticError: false }))
-            }
-            if (inputs.vibes === 0) {
-                setErrors(errors => ({ ...errors, vibesError: true }))
-                inputError = true;
-            } else {
-                setErrors(errors => ({ ...errors, vibesError: false }))
-            }
-            if (inputs.flavor === 0) {
-                setErrors(errors => ({ ...errors, flavorError: true }))
-                inputError = true;
-            } else {
-                setErrors(errors => ({ ...errors, flavorError: false }))
-            }
-            if (inputs.content === '') {
-                setErrors(errors => ({ ...errors, contentError: true }))
-                inputError = true;
-            } else {
-                setErrors(errors => ({ ...errors, contentError: false }))
-            }
-            // if (Object.keys(inputs.photo).length === 0) {
-            //     setErrors(errors => ({ ...errors, photoError: true }))
-            //     inputError = true;
-            // } else {
-            //     setErrors(errors => ({ ...errors, photoError: false }))
-            // }
-
-            // Prevent form submission if inputs are invalid
-            if (inputError && descCharLimitError) {
-                setErrors(errors => ({ ...errors, formError: true }))
-                setErrors(errors => ({ ...errors, charLimitError: true }))
-                return
-            } else if (inputError && !descCharLimitError) {
-                setErrors(errors => ({ ...errors, formError: true }))
-                setErrors(errors => ({ ...errors, charLimitError: false }))
-                return
-            } else if (!inputError && descCharLimitError) {
-                setErrors(errors => ({ ...errors, formError: false }))
-                setErrors(errors => ({ ...errors, charLimitError: true }))
-                return
-            }
-
-            // If no errors, make POST request to server
-            const updatedPost = {
-                title: inputs.title,
-                description: inputs.description,
-                content: inputs.content,
-                category: inputs.category,
-                location: inputs.location,
-                aesthetic: inputs.aesthetic,
-                vibes: inputs.vibes,
-                flavor: inputs.flavor,
-                fileName: inputs.fileName,
-                fileID: inputs.fileID
-            }
-
-            axios.put('/api/posts/' + inputs.postID, updatedPost)
-                .then(res => {
-                    console.log(res.data)
+                    console.log('submit create form: axios post request')
+                    console.log(res)
                     if (res.status === 200) {
-                        console.log('axios edit success')
-                        setErrors(errors => ({ ...errors, formSubmitted: true }))
-                    } else {
-                        console.log('Error: update post')
+                        console.log('axios post success')
+                        setInputs(inputs => ({ ...inputs, postID: res.data.newPostID }))
+                    }
+                    else {
+                        console.log('Error: create post')
                     }
                 });
+        }).catch(e => {
+            console.log('error')
+            console.log(e)
+        })
 
-            // Refresh state
-            setErrors(errors => ({
-                ...errors,
-                formError: false
-            }))
-        }
-
-        return {
-            inputs,
-            errors,
-            handleInputChange,
-            handleSubmit,
-            handleAestheticRating,
-            handleVibesRating,
-            handleFlavorRating,
-            handleFileUpload
-        };
+        // Refresh state
+        setErrors(errors => ({
+            ...errors,
+            formError: false
+        }))
     }
 
-    export { useCreateForm, useUpdateForm };
+    return {
+        handleInputChange,
+        handleAestheticRating,
+        handleVibesRating,
+        handleFlavorRating,
+        handleFileSelected,
+        handleSubmit,
+        errors,
+        inputs
+    };
+}
+
+const useUpdateForm = (callback) => {
+
+    const [inputs, setInputs] = useState({
+        postID: callback.id,
+        title: callback.title,
+        description: callback.description,
+        content: callback.content,
+        category: callback.category,
+        location: callback.location,
+        aesthetic: callback.aesthetic,
+        vibes: callback.vibes,
+        flavor: callback.flavor,
+        initFileName: callback.fileName,
+        initFileID: callback.fileID,
+        photoName: callback.fileName,
+        photoUpload: null
+    });
+
+    const [errors, setErrors] = useState({
+        titleError: false,
+        descError: false,
+        contentError: false,
+        categoryError: false,
+        locationError: false,
+        aestheticError: false,
+        vibesError: false,
+        flavorError: false,
+        photoError: false,
+        formError: false,
+        charLimitError: false,
+        formSubmitted: false,
+    });
+
+    // Event handlers
+
+    const handleInputChange = (event) => {
+        event.persist();
+        setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
+    }
+
+    const handleAestheticRating = (event, { rating }) => {
+        setInputs(inputs => ({ ...inputs, aesthetic: rating }))
+    }
+
+    const handleVibesRating = (event, { rating }) => {
+        setInputs(inputs => ({ ...inputs, vibes: rating }))
+    }
+
+    const handleFlavorRating = (event, { rating }) => {
+        setInputs(inputs => ({ ...inputs, flavor: rating }))
+    }
+
+    const handleFileSelected = e => {
+        let photo = e.target.files[0]
+        console.log(photo)
+        setInputs(inputs => ({ ...inputs, photoName: photo.name, photoUpload: photo }))
+    }
+
+    const handleSubmit = (event) => {
+
+        // Prevent page refresh
+        event.preventDefault();
+
+        // Check form submission for errors
+        let inputError = false;
+        let descCharLimitError = false;
+
+        if (inputs.description === '' || inputs.description.length > 200) {
+            setErrors(errors => ({ ...errors, descError: true }))
+            if (inputs.description === '') {
+                inputError = true;
+            } else {
+                inputError = false;
+            }
+            if (inputs.description.length > 200) {
+                descCharLimitError = true
+            } else {
+                descCharLimitError = false
+            }
+        } else {
+            setErrors(errors => ({ ...errors, descError: false }))
+        }
+        if (inputs.title === '') {
+            setErrors(errors => ({ ...errors, titleError: true }))
+            inputError = true;
+        } else {
+            setErrors(errors => ({ ...errors, titleError: false }))
+        }
+        if (inputs.location === '') {
+            setErrors(errors => ({ ...errors, locationError: true }))
+            inputError = true;
+        } else {
+            setErrors(errors => ({ ...errors, locationError: false }))
+        }
+        if (inputs.category === '') {
+            setErrors(errors => ({ ...errors, categoryError: true }))
+            inputError = true;
+        } else {
+            setErrors(errors => ({ ...errors, categoryError: false }))
+        }
+        if (inputs.aesthetic === 0) {
+            setErrors(errors => ({ ...errors, aestheticError: true }))
+            inputError = true;
+        } else {
+            setErrors(errors => ({ ...errors, aestheticError: false }))
+        }
+        if (inputs.vibes === 0) {
+            setErrors(errors => ({ ...errors, vibesError: true }))
+            inputError = true;
+        } else {
+            setErrors(errors => ({ ...errors, vibesError: false }))
+        }
+        if (inputs.flavor === 0) {
+            setErrors(errors => ({ ...errors, flavorError: true }))
+            inputError = true;
+        } else {
+            setErrors(errors => ({ ...errors, flavorError: false }))
+        }
+        if (inputs.content === '') {
+            setErrors(errors => ({ ...errors, contentError: true }))
+            inputError = true;
+        } else {
+            setErrors(errors => ({ ...errors, contentError: false }))
+        }
+        if (!(inputs.photoUpload instanceof File)) {
+            setErrors(errors => ({ ...errors, photoError: true }))
+            inputError = true;
+        } else {
+            setErrors(errors => ({ ...errors, photoError: false }))
+        }
+
+        // Prevent form submission if inputs are invalid
+        if (inputError && descCharLimitError) {
+            setErrors(errors => ({ ...errors, formError: true }))
+            setErrors(errors => ({ ...errors, charLimitError: true }))
+            return
+        } else if (inputError && !descCharLimitError) {
+            setErrors(errors => ({ ...errors, formError: true }))
+            setErrors(errors => ({ ...errors, charLimitError: false }))
+            return
+        } else if (!inputError && descCharLimitError) {
+            setErrors(errors => ({ ...errors, formError: false }))
+            setErrors(errors => ({ ...errors, charLimitError: true }))
+            return
+        }
+
+        // If no errors...
+
+        // Handle file upload
+        console.log('Selected file:')
+        console.log(inputs.photoUpload)
+        const formData = new FormData();
+        formData.append('file', inputs.photoUpload, inputs.photoName);
+
+        // Update Image: Make DELETE request to server then POST new image
+        axios.post(
+            `/api/images/${inputs.initFileID}`
+        ).then(res => {
+            console.log('Image deleted')
+            console.log(res)
+
+            // POST new image
+            axios.post(
+                '/api/images/upload',
+                formData,
+                {
+                    headers: { 'content-type': 'multipart/form-data' }
+                }
+            ).then(res => {
+                console.log('New image uploaded')
+                console.log(res)
+
+                // Update post: make PUT request to server
+                // New post object
+                const updatedPost = {
+                    title: inputs.title,
+                    description: inputs.description,
+                    content: inputs.content,
+                    category: inputs.category,
+                    location: inputs.location,
+                    aesthetic: inputs.aesthetic,
+                    vibes: inputs.vibes,
+                    flavor: inputs.flavor,
+                    fileName: res.data.file.filename,
+                    fileID: res.data.file.id
+                }
+
+                axios.put('/api/posts/' + inputs.postID, updatedPost)
+                    .then(res => {
+                        console.log(res.data)
+                        if (res.status === 200) {
+                            console.log('axios edit success')
+                            setErrors(errors => ({ ...errors, formSubmitted: true }))
+                        } else {
+                            console.log('Error: update post')
+                        }
+                        // CALLBACK HELL (will improve this later)
+                    }).catch(e => {
+                        console.log('error')
+                        console.log(e)
+                    });
+            }).catch(e => {
+                console.log('error')
+                console.log(e)
+            })
+        }).catch(e => {
+            console.log('error')
+            console.log(e)
+        })
+
+        // Refresh state
+        setErrors(errors => ({
+            ...errors,
+            formError: false
+        }))
+    }
+
+    return {
+        inputs,
+        errors,
+        handleInputChange,
+        handleSubmit,
+        handleAestheticRating,
+        handleVibesRating,
+        handleFlavorRating,
+        handleFileSelected
+    };
+}
+
+export { useCreateForm, useUpdateForm };

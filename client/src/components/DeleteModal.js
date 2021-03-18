@@ -9,7 +9,6 @@ const DeleteModal = (props) => {
 
     // Define variables from props
     let id = props.id;
-    let getPosts = props.getPosts;
 
     // Handle Delete
     const deleteHandler = (e, id) => {
@@ -25,7 +24,7 @@ const DeleteModal = (props) => {
                     // close modal
                     setOpen(false);
                     // refresh list
-                    getPosts();
+                    props.getPosts();
                 } else {
                     console.log('Error: delete post')
                     setOpen(false)

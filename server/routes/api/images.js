@@ -120,27 +120,22 @@ router.get('/render/:filename', (req, res) => {
 // POST api/images/upload
 // Upload file to db using GridFS/Multer middleware (breaks image file down into chunks)
 router.post('/upload', upload.single('file'), (req, res) => {
+    console.log('File uploaded successfully.')
     res.status(200).json({
         file: req.file,
         message: 'File uploaded successfully.'
     })
 });
 
-// PUT api/images/:filename
-// Update image by ID(?)
-//
-//
-//
-
 // DELETE api/images/:filename
 // Delete image by ID
-router.post('/:filename', (req, res) => {
-    console.log(req.params.id)
+router.post('/:id', (req, res) => {
     gfs.delete(new mongoose.Types.ObjectId(req.params.id), (err, data) => {
         if (err) {
             return res.status(404).json({ err: err })
         }
 
+        console.log(`File with ID ${req.params.id} is deleted`)
         return res.status(200).json({
             message: `File with ID ${req.params.id} is deleted`
         })

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Form, Rating, Message, Modal, List, Divider } from "semantic-ui-react";
+import { Container, Form, Rating, Message, Modal, List, Divider, Icon } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
 
 // redirect when submit
@@ -17,9 +17,7 @@ const UpdateModal = React.memo(props => {
 
     // Initiate Custom Hooks
 
-    const { inputs, errors, handleInputChange, handleVibesRating, handleAestheticRating, handleFlavorRating, handleFileUpload, handleSubmit } = useUpdateForm(props);
-
-    console.log(inputs.photo)
+    const { inputs, errors, handleInputChange, handleVibesRating, handleAestheticRating, handleFlavorRating, handleFileSelected, handleSubmit } = useUpdateForm(props);
 
     // Category options
     const options = [
@@ -143,10 +141,14 @@ const UpdateModal = React.memo(props => {
                                 onChange={handleInputChange}
                             />
                         </Form.Field>
+                        <Divider hidden />
                         <Form.Field
                             error={errors.photoError}
                         >
-                            <label></label>
+                            <label htmlFor='file-upload' className='custom-file-upload'>
+                                <Icon name='upload' />{inputs.photoName}
+                            </label>
+                            <input type='file' name='file' id='file-upload' onChange={handleFileSelected} />
                         </Form.Field>
                         {errors.formError
                             ?

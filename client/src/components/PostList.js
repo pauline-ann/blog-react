@@ -25,7 +25,7 @@ const PostList = (props) => {
     }
 
     // Initiate state to store and list posts
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState([]); 
 
     // Hook to grab posts from api
     useEffect(() => {
@@ -48,7 +48,7 @@ const PostList = (props) => {
         axios.get('/api/posts')
             .then((res) => {
                 // handle success
-                setPosts(res.data);
+                setPosts(res.data.reverse());
             })
             .catch((err) => {
                 // handle error

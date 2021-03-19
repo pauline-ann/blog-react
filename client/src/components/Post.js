@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Container, Header, Image, Icon, Rating, Divider, List } from "semantic-ui-react";
 import axios from 'axios';
 import moment from 'moment';
+import PostInfo from './PostInfo.js'
 
 const Post = (props) => {
 
@@ -20,25 +20,9 @@ const Post = (props) => {
             fileName: '',
             fileID: ''
         },
-        date: null
+        date: null,
+        dataIsLoaded: false
     });
-
-    const postHeaderStyle = {
-        marginTop: '0'
-    }
-
-    const postSubStyle = {
-        color: 'rgb(231, 159, 49)'
-    }
-
-    const postDescriptionStyle = {
-        fontSize: '.93em'
-    }
-
-    const postDateStyle = {
-        fontSize: '.8em',
-        fontStyle: 'italic'
-    }
 
     useEffect(() => {
         async function fetchData() {
@@ -61,7 +45,8 @@ const Post = (props) => {
                             fileName: res.data.photo.fileName,
                             fileID: res.data.photo.fileID
                         },
-                        date: moment(res.data.createdAt).format('dddd, MMMM Do YYYY')
+                        date: moment(res.data.createdAt).format('dddd, MMMM Do YYYY'),
+                        dataIsLoaded: true
                     });
                 })
                 .catch((err) => {
@@ -72,50 +57,19 @@ const Post = (props) => {
         fetchData();
     }, [props.match.params.id])
 
-    let aRating;
-    let vRating;
-    let fRating;
-
-    if (post.rating.aesthetic > 0) {
-        aRating = (
-            <Rating icon='star' defaultRating={post.rating.aesthetic} maxRating={5} disabled />
-        )
-    }
-    if (post.rating.vibes > 0) {
-        vRating = (
-            <Rating icon='star' defaultRating={post.rating.vibes} maxRating={5} disabled />
-        )
-    }
-    if (post.rating.flavor > 0) {
-        fRating = (
-            <Rating icon='star' defaultRating={post.rating.flavor} maxRating={5} disabled />
-        )
-    }
-
     return (
-        <div>
-            <Container text>
-                <Header sub style={postSubStyle}>{post.category}</Header>
-                <Header as="h1" style={postHeaderStyle}>{post.title}</Header>
-                <p style={postDescriptionStyle}>{post.description}</p>
-                <Header.Subheader>
-                    <List horizontal>
-                        <List.Item>
-                            <Icon name="map pin" size="large" color="orange" />
-                            {post.location}
-                        </List.Item>
-                        <List.Item>Aesthetic: {aRating}</List.Item>
-                        <List.Item>Vibes: {vRating}</List.Item>
-                        <List.Item>Flavor: {fRating}</List.Item>
-                    </List>
-                </Header.Subheader>
-                <p style={postDateStyle}>{post.date}</p>
-                <Divider />
-                <Image src={`/api/images/render/${post.photo.fileName}`} fluid />
-                <Divider />
-                {post.content}
-            </Container>
-        </div >
+        post.dataIsLoaded && <PostInfo
+            title={post.title}
+            description={post.description}
+            content={post.content}
+            category={post.category}
+            location={post.location}
+            aesthetic={post.rating.aesthetic}
+            vibes={post.rating.vibes}
+            flavor={post.rating.flavor}
+            fileName={post.photo.fileName}
+            date={post.date}
+        />
     );
 }
 

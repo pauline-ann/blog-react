@@ -1,0 +1,16 @@
+.postcard-card {
+    box-shadow: none !important;
+}
+
+.postcard-card-header {
+    font-size: 1.5rem;
+    font-family: 'Noto Serif serif';
+    font-weight: 900;
+}
+
+.postcard-category {
+    color: rgb(231, 159, 49) !important;
+    text-transform: uppercase;
+    font-size: .9rem;
+    margin-bottom: 10px;
+}

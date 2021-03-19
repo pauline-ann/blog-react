@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { Container, Item, Divider } from "semantic-ui-react";
+import { Container, Item, Divider, Grid } from "semantic-ui-react";
 import moment from 'moment';
 
 //Components
-import PostCard from "./PostCard";
+import PostCard from "./PostCard/PostCard";
 
 //Homepage
 const Home = (props) => {
@@ -31,7 +31,7 @@ const Home = (props) => {
         <div>
             <Container>
                 <Divider horizontal>Latest Posts</Divider><br />
-                <Item.Group>
+                <Grid columns={3}>
                     {posts.map((post, i) => {
 
                         let date = moment(post.createdAt).format('dddd, MMMM Do YYYY');
@@ -52,7 +52,7 @@ const Home = (props) => {
                         />
                     }
                     )}
-                </Item.Group>
+                </Grid>
             </Container>
         </div>
     );

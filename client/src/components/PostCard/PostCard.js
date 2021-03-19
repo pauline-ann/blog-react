@@ -1,0 +1,35 @@
+import React from "react";
+import { Item, Rating, Card, Icon, Image, Grid } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import ImageFadeIn from 'react-image-fade-in';
+
+import './PostCard.css';
+
+const PostCard = (props) => {
+
+    return (
+        <Grid.Column>
+            <Link to={"/post/" + props.id}>
+                <Card
+                    fluid
+                    centered
+                    className='postcard-card'>
+                    <Image wrapped>
+                        <ImageFadeIn src={`/api/images/render/${props.fileName}`} />
+                    </Image>
+                    <Card.Content>
+                        <Card.Meta className='postcard-category'>{props.category}</Card.Meta>
+                        <Card.Header className='postcard-header'>
+                            {props.title}
+                        </Card.Header>
+                        <Card.Description>
+                            {props.description}
+                        </Card.Description>
+                    </Card.Content>
+                </Card>
+            </Link>
+        </Grid.Column>
+    )
+}
+
+export default PostCard;

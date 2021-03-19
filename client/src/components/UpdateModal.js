@@ -41,7 +41,7 @@ const UpdateModal = React.memo(props => {
                     <Divider hidden />
                     <Form
                         onSubmit={(event) => handleSubmit(event)}
-                        error={errors.formError || errors.charLimitError}
+                        error={errors.formError || errors.charLimitError || errors.fileTypeError}
                     >
                         <Form.Field
                             error={errors.titleError}
@@ -166,6 +166,16 @@ const UpdateModal = React.memo(props => {
                                 error
                                 header="Maximum Character Limit"
                                 content="Description must be 200 characters or less."
+                            />
+                            :
+                            null
+                        }
+                        {errors.fileTypeError
+                            ?
+                            <Message
+                                error
+                                header="File Type Error"
+                                content="Image must be .jpeg, .png, or .svg"
                             />
                             :
                             null

@@ -28,7 +28,8 @@ const useCreateForm = (callback) => {
         flavorError: false,
         photoError: false,
         formError: false,
-        charLimitError: false
+        charLimitError: false,
+        fileTypeError: false
     });
 
     // Event handlers
@@ -64,27 +65,24 @@ const useCreateForm = (callback) => {
         // Check form submission for errors
         let inputError = false;
         let descCharLimitError = false;
+        let fileTypeError = false;
 
-        if (inputs.description === '' || inputs.description.length > 200) {
-            setErrors(errors => ({ ...errors, descError: true }))
-            if (inputs.description === '') {
-                inputError = true;
-            } else {
-                inputError = false;
-            }
-            if (inputs.description.length > 200) {
-                descCharLimitError = true
-            } else {
-                descCharLimitError = false
-            }
-        } else {
-            setErrors(errors => ({ ...errors, descError: false }))
-        }
         if (inputs.title === '') {
             setErrors(errors => ({ ...errors, titleError: true }))
             inputError = true;
         } else {
             setErrors(errors => ({ ...errors, titleError: false }))
+        }
+        if (inputs.description === '' || inputs.description.length > 200) {
+            setErrors(errors => ({ ...errors, descError: true }))
+            if (inputs.description === '') {
+                inputError = true;
+            }
+            if (inputs.description.length > 200) {
+                descCharLimitError = true
+            }
+        } else {
+            setErrors(errors => ({ ...errors, descError: false }))
         }
         if (inputs.location === '') {
             setErrors(errors => ({ ...errors, locationError: true }))
@@ -122,83 +120,121 @@ const useCreateForm = (callback) => {
         } else {
             setErrors(errors => ({ ...errors, contentError: false }))
         }
-        if (!(inputs.photoUpload instanceof File)) {
+        // Set photo form field error if no file, or wrong file type
+        if (!(inputs.photoUpload instanceof File) || ((inputs.photoUpload instanceof File) && (inputs.photoUpload.type !== 'image/jpeg' && inputs.photoUpload.type !== 'image/png' && inputs.photoUpload.type !== 'image/svg+xml'))) {
             setErrors(errors => ({ ...errors, photoError: true }))
-            inputError = true;
+            // If no file present
+            if (!(inputs.photoUpload instanceof File)) {
+                inputError = true;
+            } else if (inputs.photoUpload.type !== 'image/jpeg' && inputs.photoUpload.type !== 'image/png' && inputs.photoUpload.type !== 'image/svg+xml') {
+                // If wrong file type
+                fileTypeError = true;
+            }
         } else {
             setErrors(errors => ({ ...errors, photoError: false }))
         }
 
         // Prevent form submission if inputs are invalid
-        if (inputError && descCharLimitError) {
+        if (inputError) {
             setErrors(errors => ({ ...errors, formError: true }))
-            setErrors(errors => ({ ...errors, charLimitError: true }))
-            return
-        } else if (inputError && !descCharLimitError) {
-            setErrors(errors => ({ ...errors, formError: true }))
-            setErrors(errors => ({ ...errors, charLimitError: false }))
-            return
-        } else if (!inputError && descCharLimitError) {
+        } else {
             setErrors(errors => ({ ...errors, formError: false }))
+        }
+        if (descCharLimitError) {
             setErrors(errors => ({ ...errors, charLimitError: true }))
+        } else {
+            setErrors(errors => ({ ...errors, charLimitError: false }))
+        }
+        if (fileTypeError) {
+            setErrors(errors => ({ ...errors, fileTypeError: true }))
+        } else {
+            setErrors(errors => ({ ...errors, fileTypeError: false }))
+        }
+
+        if (inputError || descCharLimitError || fileTypeError) {
             return
         }
+
+        // Prevent form submission if inputs are invalid
+        // if (inputError && descCharLimitError) {
+        //     setErrors(errors => ({ ...errors, formError: true }))
+        //     setErrors(errors => ({ ...errors, charLimitError: true }))
+        //     return
+        // } else if (inputError && !descCharLimitError) {
+        //     setErrors(errors => ({ ...errors, formError: true }))
+        //     setErrors(errors => ({ ...errors, charLimitError: false }))
+        //     return
+        // } else if (!inputError && descCharLimitError) {
+        //     setErrors(errors => ({ ...errors, formError: false }))
+        //     setErrors(errors => ({ ...errors, charLimitError: true }))
+        //     return
+        // }
 
         // If no errors...
 
         // Handle file upload
-        console.log('Selected file:')
-        console.log(inputs.photoUpload)
-        const formData = new FormData();
-        formData.append('file', inputs.photoUpload, inputs.photoName);
+        // console.log('Selected file:')
+        // console.log(inputs.photoUpload)
+        // const formData = new FormData();
+        // formData.append('file', inputs.photoUpload, inputs.photoName);
 
-        // New Image: Make POST request to server
-        axios.post(
-            '/api/images/upload',
-            formData,
-            {
-                headers: { 'content-type': 'multipart/form-data' }
-            }
-        ).then(res => {
-            console.log('File uploaded')
-            console.log(res)
+        // // New Image: Make POST request to server
+        // axios.post(
+        //     '/api/images/upload',
+        //     formData,
+        //     {
+        //         headers: { 'content-type': 'multipart/form-data' }
+        //     }
+        // ).then(res => {
+        //     console.log('File uploaded')
+        //     console.log(res)
 
-            const newPost = {
-                title: inputs.title,
-                description: inputs.description,
-                content: inputs.content,
-                category: inputs.category,
-                location: inputs.location,
-                aesthetic: inputs.aesthetic,
-                vibes: inputs.vibes,
-                flavor: inputs.flavor,
-                fileName: res.data.file.filename,
-                fileID: res.data.file.id
-            }
+        //     const newPost = {
+        //         title: inputs.title,
+        //         description: inputs.description,
+        //         content: inputs.content,
+        //         category: inputs.category,
+        //         location: inputs.location,
+        //         aesthetic: inputs.aesthetic,
+        //         vibes: inputs.vibes,
+        //         flavor: inputs.flavor,
+        //         fileName: res.data.file.filename,
+        //         fileID: res.data.file.id
+        //     }
 
-            // New post: Make POST request to server
-            return axios.post('/api/posts/new', newPost)
-                .then(res => {
-                    console.log('submit create form: axios post request')
-                    console.log(res)
-                    if (res.status === 200) {
-                        console.log('axios post success')
-                        setInputs(inputs => ({ ...inputs, postID: res.data.newPostID }))
-                    }
-                    else {
-                        console.log('Error: create post')
-                    }
-                });
-        }).catch(e => {
-            console.log('error')
-            console.log(e)
-        })
+        //     // New post: Make POST request to server
+        //     return axios.post('/api/posts/new', newPost)
+        //         .then(res => {
+        //             console.log('submit create form: axios post request')
+        //             console.log(res)
+        //             if (res.status === 200) {
+        //                 console.log('axios post success')
+        //                 setInputs(inputs => ({ ...inputs, postID: res.data.newPostID }))
+        //             }
+        //             else {
+        //                 console.log('Error: create post')
+        //             }
+        //         });
+        // }).catch(e => {
+        //     console.log('error')
+        //     console.log(e)
+        // })
 
         // Refresh state
-        setErrors(errors => ({
-            ...errors,
-            formError: false
-        }))
+        setErrors({
+            titleError: false,
+            descError: false,
+            contentError: false,
+            categoryError: false,
+            locationError: false,
+            aestheticError: false,
+            vibesError: false,
+            flavorError: false,
+            photoError: false,
+            formError: false,
+            charLimitError: false,
+            fileTypeError: false
+        })
     }
 
     return {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Header, Image, Icon, Rating, Divider, List } from "semantic-ui-react";
+import { Container, Header, Icon, Rating, Divider, List, Image } from "semantic-ui-react";
 import ImageFadeIn from "react-image-fade-in";
 
 const Post = (props) => {
@@ -60,7 +60,9 @@ const Post = (props) => {
                 </Header.Subheader>
                 <p style={postDateStyle}>{props.date}</p>
                 <Divider />
-                <ImageFadeIn fluid src={`/api/images/render/${props.fileName}`} />
+                <Image fluid>
+                    <ImageFadeIn src={`/api/images/render/${props.fileName}`} />
+                </Image>
                 <Divider />
                 {props.content}
             </Container>

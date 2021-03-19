@@ -228,7 +228,8 @@ const useUpdateForm = (callback) => {
         initFileName: callback.fileName,
         initFileID: callback.fileID,
         photoName: callback.fileName,
-        photoUpload: null
+        photoUpload: null,
+        photoChanged: false
     });
 
     const [errors, setErrors] = useState({
@@ -268,7 +269,7 @@ const useUpdateForm = (callback) => {
     const handleFileSelected = e => {
         let photo = e.target.files[0]
         console.log(photo)
-        setInputs(inputs => ({ ...inputs, photoName: photo.name, photoUpload: photo }))
+        setInputs(inputs => ({ ...inputs, photoName: photo.name, photoUpload: photo, photoChanged: true }))
     }
 
     const handleSubmit = (event) => {
@@ -337,7 +338,8 @@ const useUpdateForm = (callback) => {
         } else {
             setErrors(errors => ({ ...errors, contentError: false }))
         }
-        if (!(inputs.photoUpload instanceof File)) {
+        // If photo was uploaded but there is no file, then error
+        if (inputs.photoChanged && !(inputs.photoUpload instanceof File)) {
             setErrors(errors => ({ ...errors, photoError: true }))
             inputError = true;
         } else {
@@ -361,42 +363,79 @@ const useUpdateForm = (callback) => {
 
         // If no errors...
 
-        // Handle file upload
-        console.log('Selected file:')
-        console.log(inputs.photoUpload)
-        const formData = new FormData();
-        formData.append('file', inputs.photoUpload, inputs.photoName);
+        // GOOD: left untouched (in update: stay the same.)
+        // GOOD: change file. (in update: update file)
 
-        // Make image DELETE request
-        axios.post(
-            `/api/images/${inputs.initFileID}`
-        ).then(res => {
-            console.log('Image deleted')
-            console.log(res)
-            return res
-        }).catch(e => {
-            console.log('error')
-            console.log(e)
-        })
+        // If photo is being updated
+        if (inputs.photoChanged) {
+            // Handle file upload
+            console.log('Selected file:')
+            console.log(inputs.photoUpload)
+            const formData = new FormData();
+            formData.append('file', inputs.photoUpload, inputs.photoName);
 
-        // Make image POST request
-        axios.post(
-            '/api/images/upload',
-            formData,
-            {
-                headers: { 'content-type': 'multipart/form-data' }
+            // Make image DELETE request
+            axios.post(
+                `/api/images/${inputs.initFileID}`
+            ).then(res => {
+                console.log('Image deleted')
+                console.log(res)
+                return res
+            }).catch(e => {
+                console.log('error')
+                console.log(e)
+            })
+
+            // Make image POST request
+            axios.post(
+                '/api/images/upload',
+                formData,
+                {
+                    headers: { 'content-type': 'multipart/form-data' }
+                }
+            ).then(res => {
+                console.log('New image uploaded')
+                console.log(res)
+                updatePost(res.data.file)
+            }).catch(e => {
+                console.log('error')
+                console.log(e)
+            })
+
+            // Update post with new image
+            const updatePost = (newImage) => {
+
+                //New post object
+                const updatedPost = {
+                    title: inputs.title,
+                    description: inputs.description,
+                    content: inputs.content,
+                    category: inputs.category,
+                    location: inputs.location,
+                    aesthetic: inputs.aesthetic,
+                    vibes: inputs.vibes,
+                    flavor: inputs.flavor,
+                    fileName: newImage.filename,
+                    fileID: newImage.id
+                }
+
+                //Update post: make PUT request to server
+                axios.put('/api/posts/' + inputs.postID, updatedPost)
+                    .then(res => {
+                        console.log(res.data)
+                        if (res.status === 200) {
+                            console.log('axios edit success')
+                            setErrors(errors => ({ ...errors, formSubmitted: true }))
+                        } else {
+                            console.log('Error: update post')
+                        }
+                    }).catch(e => {
+                        console.log('error')
+                        console.log(e)
+                    });
             }
-        ).then(res => {
-            console.log('New image uploaded')
-            console.log(res)
-            updatePost(res.data.file)
-        }).catch(e => {
-            console.log('error')
-            console.log(e)
-        })
-
-        // Update post with new image
-        const updatePost = (newImage) => {
+        } else {
+            // Update post but image is staying the same
 
             //New post object
             const updatedPost = {
@@ -408,8 +447,8 @@ const useUpdateForm = (callback) => {
                 aesthetic: inputs.aesthetic,
                 vibes: inputs.vibes,
                 flavor: inputs.flavor,
-                fileName: newImage.filename,
-                fileID: newImage.id
+                fileName: inputs.initFileName,
+                fileID: inputs.initFileID
             }
 
             //Update post: make PUT request to server

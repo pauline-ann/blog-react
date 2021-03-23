@@ -1,5 +1,5 @@
 import React from "react";
-import { Item, Rating, Card, Icon, Image, Grid } from "semantic-ui-react";
+import { Card, Image, Grid } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import ImageFadeIn from 'react-image-fade-in';
 

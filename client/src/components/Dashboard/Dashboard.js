@@ -11,13 +11,13 @@ const Dashboard = (props) => {
 
     return (
         <React.Fragment>
-            <Container>
+            <Container className='dashboard-container'>
                 <h1 className='dashboard-header'>Dashboard</h1><br />
                 {/* Create New Post Button */}
                 <Modal
                     closeIcon
                     trigger={
-                        <Button className='dashboard-modal-trigger'>New Post</Button>
+                        <Button className='dashboard-modal-trigger'><span className='dashboard-modal-trigger--text'>New Post</span></Button>
                     }>
                     <Modal.Header
                         className='dashboard-header'>New Post</Modal.Header>

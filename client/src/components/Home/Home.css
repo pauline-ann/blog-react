@@ -1,0 +1,13 @@
+.home-header {
+    background: url(../../assets/images/header-foodie.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: auto;
+    height: 90vh;
+}
+
+.home-latest-posts {
+    margin-top: 3em;
+}

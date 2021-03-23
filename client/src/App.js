@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //Components
 import Navbar from "./components/Navbar/Navbar";
-import Home from "./components/Home";
+import Home from "./components/Home/Home";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Post from "./components/Post";
 import UpdateModal from "./components/UpdateModal";
-import About from "./components/About";
+import About from "./components/About/About";
 import Error404 from "./components/Error404";
 import Footer from "./components/Footer";
 

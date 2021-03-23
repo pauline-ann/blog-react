@@ -2,22 +2,17 @@ import React from "react";
 import { Container, Header, Image, List, Icon, Divider } from "semantic-ui-react";
 import ImageFadeIn from 'react-image-fade-in';
 
-import ramen from '../assets/images/ramen.jpg';
+// CSS
+import './About.css'
+
+import ramen from '../../assets/images/ramen.jpg';
 
 const About = (props) => {
-
-    const style = {
-        "width": "50%"
-    }
-
-    const style2 = {
-        "width": "30%"
-    }
 
     return (
         <div>
             <Container
-                style={style}
+                className='about-container'
             >
                 <Header as='h1' textAlign="center">About</Header>
                 <Divider section />
@@ -33,7 +28,7 @@ const About = (props) => {
                 </p>
                 <Divider section />
                 <Header as='h2' textAlign="center">Contact</Header>
-                <Container style={style2}>
+                <Container className='about-contact'>
                     <List animated>
                         <List.Item>
                             <Icon name="marker" />

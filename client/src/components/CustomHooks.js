@@ -51,6 +51,11 @@ const useCreateForm = (callback) => {
         setInputs(inputs => ({ ...inputs, flavor: rating }))
     }
 
+    const handleContentChange = (val) => {
+        setInputs(inputs => ({ ...inputs, content: val }))
+        console.log(inputs.content)
+    }
+
     const handleCategoryChange = (event, data) => {
         let category = data.value;
         setInputs(inputs => ({ ...inputs, category: category }))
@@ -232,6 +237,7 @@ const useCreateForm = (callback) => {
         handleAestheticRating,
         handleVibesRating,
         handleFlavorRating,
+        handleContentChange,
         handleCategoryChange,
         handleFileSelected,
         handleSubmit,
@@ -296,6 +302,11 @@ const useUpdateForm = (callback) => {
     const handleCategoryChange = (event, data) => {
         let category = data.value;
         setInputs(inputs => ({ ...inputs, category: category }))
+    }
+
+    const handleContentChange = (val) => {
+        setInputs(inputs => ({ ...inputs, content: val }))
+        console.log(inputs.content)
     }
 
     const handleFileSelected = e => {
@@ -534,6 +545,7 @@ const useUpdateForm = (callback) => {
         handleVibesRating,
         handleFlavorRating,
         handleCategoryChange,
+        handleContentChange,
         handleFileSelected
     };
 }

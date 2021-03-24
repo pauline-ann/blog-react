@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Form, Rating, Message, Divider, Icon } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
+import ReactQuill from 'react-quill';
 
 import './CreateForm.css'
 
@@ -9,7 +10,7 @@ import { useCreateForm } from '../CustomHooks';
 
 const CreateForm = React.memo(props => {
 
-    const { inputs, errors, handleVibesRating, handleAestheticRating, handleFlavorRating, handleInputChange, handleCategoryChange, handleFileSelected, handleSubmit } = useCreateForm();
+    const { inputs, errors, handleInputChange, handleVibesRating, handleAestheticRating, handleFlavorRating, handleContentChange, handleCategoryChange, handleFileSelected, handleSubmit } = useCreateForm();
 
     // Category options
     const options = [
@@ -152,12 +153,10 @@ const CreateForm = React.memo(props => {
                     <Form.Field
                         error={errors.contentError}
                     >
-                        <Form.TextArea
-                            label='Experience'
-                            name='content'
+                        <label>Experience</label>
+                        <ReactQuill
                             value={inputs.content}
-                            onChange={handleInputChange}
-                            placeholder='How was your meal?'
+                            onChange={handleContentChange}
                         />
                     </Form.Field>
                     <Divider hidden />

@@ -1,7 +1,9 @@
 import React from "react";
 import { Container, Header, Icon, Rating, Divider, List, Image } from "semantic-ui-react";
 import ImageFadeIn from "react-image-fade-in";
+import parse from 'html-react-parser';
 
+// CSS
 import './PostInfo.css';
 
 const Post = (props) => {
@@ -49,7 +51,7 @@ const Post = (props) => {
                     <ImageFadeIn src={`/api/images/render/${props.fileName}`} />
                 </Image>
                 <Divider />
-                {props.content}
+                {parse(props.content)}
             </Container>
         </div >
     );

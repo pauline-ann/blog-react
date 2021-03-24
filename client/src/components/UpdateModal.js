@@ -1,8 +1,7 @@
 import React from "react";
 import { Container, Form, Rating, Message, Modal, List, Divider, Icon } from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
-
-// redirect when submit
+import ReactQuill from 'react-quill';
 
 // Custom hooks
 import { useUpdateForm } from './CustomHooks';
@@ -17,7 +16,7 @@ const UpdateModal = React.memo(props => {
 
     // Initiate Custom Hooks
 
-    const { inputs, errors, handleInputChange, handleVibesRating, handleAestheticRating, handleFlavorRating, handleCategoryChange, handleFileSelected, handleSubmit } = useUpdateForm(props);
+    const { inputs, errors, handleInputChange, handleVibesRating, handleAestheticRating, handleFlavorRating, handleCategoryChange, handleContentChange, handleFileSelected, handleSubmit } = useUpdateForm(props);
 
     // Category options
     const options = [
@@ -167,11 +166,16 @@ const UpdateModal = React.memo(props => {
                         <Form.Field
                             error={errors.contentError}
                         >
-                            <Form.TextArea
+                            {/* <Form.TextArea
                                 label='Experience'
                                 name='content'
                                 value={inputs.content}
                                 onChange={handleInputChange}
+                            /> */}
+                            <label>Experience</label>
+                            <ReactQuill
+                                value={inputs.content}
+                                onChange={handleContentChange}
                             />
                         </Form.Field>
                         <Divider hidden />

@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Button, Modal, Divider } from 'semantic-ui-react';
 
 import CreateForm from '../CreateForm/CreateForm';
-import PostList from '../PostList';
+import PostList from '../PostList/PostList';
 
 import './Dashboard.css';
 
@@ -13,7 +13,6 @@ const Dashboard = (props) => {
         <React.Fragment>
             <Container className='dashboard-container'>
                 <h1 className='dashboard-header'>Dashboard</h1><br />
-                {/* Create New Post Button */}
                 <Modal
                     closeIcon
                     trigger={

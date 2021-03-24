@@ -1,0 +1,14 @@
+.postlist-item {
+    padding: .75em 0;
+    display: block;
+}
+
+.postlist-date {
+    font-style: italic;
+    padding-bottom: 8px;
+}
+
+.postlist-title {
+    padding-bottom: 8px;
+    font-size: 1.2em;
+}

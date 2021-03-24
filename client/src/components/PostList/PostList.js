@@ -2,30 +2,19 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { List } from "semantic-ui-react";
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
-import UpdateModal from './UpdateModal';
-import DeleteModal from './DeleteModal';
+// Components
+import UpdateModal from '../UpdateModal';
+import DeleteModal from '../DeleteModal';
+
+// CSS
+import './PostList.css';
 
 const PostList = (props) => {
 
-    // Component Styling
-    const listItemStyle = {
-        'padding': '.75em 0',
-        'display': 'block'
-    }
-
-    const dateStyle = {
-        fontStyle: 'italic',
-        paddingBottom: '8px'
-    }
-
-    const postTitleStyle = {
-        paddingBottom: '8px',
-        fontSize: '1.2em'
-    }
-
     // Initiate state to store and list posts
-    const [posts, setPosts] = useState([]); 
+    const [posts, setPosts] = useState([]);
 
     // Hook to grab posts from api
     useEffect(() => {
@@ -63,7 +52,7 @@ const PostList = (props) => {
                     console.log(post)
                     return (
                         <List.Item
-                            style={listItemStyle}
+                            className='postlist-item'
                             key={post._id}>
                             {/* EDIT POST BUTTON/MODAL */}
                             <UpdateModal
@@ -81,9 +70,9 @@ const PostList = (props) => {
                             />
                             {/* DELETE POST BUTTON/MODAL */}
                             <DeleteModal postID={post._id} fileID={post.photo.fileID} getPosts={getPosts} />
-                            <List.Content>
-                                <List.Description style={dateStyle}>{moment(post.createdAt).format('dddd, MMMM Do YYYY')}</List.Description>
-                                <List.Header style={postTitleStyle}>{post.title}</List.Header>
+                            <List.Content as={Link} to={`/post/${post._id}`}>
+                                <List.Description className='postlist-date'>{moment(post.createdAt).format('dddd, MMMM Do YYYY')}</List.Description>
+                                <List.Header className='postlist-title'>{post.title}</List.Header>
                                 <List.Description>
                                     {post.description}
                                 </List.Description>

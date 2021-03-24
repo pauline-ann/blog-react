@@ -8,6 +8,30 @@
     height: 90vh;
 }
 
+.home-textbox {
+    padding: 4em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center !important;
+    margin-top: 0;
+}
+
+.home-textbox--text {
+    color: white !important;
+}
+
+.home-textbox--main {
+    font-size: 3em !important;
+}
+
 .home-latest-posts {
     margin-top: 3em;
+}
+
+.home-header--button {
+    display: block !important;
+    margin: 0 auto !important;
+    margin-bottom: .5em !important;
 }

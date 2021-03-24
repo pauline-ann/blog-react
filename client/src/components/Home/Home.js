@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { Container, Divider, Grid, Segment, Header, Image } from "semantic-ui-react";
+import { Container, Divider, Grid, Header, Button } from "semantic-ui-react";
 import moment from 'moment';
 
 //Components
@@ -8,6 +8,7 @@ import PostCard from "../PostCard/PostCard";
 
 //CSS
 import './Home.css';
+import { Link } from "react-router-dom";
 
 //Homepage
 const Home = (props) => {
@@ -35,12 +36,32 @@ const Home = (props) => {
             <div
                 className='home-header'
             >
-                <Container text>
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                <Container
+                    className='home-textbox'
+                    textAlign='center'
+                >
+                    <Header as='h1' className='home-textbox--text home-textbox--main'>A place for foodies to gather.</Header>
+                    <Header as='h2' className='home-textbox--text' color='white'>Share food, look at food, and find your next meal.</Header>
+                    <Divider hidden />
+                    <Link to='/dashboard'>
+                        <Button
+                            inverted
+                            size='big'
+                            className='home-header--button'
+                        >Share Your Meal</Button>
+                    </Link>
+                    <a href='#latest-posts'>
+                        <Button
+                            inverted
+                            size='big'
+                            className='home-header--button'
+                        >Latest Posts</Button>
+                    </a>
                 </Container>
             </div>
             <Container
                 className='home-latest-posts'
+                id='latest-posts'
             >
                 <Divider horizontal section>Latest Posts</Divider><br />
                 <Grid doubling stackable columns={3}>
@@ -66,7 +87,7 @@ const Home = (props) => {
                     )}
                 </Grid>
             </Container>
-        </div>
+        </div >
     );
 }
 

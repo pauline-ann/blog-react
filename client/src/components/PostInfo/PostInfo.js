@@ -2,24 +2,9 @@ import React from "react";
 import { Container, Header, Icon, Rating, Divider, List, Image } from "semantic-ui-react";
 import ImageFadeIn from "react-image-fade-in";
 
+import './PostInfo.css';
+
 const Post = (props) => {
-
-    const postHeaderStyle = {
-        marginTop: '0'
-    }
-
-    const postSubStyle = {
-        color: 'rgb(231, 159, 49)'
-    }
-
-    const postDescriptionStyle = {
-        fontSize: '.93em'
-    }
-
-    const postDateStyle = {
-        fontSize: '.8em',
-        fontStyle: 'italic'
-    }
 
     let aRating;
     let vRating;
@@ -43,10 +28,10 @@ const Post = (props) => {
 
     return (
         <div>
-            <Container text>
-                <Header sub style={postSubStyle}>{props.category}</Header>
-                <Header as="h1" style={postHeaderStyle}>{props.title}</Header>
-                <p style={postDescriptionStyle}>{props.description}</p>
+            <Container text className='postinfo-container'>
+                <Header sub className='postinfo-sub'>{props.category}</Header>
+                <Header as="h1" className='postinfo-header'>{props.title}</Header>
+                <p className='postinfo-description'>{props.description}</p>
                 <Header.Subheader>
                     <List horizontal>
                         <List.Item>
@@ -58,7 +43,7 @@ const Post = (props) => {
                         <List.Item>Flavor: {fRating}</List.Item>
                     </List>
                 </Header.Subheader>
-                <p style={postDateStyle}>{props.date}</p>
+                <p className='postinfo-date'>{props.date}</p>
                 <Divider />
                 <Image fluid>
                     <ImageFadeIn src={`/api/images/render/${props.fileName}`} />

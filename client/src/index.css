@@ -1,6 +1,12 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     height: 100%;
     background-color: #f8f8f8;
+    margin: 0;
+    font-size: 1.125em;
 }
 
 h1, h2, h3, a.header, div.header {

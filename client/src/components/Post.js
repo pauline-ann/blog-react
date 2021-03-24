@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import moment from 'moment';
-import PostInfo from './PostInfo.js'
+import PostInfo from './PostInfo/PostInfo';
 
 const Post = (props) => {
 

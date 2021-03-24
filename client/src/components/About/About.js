@@ -1,11 +1,8 @@
 import React from "react";
 import { Container, Header, Image, List, Icon, Divider } from "semantic-ui-react";
-import ImageFadeIn from 'react-image-fade-in';
 
 // CSS
 import './About.css'
-
-import ramen from '../../assets/images/ramen.jpg';
 
 const About = (props) => {
 
@@ -19,10 +16,10 @@ const About = (props) => {
                 <p>
                     Culpa eiusmod amet consequat officia do do. Consectetur nulla commodo mollit cillum deserunt voluptate non. Do dolor laboris do est mollit pariatur dolore enim consequat. Eiusmod pariatur anim dolor dolor nostrud ipsum nulla aliquip. Ea dolor laborum officia velit eiusmod eu cupidatat ullamco commodo id amet. Nostrud proident pariatur magna dolor labore excepteur ipsum. Nisi dolore dolor fugiat duis cupidatat reprehenderit fugiat minim fugiat incididunt excepteur. Aute nisi sunt Lorem nostrud anim. Cillum esse reprehenderit elit duis ex consequat nulla ad.
                 </p>
-                <Image fluid>
+                {/* <Image fluid>
                     <ImageFadeIn src={ramen} />
                 </Image>
-                <br />
+                <br /> */}
                 <p>
                     Culpa eiusmod amet consequat officia do do. Consectetur nulla commodo mollit cillum deserunt voluptate non. Do dolor laboris do est mollit pariatur dolore enim consequat. Eiusmod pariatur anim dolor dolor nostrud ipsum nulla aliquip. Ea dolor laborum officia velit eiusmod eu cupidatat ullamco commodo id amet. Nostrud proident pariatur magna dolor labore excepteur ipsum. Nisi dolore dolor fugiat duis cupidatat reprehenderit fugiat minim fugiat incididunt excepteur. Aute nisi sunt Lorem nostrud anim. Cillum esse reprehenderit elit duis ex consequat nulla ad.
                 </p>

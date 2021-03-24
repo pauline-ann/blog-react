@@ -7,7 +7,7 @@ const useCreateForm = (callback) => {
         title: '',
         description: '',
         content: '',
-        category: 'food',
+        category: '',
         location: '',
         aesthetic: 0,
         vibes: 0,
@@ -49,6 +49,11 @@ const useCreateForm = (callback) => {
 
     const handleFlavorRating = (event, { rating }) => {
         setInputs(inputs => ({ ...inputs, flavor: rating }))
+    }
+
+    const handleCategoryChange = (event, data) => {
+        let category = data.value;
+        setInputs(inputs => ({ ...inputs, category: category }))
     }
 
     const handleFileSelected = e => {
@@ -227,6 +232,7 @@ const useCreateForm = (callback) => {
         handleAestheticRating,
         handleVibesRating,
         handleFlavorRating,
+        handleCategoryChange,
         handleFileSelected,
         handleSubmit,
         errors,

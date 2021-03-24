@@ -99,7 +99,6 @@ const CreateForm = React.memo(props => {
                                 options={options}
                                 name='category'
                                 search
-                                // value={inputs.category}
                                 placeholder='Category'
                                 onChange={handleCategoryChange}
                             />

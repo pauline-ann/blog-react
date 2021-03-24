@@ -17,11 +17,40 @@ const UpdateModal = React.memo(props => {
 
     // Initiate Custom Hooks
 
-    const { inputs, errors, handleInputChange, handleVibesRating, handleAestheticRating, handleFlavorRating, handleFileSelected, handleSubmit } = useUpdateForm(props);
+    const { inputs, errors, handleInputChange, handleVibesRating, handleAestheticRating, handleFlavorRating, handleCategoryChange, handleFileSelected, handleSubmit } = useUpdateForm(props);
 
     // Category options
     const options = [
-        { key: 'f', text: 'Food', value: 'food' }
+        { key: 'bc', text: 'Bakery Cafe', value: 'Bakery Cafe' },
+        { key: 'b', text: 'Bar', value: 'Bar' },
+        { key: 'ba', text: 'Barbeque', value: 'Barbeque' },
+        { key: 'bu', text: 'Buffet', value: 'Buffet' },
+        { key: 'c', text: 'Cafe', value: 'Cafe' },
+        { key: 'ca', text: 'Cajun', value: 'Cajun' },
+        { key: 'cd', text: 'Casual Dining', value: 'Casual Dining' },
+        { key: 'ch', text: 'Coffeehouse', value: 'Coffeehouse' },
+        { key: 'd', text: 'Dessert', value: 'Dessert' },
+        { key: 'di', text: 'Diner', value: 'Diner' },
+        { key: 'dr', text: 'Drive-in', value: 'Drive-in' },
+        { key: 'e', text: 'Ethnic', value: 'Ethnic' },
+        { key: 'fs', text: 'Family Style', value: 'Family Style' },
+        { key: 'ff', text: 'Fast Food', value: 'Fast Food' },
+        { key: 'fd', text: 'Fine Dining', value: 'Fine Dining' },
+        { key: 'fh', text: 'Food Hall', value: 'Food Hall' },
+        { key: 'ft', text: 'Food Hall', value: 'Food Hall' },
+        { key: 'g', text: 'Gastropub', value: 'Gastropub' },
+        { key: 'h', text: 'Halal', value: 'Halal' },
+        { key: 'ha', text: 'Hamburger', value: 'Hamburger' },
+        { key: 'ho', text: 'Hotdog', value: 'Hotdog' },
+        { key: 'jb', text: 'Juice Bar', value: 'Juice Bar' },
+        { key: 'n', text: 'Noodles', value: 'Noodles' },
+        { key: 'p', text: 'Pizzeria', value: 'Pizzeria' },
+        { key: 's', text: 'Sandwich', value: 'Sandwich' },
+        { key: 'se', text: 'Seafood', value: 'Seafood' },
+        { key: 'st', text: 'Steakhouse', value: 'Steakhouse' },
+        { key: 'tc', text: 'Tabletop Cooking', value: 'Tabletop Cooking' },
+        { key: 'v', text: 'Vegan', value: 'Vegan' },
+        { key: 'vt', text: 'Vegetarian', value: 'Vegetarian' }
     ]
 
     // Redirect to post page once form is submitted
@@ -76,13 +105,17 @@ const UpdateModal = React.memo(props => {
                                     onChange={handleInputChange}
                                 />
                             </Form.Field>
-                            <Form.Field>
+                            <Form.Field
+                                error={errors.categoryError}
+                            >
                                 <label>Category</label>
                                 <Form.Select
                                     fluid
+                                    search
                                     options={options}
                                     name='category'
-                                    value={options[0].value}
+                                    value={inputs.category}
+                                    onChange={handleCategoryChange}
                                 />
                             </Form.Field>
                         </Form.Group>

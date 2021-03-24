@@ -293,6 +293,11 @@ const useUpdateForm = (callback) => {
         setInputs(inputs => ({ ...inputs, flavor: rating }))
     }
 
+    const handleCategoryChange = (event, data) => {
+        let category = data.value;
+        setInputs(inputs => ({ ...inputs, category: category }))
+    }
+
     const handleFileSelected = e => {
         let photo = e.target.files[0]
         console.log(photo)
@@ -528,6 +533,7 @@ const useUpdateForm = (callback) => {
         handleAestheticRating,
         handleVibesRating,
         handleFlavorRating,
+        handleCategoryChange,
         handleFileSelected
     };
 }

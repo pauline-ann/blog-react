@@ -24,3 +24,7 @@ a, .ui.list .list>.item a.header, .ui.list>.item a.header {
 a:hover, a:active, .ui.list .list>.item a.header, .ui.list>.item a.header:hover {
     color: rgb(231, 159, 49) !important;
 }
+
+.App {
+    min-height: calc(100vh - 170px)
+}

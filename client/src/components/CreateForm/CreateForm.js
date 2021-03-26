@@ -30,7 +30,6 @@ const CreateForm = React.memo(props => {
         { key: 'ff', text: 'Fast Food', value: 'Fast Food' },
         { key: 'fd', text: 'Fine Dining', value: 'Fine Dining' },
         { key: 'fh', text: 'Food Hall', value: 'Food Hall' },
-        { key: 'ft', text: 'Food Hall', value: 'Food Hall' },
         { key: 'g', text: 'Gastropub', value: 'Gastropub' },
         { key: 'h', text: 'Halal', value: 'Halal' },
         { key: 'ha', text: 'Hamburger', value: 'Hamburger' },
@@ -57,7 +56,8 @@ const CreateForm = React.memo(props => {
             <Container>
                 <Divider hidden />
                 <Form
-                    onSubmit={(event) => handleSubmit(event)}
+                    onSubmit={(event) => handleSubmit(event, props.onLoad)}
+                    // onSubmit={(event) => handleFormSubmit(event)}
                     error={errors.formError || errors.charLimitError || errors.fileTypeError}
                 >
                     <Form.Field
@@ -201,12 +201,10 @@ const CreateForm = React.memo(props => {
                     <Divider section hidden />
                     <Container textAlign='center'>
                         <Form.Button
-                            basic
-                            color="yellow"
+                            color="brown"
                             type='submit'
-                        >
-                            Submit
-                    </Form.Button>
+                            size='large'
+                        >Submit</Form.Button>
                     </Container>
                 </Form>
             </Container>

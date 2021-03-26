@@ -67,6 +67,7 @@ const PostList = (props) => {
                                 fileName={post.photo.fileName}
                                 fileID={post.photo.fileID}
                                 id={post._id}
+                                onLoad={props.onLoad}
                             />
                             {/* DELETE POST BUTTON/MODAL */}
                             <DeleteModal postID={post._id} fileID={post.photo.fileID} getPosts={getPosts} />

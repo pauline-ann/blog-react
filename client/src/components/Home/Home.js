@@ -64,7 +64,7 @@ const Home = (props) => {
                 id='latest-posts'
             >
                 <Divider horizontal section>Latest Posts</Divider><br />
-                <Grid doubling stackable columns={4}>
+                <Grid doubling stackable columns={3}>
                     {posts.map((post, i) => {
 
                         let date = moment(post.createdAt).format('dddd, MMMM Do YYYY');

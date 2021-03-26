@@ -67,7 +67,7 @@ const useCreateForm = (callback) => {
         setInputs(inputs => ({ ...inputs, photoName: photo.name, photoUpload: photo }))
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event, onLoad) => {
 
         // Prevent page refresh
         event.preventDefault();
@@ -167,6 +167,9 @@ const useCreateForm = (callback) => {
 
         // If no errors...
 
+        // Trigger loading screen
+        onLoad(true);
+
         // Handle file upload
         console.log('Selected file:')
         console.log(inputs.photoUpload)
@@ -229,7 +232,7 @@ const useCreateForm = (callback) => {
             formError: false,
             charLimitError: false,
             fileTypeError: false
-        })
+        });
     }
 
     return {
@@ -315,7 +318,7 @@ const useUpdateForm = (callback) => {
         setInputs(inputs => ({ ...inputs, photoName: photo.name, photoUpload: photo, photoChanged: true }))
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event, onLoad) => {
 
         // Prevent page refresh
         event.preventDefault();
@@ -417,9 +420,13 @@ const useUpdateForm = (callback) => {
         }
 
         // If no errors...
+        
+        // Trigger loading screen
+        onLoad(true);
 
         // If photo is being updated
         if (inputs.photoChanged) {
+
             // Handle file upload
             console.log('Selected file:')
             console.log(inputs.photoUpload)
@@ -487,7 +494,7 @@ const useUpdateForm = (callback) => {
                     });
             }
         } else {
-            // Update post but image is staying the same
+            // If image is staying the same
 
             //New post object
             const updatedPost = {

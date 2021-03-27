@@ -29,7 +29,7 @@ const About = (props) => {
                     <List.Item>photo upload</List.Item>
                 </List>
                 <Header as='h2' textAlign='left' className='about-header'>How can I see other posts?</Header>
-                <p>Browse the homepage which displays all posts that currently exist in Foodie! Click each post to see each one in more detail.</p>
+                <p>Browse the homepage to see all posts that currently exist in Foodie, and click each post to see each it in more detail.</p>
                 <Divider hidden />
                 <Header as='h1' textAlign="center">Contact</Header>
                 <Divider section />
@@ -41,7 +41,7 @@ const About = (props) => {
                         </List.Item>
                         <List.Item
                             icon='mail'
-                            content={<a href='mailto:paulinebantayan@gmail.com'>email</a>}
+                            content={<a href='mailto:&#x70;&#x61;&#x75;&#x6c;&#x69;&#x6e;&#x65;&#x62;&#x61;&#x6e;&#x74;&#x61;&#x79;&#x61;&#x6e;&#x40;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;'>email</a>}
                         />
                         <List.Item
                             icon='linkify'

@@ -11,11 +11,11 @@
 }
 
 .dashboard-modal-trigger--text {
-    font-size: 1.1em;
+    font-size: 1.2em;
 }
 
 .dashboard-modal-trigger:active, .dashboard-modal-trigger:hover {
-    background: rgb(254,237,207) !important;
+    background: rgb(245, 204, 142) !important;
 }
 
 .dashboard-header {

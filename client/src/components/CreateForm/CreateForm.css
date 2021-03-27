@@ -12,7 +12,7 @@ input[type="file"] {
 }
 
 .custom-file-upload:active, .custom-file-upload:hover {
-    background-color: rgb(254, 237, 207);
+    background-color: rgb(245, 204, 142);
 }
 
 .ui.form .field>label {

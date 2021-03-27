@@ -13,14 +13,26 @@ const About = (props) => {
             >
                 <Header as='h1' textAlign="center">About</Header>
                 <Divider section />
+                <Header as='h2' textAlign='left' className='about-header'>What is Foodie?</Header>
                 <p>
-                    Culpa eiusmod amet consequat officia do do. Consectetur nulla commodo mollit cillum deserunt voluptate non. Do dolor laboris do est mollit pariatur dolore enim consequat. Eiusmod pariatur anim dolor dolor nostrud ipsum nulla aliquip. Ea dolor laborum officia velit eiusmod eu cupidatat ullamco commodo id amet. Nostrud proident pariatur magna dolor labore excepteur ipsum. Nisi dolore dolor fugiat duis cupidatat reprehenderit fugiat minim fugiat incididunt excepteur. Aute nisi sunt Lorem nostrud anim. Cillum esse reprehenderit elit duis ex consequat nulla ad.
+                    Foodie is a blogging and social media tool built for food lovers. Here, you can effortlessly share your favorite places to eat, all while discovering hidden gems you've yet to find too!
                 </p>
-                <p>
-                    Culpa eiusmod amet consequat officia do do. Consectetur nulla commodo mollit cillum deserunt voluptate non. Do dolor laboris do est mollit pariatur dolore enim consequat. Eiusmod pariatur anim dolor dolor nostrud ipsum nulla aliquip. Ea dolor laborum officia velit eiusmod eu cupidatat ullamco commodo id amet. Nostrud proident pariatur magna dolor labore excepteur ipsum. Nisi dolore dolor fugiat duis cupidatat reprehenderit fugiat minim fugiat incididunt excepteur. Aute nisi sunt Lorem nostrud anim. Cillum esse reprehenderit elit duis ex consequat nulla ad.
-                </p>
+                <Header as='h2' textAlign='left' className='about-header'>What can I share?</Header>
+                Each blog post includes a...
+                <List bulleted>
+                    <List.Item>title</List.Item>
+                    <List.Item>description</List.Item>
+                    <List.Item>location</List.Item>
+                    <List.Item>category</List.Item>
+                    <List.Item>rating system (aesthetic, vibes, flavor)</List.Item>
+                    <List.Item>text section to describe your experience</List.Item>
+                    <List.Item>photo upload</List.Item>
+                </List>
+                <Header as='h2' textAlign='left' className='about-header'>How can I see other posts?</Header>
+                <p>Browse the homepage which displays all posts that currently exist in Foodie! Click each post to see each one in more detail.</p>
+                <Divider hidden />
+                <Header as='h1' textAlign="center">Contact</Header>
                 <Divider section />
-                <Header as='h2' textAlign="center">Contact</Header>
                 <Container className='about-contact'>
                     <List animated>
                         <List.Item>
@@ -34,10 +46,6 @@ const About = (props) => {
                         <List.Item
                             icon='linkify'
                             content={<a href='https://www.paulineann.me' target='_blank' rel='noopener noreferrer'>portfolio</a>}
-                        />
-                        <List.Item
-                            icon='instagram'
-                            content={<a href='https://www.instagram.com/paintwithpau/' target='_blank' rel='noopener noreferrer'>instagram</a>}
                         />
                     </List>
                 </Container>

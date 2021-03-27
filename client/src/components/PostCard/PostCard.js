@@ -23,7 +23,7 @@ const PostCard = (props) => {
                             {props.title}
                         </Card.Header>
                         <Card.Description>
-                            {props.description}
+                            {props.description.slice(0, 30) + '...'}
                         </Card.Description>
                     </Card.Content>
                 </Card>

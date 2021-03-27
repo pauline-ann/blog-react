@@ -165,12 +165,6 @@ const UpdateModal = React.memo(props => {
                         <Form.Field
                             error={errors.contentError}
                         >
-                            {/* <Form.TextArea
-                                label='Experience'
-                                name='content'
-                                value={inputs.content}
-                                onChange={handleInputChange}
-                            /> */}
                             <label>Experience</label>
                             <ReactQuill
                                 value={inputs.content}

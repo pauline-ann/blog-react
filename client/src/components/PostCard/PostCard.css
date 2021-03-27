@@ -3,7 +3,7 @@
 }
 
 .postcard-card-header {
-    font-size: 1.5rem;
+    font-size: 1.2em !important;
     font-family: 'Noto Serif serif';
     font-weight: 900;
 }
@@ -11,6 +11,6 @@
 .postcard-category {
     color: rgb(231, 159, 49) !important;
     text-transform: uppercase;
-    font-size: .9rem;
+    font-size: .9em !important;
     margin-bottom: 10px;
 }

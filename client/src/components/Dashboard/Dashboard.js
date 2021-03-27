@@ -11,8 +11,6 @@ const Dashboard = (props) => {
 
     const [loading, setLoading] = useState(false);
 
-    // set loading to true when loading
-
     return (
         <React.Fragment>
             <Dimmer active={loading} page>

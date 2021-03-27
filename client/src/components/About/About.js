@@ -7,7 +7,7 @@ import './About.css'
 const About = (props) => {
 
     return (
-        <div>
+        <React.Fragment>
             <Container
                 className='about-container'
             >
@@ -50,7 +50,7 @@ const About = (props) => {
                     </List>
                 </Container>
             </Container>
-        </div >
+        </React.Fragment>
     );
 }
 

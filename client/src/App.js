@@ -8,7 +8,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Post from "./components/Post";
 import UpdateModal from "./components/UpdateModal";
 import About from "./components/About/About";
-import Error404 from "./components/Error404";
+import Error404 from "./components/Error404/Error404";
 import Footer from "./components/Footer/Footer";
 
 const App = () => {

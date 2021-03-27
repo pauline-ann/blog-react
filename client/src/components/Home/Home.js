@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Container, Divider, Grid, Header, Button } from "semantic-ui-react";
 import moment from 'moment';
+import { Link } from "react-router-dom";
 
 //Components
 import PostCard from "../PostCard/PostCard";
 
 //CSS
 import './Home.css';
-import { Link } from "react-router-dom";
 
 //Homepage
 const Home = (props) => {

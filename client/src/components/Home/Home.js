@@ -41,7 +41,7 @@ const Home = (props) => {
                     textAlign='center'
                 >
                     <Header as='h1' className='home-textbox--text home-textbox--main'>A place for foodies to gather.</Header>
-                    <Header as='h2' className='home-textbox--text' color='white'>Find your next meal.</Header>
+                    <Header as='h2' className='home-textbox--text'>Find your next meal.</Header>
                     <Divider hidden />
                     <Link to='/dashboard'>
                         <Button

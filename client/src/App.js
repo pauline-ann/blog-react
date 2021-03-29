@@ -6,7 +6,6 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Post from "./components/Post";
-import UpdateModal from "./components/UpdateModal";
 import About from "./components/About/About";
 import Error404 from "./components/Error404/Error404";
 import Footer from "./components/Footer/Footer";
@@ -20,7 +19,6 @@ const App = () => {
           <Route exact path="/" component={() => <Home />} />
           <Route exact path="/dashboard" component={() => <Dashboard />} />
           <Route path="/post/:id" component={(props) => <Post {...props} />} />
-          <Route exact path="/edit/:id" component={() => <UpdateModal />} />
           <Route exact path="/about" component={() => <About />} />
           <Route component={Error404} />
         </Switch>

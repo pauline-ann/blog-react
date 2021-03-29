@@ -18,7 +18,7 @@ import {
 // CSS
 import './PostInfo.css';
 
-const Post = (props) => {
+const PostInfo = (props) => {
 
     let aRating;
     let vRating;
@@ -96,4 +96,4 @@ const Post = (props) => {
     );
 }
 
-export default Post;
+export default PostInfo;

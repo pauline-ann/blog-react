@@ -12,7 +12,6 @@ const PostCard = (props) => {
             <Link to={"/post/" + props.id}>
                 <Card
                     fluid
-                    centered
                     className='postcard-card'>
                     <Image wrapped>
                         <ImageFadeIn src={`/api/images/render/${props.fileName}`} />

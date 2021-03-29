@@ -107,7 +107,7 @@ const CreateForm = React.memo(props => {
                     </Form.Group>
                     <Divider hidden />
                     <Form.Group
-                        inline
+                        unstackable
                     >
                         <Form.Field
                             error={errors.aestheticError}

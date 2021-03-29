@@ -39,6 +39,7 @@ const Home = (props) => {
                 <Container
                     className='home-textbox'
                     textAlign='center'
+                    fluid
                 >
                     <Header as='h1' className='home-textbox--text home-textbox--main'>A place for foodies to gather.</Header>
                     <Header as='h2' className='home-textbox--text'>Find your next meal.</Header>

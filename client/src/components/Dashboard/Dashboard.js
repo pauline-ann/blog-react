@@ -14,9 +14,7 @@ const Dashboard = (props) => {
     return (
         <React.Fragment>
             <Dimmer active={loading} page>
-                <Loader active inline='centered' size='huge'>
-                    Loading...
-                </Loader>
+                <Loader active inline='centered' size='huge' content='Loading...' />
             </Dimmer>
             <Container className='dashboard-container'>
                 <h1 className='dashboard-header'>Dashboard</h1><br />

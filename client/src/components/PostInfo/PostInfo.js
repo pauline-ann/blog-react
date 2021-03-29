@@ -121,7 +121,7 @@ const PostInfo = (props) => {
                 {parse(props.content)}
                 <Divider />
                 {/* Post Navigation / Social Media Share */}
-                <Grid stackable>
+                <Grid>
                     <Grid.Row columns='equal'>
                         {prevIndex !== null
                             ?

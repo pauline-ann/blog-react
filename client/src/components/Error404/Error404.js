@@ -7,10 +7,6 @@ import './Error404.css'
 
 const Error404 = (props) => {
 
-    const style = {
-        textAlign: 'center'
-    }
-
     return (
         <React.Fragment>
             <Grid verticalAlign='middle' centered className='error-page'>

@@ -2,6 +2,18 @@ import React from "react";
 import { Container, Header, Icon, Rating, Divider, List, Image } from "semantic-ui-react";
 import ImageFadeIn from "react-image-fade-in";
 import parse from 'html-react-parser';
+import {
+    EmailShareButton,
+    EmailIcon,
+    FacebookShareButton,
+    FacebookIcon,
+    PinterestShareButton,
+    PinterestIcon,
+    RedditShareButton,
+    RedditIcon,
+    TwitterShareButton,
+    TwitterIcon
+} from "react-share";
 
 // CSS
 import './PostInfo.css';
@@ -52,6 +64,33 @@ const Post = (props) => {
                 </Image>
                 <Divider />
                 {parse(props.content)}
+                <Divider />
+                <List horizontal floated='right'>
+                    <EmailShareButton
+                        subject={`${props.title} | Foodie App`}>
+                        <EmailIcon size={27} round />
+                    </EmailShareButton>
+                    <FacebookShareButton
+                        url={"https://adventure-game-lom.herokuapp.com/" + props.id}
+                        quote={"Foodie App - Discover your next foodie adventure!"}
+                        hashtag="#foodieapp">
+                        <FacebookIcon size={27} round />
+                    </FacebookShareButton>
+                    <TwitterShareButton
+                        title={props.title}
+                        hashtags={['#foodieapp', `#${props.category}`]}>
+                        <TwitterIcon size={27} round />
+                    </TwitterShareButton>
+                    <RedditShareButton
+                        title={props.title}>
+                        <RedditIcon size={27} round />
+                    </RedditShareButton>
+                    <PinterestShareButton
+                        description={props.description}
+                        media={`/api/images/render/${props.fileName}`}>
+                        <PinterestIcon size={27} round />
+                    </PinterestShareButton>
+                </List>
             </Container>
         </div >
     );

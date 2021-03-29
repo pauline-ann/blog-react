@@ -1,5 +1,5 @@
-import React from "react";
-import { Container, Header, Icon, Rating, Divider, List, Image } from "semantic-ui-react";
+import React, { useEffect, useState } from "react";
+import { Container, Header, Icon, Rating, Divider, List, Image, Grid } from "semantic-ui-react";
 import ImageFadeIn from "react-image-fade-in";
 import parse from 'html-react-parser';
 import {
@@ -7,19 +7,57 @@ import {
     EmailIcon,
     FacebookShareButton,
     FacebookIcon,
-    PinterestShareButton,
-    PinterestIcon,
-    RedditShareButton,
-    RedditIcon,
     TwitterShareButton,
     TwitterIcon
 } from "react-share";
+import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 // CSS
 import './PostInfo.css';
 
 const PostInfo = (props) => {
 
+    const [state, setState] = useState([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            await axios.get('/api/posts/')
+                .then((res) => {
+                    // handle success
+                    console.log(res);
+                    let postIDarray = [];
+                    res.data.forEach(post => {
+                        postIDarray.push(post._id)
+                    });
+                    setState(postIDarray);
+                })
+                .catch((err) => {
+                    // handle error
+                    console.log(err);
+                });
+        }
+        fetchData();
+    }, [])
+
+    // Get next and last post ID's (if they exist)
+    let currentIndex = state.indexOf(props.id)
+    let prevIndex;
+    let nextIndex;
+    // If first post
+    if (currentIndex === 0) {
+        prevIndex = null;
+        nextIndex = currentIndex + 1;
+        // If last post
+    } else if (currentIndex === (state.length - 1)) {
+        prevIndex = currentIndex - 1;
+        nextIndex = null;
+    } else {
+        prevIndex = currentIndex - 1;
+        nextIndex = currentIndex + 1;
+    }
+
+    // Set up ratings
     let aRating;
     let vRating;
     let fRating;
@@ -42,7 +80,7 @@ const PostInfo = (props) => {
 
     return (
         <div>
-            <Container text className='postinfo-container'>
+            <Container text className='postinfo-container' >
                 <Header sub className='postinfo-sub'>{props.category}</Header>
                 <Header as="h1" className='postinfo-header'>{props.title}</Header>
                 <p className='postinfo-description'>{props.description}</p>
@@ -58,14 +96,7 @@ const PostInfo = (props) => {
                     </List>
                 </Header.Subheader>
                 <p className='postinfo-date'>{props.date}</p>
-                <Divider />
-                <Image fluid>
-                    <ImageFadeIn src={`/api/images/render/${props.fileName}`} />
-                </Image>
-                <Divider />
-                {parse(props.content)}
-                <Divider />
-                <List horizontal floated='right'>
+                <List horizontal>
                     <EmailShareButton
                         subject={`${props.title} | Foodie App`}>
                         <EmailIcon size={27} round />
@@ -81,16 +112,39 @@ const PostInfo = (props) => {
                         hashtags={['#foodieapp', `#${props.category}`]}>
                         <TwitterIcon size={27} round />
                     </TwitterShareButton>
-                    <RedditShareButton
-                        title={props.title}>
-                        <RedditIcon size={27} round />
-                    </RedditShareButton>
-                    <PinterestShareButton
-                        description={props.description}
-                        media={`/api/images/render/${props.fileName}`}>
-                        <PinterestIcon size={27} round />
-                    </PinterestShareButton>
                 </List>
+                <Divider />
+                <Image fluid>
+                    <ImageFadeIn src={`/api/images/render/${props.fileName}`} />
+                </Image>
+                <Divider />
+                {parse(props.content)}
+                <Divider />
+                {/* Post Navigation / Social Media Share */}
+                <Grid stackable>
+                    <Grid.Row columns='equal'>
+                        {prevIndex !== null
+                            ?
+                            <Grid.Column textAlign='left'>
+                                <Link to={`/post/${state[prevIndex]}`}>
+                                    <Icon name='angle double left' size='big' /> Previous Post
+                                </Link>
+                            </Grid.Column>
+                            :
+                            null
+                        }
+                        {nextIndex !== null
+                            ?
+                            <Grid.Column textAlign='right'>
+                                <Link to={`/post/${state[nextIndex]}`}>
+                                    Next Post <Icon name='angle double right' size='big' />
+                                </Link>
+                            </Grid.Column>
+                            :
+                            null
+                        }
+                    </Grid.Row>
+                </Grid>
             </Container>
         </div >
     );

@@ -25,7 +25,7 @@ const Post = (props) => {
     });
 
     useEffect(() => {
-        async function fetchData() {
+        async function fetchPost() {
             await axios.get('/api/posts/' + props.match.params.id)
                 .then((res) => {
                     // handle success
@@ -54,7 +54,7 @@ const Post = (props) => {
                     console.log(err);
                 });
         }
-        fetchData();
+        fetchPost();
     }, [props.match.params.id])
 
     return (
@@ -69,6 +69,7 @@ const Post = (props) => {
             flavor={post.rating.flavor}
             fileName={post.photo.fileName}
             date={post.date}
+            id={props.match.params.id}
         />
     );
 }

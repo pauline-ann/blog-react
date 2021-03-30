@@ -113,13 +113,13 @@ const PostInfo = (props) => {
                         <TwitterIcon size={27} round />
                     </TwitterShareButton>
                 </List>
-                <Divider />
+                <Divider section />
                 <Image fluid>
                     <ImageFadeIn src={`/api/images/render/${props.fileName}`} />
                 </Image>
-                <Divider />
+                <Divider section />
                 {parse(props.content)}
-                <Divider />
+                <Divider section />
                 {/* Post Navigation / Social Media Share */}
                 <Grid>
                     <Grid.Row columns='equal'>

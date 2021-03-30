@@ -175,6 +175,7 @@ const UpdateModal = React.memo(props => {
                         <Form.Field
                             error={errors.photoError}
                         >
+                            <label>Photo Upload</label>
                             <label htmlFor='file-upload' className='custom-file-upload'>
                                 <Icon name='upload' />{inputs.photoName}
                             </label>

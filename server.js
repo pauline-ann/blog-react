@@ -31,16 +31,16 @@ app.use('/api/images', imagesRouter);
 // Serve up static assets if in production
 if (process.env.NODE_ENV === 'production') {
     // Set static folder
-    app.use(express.static('../client/build'));
-    app.use(favicon(__dirname + '../client/build/favicon.ico'));
+    app.use(express.static('client/build'));
+    app.use(favicon(__dirname + 'client/build/favicon.ico'));
 
     // Define any API routes before this runs
     // Any requests that's not to the API...
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     })
 } else {
-    app.use(favicon(__dirname + '../client/public/favicon.ico'));
+    app.use(favicon(__dirname + 'client/public/favicon.ico'));
 }
 
 // ----- Middleware --------------------/

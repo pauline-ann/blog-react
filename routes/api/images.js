@@ -8,7 +8,6 @@ const GridFsStorage = require('multer-gridfs-storage');
 
 // ----- Mongo Connection --------------------/
 // Initialize GridFS stream
-require('dotenv').config();
 const uri = process.env.ATLAS_URI;
 const connect = mongoose.createConnection(uri, {
     useUnifiedTopology: true,

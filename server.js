@@ -6,7 +6,6 @@ const cors = require('cors');
 const logger = require("morgan");
 const favicon = require('express-favicon');
 const path = require('path');
-require('dotenv').config();
 
 // ----- Init Mongo DB --------------------/
 const connectDB = require("./config/db");

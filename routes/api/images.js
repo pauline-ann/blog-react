@@ -4,7 +4,6 @@ const router = express.Router();
 const crypto = require('crypto');
 const path = require('path');
 const multer = require('multer');
-const methodOverride = require('method-override');
 const GridFsStorage = require('multer-gridfs-storage');
 
 // ----- Mongo Connection --------------------/

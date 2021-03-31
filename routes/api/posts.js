@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
 // Route to add/save post
 router.post('/new', (req, res) => {
 
-  console.log(req.body)
+  console.log(req.body);
 
   const title = req.body.title;
   const description = req.body.description;

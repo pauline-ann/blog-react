@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === 'production') {
     // Define any API routes before this runs
     // Any requests that's not to the API...
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
     })
 } else {
     app.use(favicon(__dirname + 'client/public/favicon.ico'));

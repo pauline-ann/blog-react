@@ -4,6 +4,7 @@
   "description": "food blog built with react.js, mongo db, and node.js",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "dev": "concurrently \"node server.js\" \"cd client && yarn start\"",
     "heroku-postbuild": "cd client && yarn install && yarn build"
   },

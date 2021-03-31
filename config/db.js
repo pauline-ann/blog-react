@@ -4,12 +4,11 @@ const mongoose = require('mongoose');
 
 // Configure env. variables in dotenv file
 require('dotenv').config();
-const uri = process.env.ATLAS_URI;
 
 const connectDB = async () => {
     try {
         await mongoose.connect(
-            uri,
+            process.env.ATLAS_URI,
             {
                 useUnifiedTopology: true,
                 useNewUrlParser: true,

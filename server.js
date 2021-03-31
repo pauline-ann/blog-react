@@ -6,6 +6,7 @@ const cors = require('cors');
 const logger = require("morgan");
 const favicon = require('express-favicon');
 const path = require('path');
+require('dotenv').config();
 
 // ----- Init Mongo DB --------------------/
 const connectDB = require("./config/db");
@@ -37,16 +38,16 @@ app.use('/api/images', imagesRouter);
 // Serve up static assets if in production
 if (process.env.NODE_ENV === 'production') {
     // Set static folder
-    app.use(express.static(path.join(__dirname + 'client/build')));
-    app.use(favicon(__dirname + 'client/build/favicon.ico'));
+    app.use(express.static(path.join(__dirname + '/client/build')));
+    app.use(favicon(__dirname + '/client/build/favicon.ico'));
 
     // Define any API routes before this runs
     // Any requests that's not to the API...
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+        res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
     })
 } else {
-    app.use(favicon(__dirname + 'client/public/favicon.ico'));
+    app.use(favicon(__dirname + '/client/public/favicon.ico'));
 }
 
 // ----- Listen --------------------/

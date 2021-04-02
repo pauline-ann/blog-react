@@ -2,7 +2,7 @@
 
 ## [Live Demo](https://foodie-react-blog.herokuapp.com/)
 
-<img src="client/src/assets/readme/foodie-banner.png">
+<img src="readme/foodie-banner.png">
 
 ## About Foodie
 Foodie is a modern web application designed for sharing restaurant reviews with other foodies!
@@ -16,23 +16,23 @@ As a foodie myself, I created this application because I wanted to create my own
 ## How to use
 
 #### Homepage
-![Foodie Homepage](client/src/assets/readme/foodie-home.gif)
+![Foodie Homepage](readme/foodie-home.gif)
 
 The homepage summarizes and displays each review post in a feed. When clicked, you are taken to the post page where you may view the full review.
 
 #### Easily browse through each review
-<img src="client/src/assets/readme/foodie-nextpost.png">
+<img src="readme/foodie-nextpost.png">
 
 The post page features a "Next Post" and a "Previous Post" button that allows you to easily  browse through each post.
 
 #### Dashboard
-<img src="client/src/assets/readme/foodie-dashboard.png">
+<img src="readme/foodie-dashboard.png">
 
 To create, edit, and delete reviews, simply go to the Dashboard page.
 
 Here, you may find the button to create a new post, as well as a list of already existing posts that you may edit or delete.
 
-![Foodie update post](client/src/assets/readme/foodie-update.gif)
+![Foodie update post](readme/foodie-update.gif)
 
 **Each review includes a...**
 
@@ -71,10 +71,10 @@ Foodie makes use of multer and GridFS storage, which stores files into MongoDB i
 Since MongoDB has a file size limit for BSON (binary image) data, a way to bypass that is by breaking up image files into chunks.
 
 ##### Image file data
-<img src="client/src/assets/readme/foodie-files.png">
+<img src="readme/foodie-files.png">
 
 ##### Files broken up into chunks
-<img src="client/src/assets/readme/foodie-chunks.png">
+<img src="readme/foodie-chunks.png">
 
 ## Project Setup
 After cloning the repository to your machine...

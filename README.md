@@ -1,6 +1,6 @@
-#<center>Foodie Blog 🍽️ 
+#Foodie Blog 🍽️ 
 
-##<center>[Live Demo](https://dry-anchorage-96447.herokuapp.com/)
+##[Live Demo](https://dry-anchorage-96447.herokuapp.com/)
 
 <img src="client/src/assets/readme/foodie-banner.png">
 
@@ -10,22 +10,22 @@ Foodie is a modern web application designed for sharing restaurant reviews with 
 Foodie (n):
 > a person with a particular interest in food; a gourmet.
 
-##### Motivation
+#### Motivation
 As a foodie myself, I created this application because I wanted to create my own food blog. However, rather than using third-party site to create and host my blog, I thought it would be a great learning opportunity for me to challenge myself and create my own React blog application!
 
 ## How to use
 
-##### Homepage
+#### Homepage
 ![Foodie Homepage](client/src/assets/readme/foodie-home.gif)
 
 The homepage summarizes and displays each review post in a feed. When clicked, you are taken to the post page where you may view the full review.
 
-##### Easily browse through each review
+#### Easily browse through each review
 <img src="client/src/assets/readme/foodie-nextpost.png">
 
 The post page features a "Next Post" and a "Previous Post" button that allows you to easily  browse through each post.
 
-##### Dashboard
+#### Dashboard
 <img src="client/src/assets/readme/foodie-dashboard.png">
 
 To create, edit, and delete reviews, simply go to the Dashboard page.
@@ -34,7 +34,7 @@ Here, you may find the button to create a new post, as well as a list of already
 
 ![Foodie update post](client/src/assets/readme/foodie-update.gif)
 
-Each review includes a...
+**Each review includes a...**
 
 * title
 * description
@@ -52,7 +52,7 @@ This is a **MERN Stack application** which is made up by four key technologies:
 * [react.js](https://reactjs.org/) - a client-side JavaScript framework
 * [node.js](https://nodejs.org/en/docs/) - an open source JavaScript web server/runtime
 
-#####Other key technologies used include:
+##### Other key technologies used include:
 
 * [React Hooks](https://reactjs.org/docs/hooks-intro.html) - introduced in React 16.8, hooks let you use state and other features without having to use class based components
 * [axios](https://www.npmjs.com/package/axios) - promise based HTTP client for browser and Node.js

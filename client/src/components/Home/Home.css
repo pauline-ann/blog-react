@@ -1,11 +1,21 @@
 .home-header {
-    background: url(../../assets/images/header-foodie.jpg) no-repeat center center fixed;
+    background-image: url(../../assets/images/header-foodie.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
+    background-size: cover !important;
+    background-color: #f5f5f5;
     width: auto;
     height: 90vh;
+}
+
+@media only screen and (max-width: 767px) {
+    body {
+        background-image: url(../../assets/images/header-foodie-mobile.jpg);
+    }
 }
 
 .home-textbox {
@@ -15,6 +25,7 @@
     transform: translate(-50%, -50%);
     text-align: center !important;
     margin-top: 0;
+    min-width: 275px;
 }
 
 .home-textbox--text {
@@ -43,23 +54,22 @@
 
 @media only screen and (min-width: 768px) {
     .masonry.grid {
-      -webkit-column-count: 1 !important;
-         -moz-column-count: 1 !important;
-              column-count: 1 !important;
-      -webkit-column-gap: 0;
-         -moz-column-gap: 0;
-              column-gap: 0;
+        -webkit-column-count: 1 !important;
+        -moz-column-count: 1 !important;
+        column-count: 1 !important;
+        -webkit-column-gap: 0;
+        -moz-column-gap: 0;
+        column-gap: 0;
     }
-    
-    .ui.doubling.masonry.grid[class*="three column"] > .column {
-      width: 100% !important;
+    .ui.doubling.masonry.grid[class*="three column"]>.column {
+        width: 100% !important;
     }
-  }
-  
-  @media only screen and (min-width: 992px) {
+}
+
+@media only screen and (min-width: 992px) {
     .masonry.grid {
-      -webkit-column-count: 3 !important;
-         -moz-column-count: 3 !important;
-              column-count: 3 !important;
+        -webkit-column-count: 3 !important;
+        -moz-column-count: 3 !important;
+        column-count: 3 !important;
     }
-  }
+}

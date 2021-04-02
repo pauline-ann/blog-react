@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "food blog built with react.js, mongo db, and node.js",
   "main": "index.js",
+  "author": "Pauline Ann Bantayan",
   "scripts": {
     "client": "cd client && yarn start",
     "server": "nodemon server.js",

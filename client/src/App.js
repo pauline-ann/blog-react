@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import ScrollToTop from './components/ScrollToTop';
 
 //Components
 import Navbar from "./components/Navbar/Navbar";
@@ -13,6 +14,7 @@ import Footer from "./components/Footer/Footer";
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <div className="App">
         <Navbar />
         <Switch>

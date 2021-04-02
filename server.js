@@ -34,8 +34,6 @@ app.use('/api/posts', postsRouter);
 const imagesRouter = require('./routes/api/images');
 app.use('/api/images', imagesRouter);
 
-console.log(process.env.NODE_ENV)
-
 // Serve up static assets if in production
 if (process.env.NODE_ENV === 'production') {
     console.log('testing production mode')

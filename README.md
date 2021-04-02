@@ -1,6 +1,6 @@
-#Foodie Blog 🍽️ 
+# Foodie Blog 🍽️ 
 
-##[Live Demo](https://dry-anchorage-96447.herokuapp.com/)
+## [Live Demo](https://dry-anchorage-96447.herokuapp.com/)
 
 <img src="client/src/assets/readme/foodie-banner.png">
 

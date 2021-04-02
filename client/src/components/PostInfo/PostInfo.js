@@ -102,14 +102,15 @@ const PostInfo = (props) => {
                         <EmailIcon size={27} round />
                     </EmailShareButton>
                     <FacebookShareButton
-                        url={"https://adventure-game-lom.herokuapp.com/" + props.id}
+                        url={`https://foodie-react-blog.herokuapp.com/post/${props.id}`}
                         quote={"Foodie App - Discover your next foodie adventure!"}
                         hashtag="#foodieapp">
                         <FacebookIcon size={27} round />
                     </FacebookShareButton>
                     <TwitterShareButton
                         title={props.title}
-                        hashtags={['#foodieapp', `#${props.category}`]}>
+                        url={`https://foodie-react-blog.herokuapp.com/post/${props.id}`}
+                        hashtags={['foodieapp', `${props.category}`]}>
                         <TwitterIcon size={27} round />
                     </TwitterShareButton>
                 </List>

@@ -6,7 +6,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "html-react-parser": "^1.2.4",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-image-fade-in": "^1.1.3",
